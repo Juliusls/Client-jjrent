@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { useQuery } from '@apollo/client'
+import { ALL_PHONES } from './queries'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+    const result = useQuery(ALL_PHONES)
+
+    if (result.loading)  {
+        return <div>loading...</div>
+    }
+
+    return (
+        <div>
+            <div>{result.data.allPhones.map(p => p.name).join(', ')}</div>
+            <div>{result.data.allPhones.map(p => p.brand).join(', ')}</div>
+        </div>
+    )
 }
 
-export default App;
+export default App
