@@ -8,6 +8,8 @@ import Navbar from './components/Navigation/Navbar'
 import Phones from './components/Phones'
 import Laptops from './components/Laptops'
 import Jumbotron from './components/Jumbotron'
+import PhonesComponent from './components/PhonesComponent'
+
 
 import Container from '@material-ui/core/Container'
 
@@ -33,6 +35,8 @@ const App = () => {
 			<Container maxWidth='xl' className={classes.root}>
 				<Navbar />
 				<Jumbotron />
+				<PhonesComponent />
+				<PhonesComponent />
 				<Switch>
 					<Route path='/laptops'>
 						<Laptops />
