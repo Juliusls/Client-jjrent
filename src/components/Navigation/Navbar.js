@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { Button, Typography, Toolbar, AppBar, Fab, IconButton } from '@material-ui/core'
+import { Button, Typography, Toolbar, AppBar, Fab } from '@material-ui/core'
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank'
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket'
 
@@ -17,10 +17,22 @@ const useStyles = makeStyles(theme => ({
 		flexGrow: 1,
 	},
 	title: {
-		flexGrow: 1,
 		color: theme.palette.primary.main,
-		fontSize: 30,
 		fontWeight: 'bold',
+		marginRight: 40,
+	},
+	buttonOthers: {
+		color: theme.palette.primary.main,
+		backgroundColor: theme.palette.common.white,
+		borderRadius: 25,
+		fontSize: 13,
+		fontWeight: 'bold',
+		boxShadow: 'none',
+		'&:hover': {
+			opacity: 0.5,
+			backgroundColor: theme.palette.common.white,
+			boxShadow: 'none',
+		}
 	},
 	buttonLogin: {
 		color: theme.palette.primary.main,
@@ -33,9 +45,10 @@ const useStyles = makeStyles(theme => ({
 		margin: 10,
 		fontSize: 20,
 		fontWeight: 'bold',
+		boxShadow: theme.shadows[5],
 		'&:hover': {
 			backgroundColor: theme.palette.common.white,
-			boxShadow: 3,
+			boxShadow: theme.shadows[10],
 		}
 	},
 	buttonSignup: {
@@ -48,35 +61,56 @@ const useStyles = makeStyles(theme => ({
 		paddingLeft: 20,
 		fontSize: 20,
 		fontWeight: 'bold',
+		boxShadow: theme.shadows[5],
 		'&:hover': {
 			backgroundColor: theme.palette.common.white,
 			color: theme.palette.primary.main,
-			boxShadow: 20,
+			boxShadow: theme.shadows[10],
 		}
 	},
 	buttonCategories: {
 		color: theme.palette.primary.main,
 		backgroundColor: theme.palette.common.white,
-		borderRadius: 25,
-		paddingTop: 13,
-		paddingBottom: 13,
+		borderRadius: 30,
+		paddingTop: 10,
+		paddingBottom: 10,
 		paddingRight: 30,
 		paddingLeft: 30,
 		fontSize: 20,
 		fontWeight: 'bold',
+		boxShadow: theme.shadows[5],
 		'&:hover': {
 			backgroundColor: theme.palette.common.white,
-			boxShadow: 3,
+			boxShadow: theme.shadows[10],
 		}
 	},
 	buttonCart: {
+		color: theme.palette.primary.main,
 		backgroundColor: 'white',
-		borderColor: theme.palette.primary.main,
-		boxShadow: 'none',
+		boxShadow: theme.shadows[5],
 		'&:hover': {
 			backgroundColor: theme.palette.common.white,
-			boxShadow: 3,
+			boxShadow: theme.shadows[10],
 		}
+	},
+	topContainer: {
+		display: 'flex',
+		justifyContent: 'space-between',
+	},
+	containerLogo: {
+		flexGrow: 1,
+		display: 'flex',
+		justifyContent: 'flex-start',
+		alignItems: 'center'
+
+	},
+	bottomContainer: {
+		display: 'flex',
+	},
+	searchField: {
+		flexGrow: 1,
+		marginLeft: 10,
+		marginRight: 10,
 	}
 }))
 
@@ -93,14 +127,18 @@ const Navbar = () => {
 	return (
 		<div className={classes.root}>
 			<AppBar position="static" className={classes.appbar}>
-				<Toolbar id='top-navbar'>
-					<Typography variant="h6" className={classes.title}>
-						JJ-rent
-					</Typography>
-					<Button variant="contained" className={classes.buttonLogin}>Log In</Button>
-					<Button variant="contained" className={classes.buttonSignup}>Sign Up</Button>
+				<Toolbar id='top-navbar' classes={classes.topContainer} style={{ padding: 0 }}>
+					<div className={classes.containerLogo}>
+						<Typography variant="h4" className={classes.title}>JJ-rent</Typography>
+						<Button variant="contained" className={classes.buttonOthers}>How it works</Button>
+						<Button variant="contained" className={classes.buttonOthers}>For Business</Button>
+					</div>
+					<div>
+						<Button variant="contained" className={classes.buttonLogin}>Log In</Button>
+						<Button variant="contained" className={classes.buttonSignup}>Sign Up</Button>
+					</div>
 				</Toolbar>
-				<Toolbar id='bottom-navbar'>
+				<Toolbar id='bottom-navbar' classes={classes.bottomContainer} style={{ padding: 0 }}>
 					<Button
 						aria-controls="simple-menu"
 						variant="contained"
@@ -112,13 +150,12 @@ const Navbar = () => {
 					>
 						Categories
 					</Button>
-					<SearchField />
+					<div className={classes.searchField}>
+						<SearchField />
+					</div>
 					<Fab color="primary" aria-label="add" className={classes.buttonCart}>
 						<ShoppingBasketIcon />
 					</Fab>
-					<IconButton color="primary" className={classes.buttonCart}>
-						<ShoppingBasketIcon />
-					</IconButton>
 				</Toolbar>
 				<CategoriesMenu menuIsOpen={menuIsOpen} handleClose={handleClose} />
 			</AppBar>

@@ -10,15 +10,22 @@ const useStyles = makeStyles(theme => ({
 		borderRadius: 25,
 		fontWeight: 'bold',
 		borderColor: theme.palette.primary.main,
+		boxShadow: theme.shadows[5],
 		'&:hover': {
 			color: theme.palette.primary.main,
-			boxShadow: 'none',
+			boxShadow: theme.shadows[10],
 			borderColor: theme.palette.primary.main,
 		}
 	},
 	inputStyles: {
 		color: theme.palette.primary.main,
-	}
+		fontWeight: 'bold',
+		fontSize: 15,
+		paddingLeft: 10,
+	},
+	noBorder: {
+		border: 'none',
+	},
 }))
 
 const SearchField = () => {
@@ -30,8 +37,10 @@ const SearchField = () => {
 			className={classes.searchField}
 			placeholder='Search'
 			variant="outlined"
+			fullWidth
 			InputProps={{
 				className: classes.inputStyles,
+				classes:{ notchedOutline: classes.noBorder }
 			}}
 		/>
 	)
