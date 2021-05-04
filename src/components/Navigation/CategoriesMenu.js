@@ -43,7 +43,7 @@ const CategoriesMenu = ({ menuIsOpen, handleClose }) => {
 				<ListItemIcon>
 					<CameraAltIcon fontSize="small" />
 				</ListItemIcon>
-				<ListItemText primary="Cameras" />
+				<ListItemText primary="Headphone" />
 			</MenuItem>
 		</Menu>
 	)

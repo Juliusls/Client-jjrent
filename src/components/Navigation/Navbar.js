@@ -102,7 +102,6 @@ const useStyles = makeStyles(theme => ({
 		display: 'flex',
 		justifyContent: 'flex-start',
 		alignItems: 'center'
-
 	},
 	bottomContainer: {
 		display: 'flex',
@@ -131,7 +130,6 @@ const Navbar = () => {
 					<div className={classes.containerLogo}>
 						<Typography variant="h4" className={classes.title}>JJ-rent</Typography>
 						<Button variant="contained" className={classes.buttonOthers}>How it works</Button>
-						<Button variant="contained" className={classes.buttonOthers}>For Business</Button>
 					</div>
 					<div>
 						<Button variant="contained" className={classes.buttonLogin}>Log In</Button>
