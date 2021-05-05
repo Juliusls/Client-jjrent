@@ -3,15 +3,3 @@ body{
 	padding: 0;
 	box-sizing: border-box;
 }
-
-.centerlizeJumbotron {
-	width: 'inherit';
-	height: 400px;
-	background-image: url('./Images/backgroundImage.jpeg');
-	background-position: center;
-	background-size: cover;
-	color: white;
-	padding: 20px;
-	border-radius: 25px;
-	margin-top: 20px;
-}

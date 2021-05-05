@@ -1,8 +1,9 @@
 import React from 'react'
-
 import { makeStyles } from '@material-ui/core/styles'
-
 import { Typography, Button } from '@material-ui/core'
+
+import coverPhoto from '../Images/backgroundImage.jpeg'
+
 
 const useStyles = makeStyles(theme => ({
 	title: {
@@ -12,7 +13,15 @@ const useStyles = makeStyles(theme => ({
 		fontSize: 40,
 		marginTop: 60,
 		marginLeft: 50,
-		maxWidth: 700
+		maxWidth: 700,
+		[theme.breakpoints.down('sm')]: {
+			marginTop: 30,
+			marginLeft: 25,
+		},
+		[theme.breakpoints.down('xs')]: {
+			marginTop: 12,
+			marginLeft: 10,
+		},
 	},
 	text: {
 		color: theme.palette.common.white,
@@ -20,7 +29,15 @@ const useStyles = makeStyles(theme => ({
 		fontSize: 20,
 		marginTop: 20,
 		marginLeft: 50,
-		maxWidth: 700
+		maxWidth: 700,
+		[theme.breakpoints.down('sm')]: {
+			marginTop: 30,
+			marginLeft: 25,
+		},
+		[theme.breakpoints.down('xs')]: {
+			marginTop: 12,
+			marginLeft: 10,
+		},
 	},
 	buttonDiscover: {
 		color: theme.palette.primary.main,
@@ -36,18 +53,37 @@ const useStyles = makeStyles(theme => ({
 		fontWeight: 'bold',
 		'&:hover': {
 			backgroundColor: theme.palette.common.white,
-		}
+		},
+		[theme.breakpoints.down('sm')]: {
+			marginTop: 30,
+			marginLeft: 25,
+		},
+		[theme.breakpoints.down('xs')]: {
+			marginTop: 12,
+			marginLeft: 10,
+		},
 	},
+	containerJumbotron: {
+		padding: 20,
+		height: 400,
+		backgroundPosition: 'center',
+		backgroundSize: 'cover',
+		color: 'white',
+		borderRadius: 25,
+		marginTop: 20,
+		// [theme.breakpoints.down('sm')]: {
+		// 	padding: 10
+		// },
+	}
 }))
 
 const Jumbotron = () => {
 	const classes = useStyles()
 	return (
-		<div className='centerlizeJumbotron'>
-			<Typography classes={{ root: classes.title}}>The future of tech is renting</Typography>
-			<Typography classes={{ root: classes.text}}>Rent the tech you want, when you want. And to celebrate our fresh new look, get 90% off your first month when you rent for 3+ months with code</Typography>
+		<div id='centerlizeJumbotron' className={classes.containerJumbotron} style={{ backgroundImage: `url(${coverPhoto})` }}>
+			<Typography classes={{ root: classes.title }}>The future of tech is renting</Typography>
+			<Typography classes={{ root: classes.text }}>Rent the tech you want, when you want. And to celebrate our fresh new look, get 90% off your first month when you rent for 3+ months with code</Typography>
 			<Button variant="contained" className={classes.buttonDiscover}>Discover deals</Button>
-
 		</div>
 	)
 }

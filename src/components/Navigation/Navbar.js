@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { Button, Typography, Toolbar, AppBar, Fab } from '@material-ui/core'
-import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank'
+import { Button, Typography, Toolbar, AppBar, Fab, Hidden } from '@material-ui/core'
+import Menu from '@material-ui/icons/Menu'
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket'
 
 import CategoriesMenu from './CategoriesMenu'
@@ -20,8 +20,11 @@ const useStyles = makeStyles(theme => ({
 		color: theme.palette.primary.main,
 		fontWeight: 'bold',
 		marginRight: 40,
+		[theme.breakpoints.down('sm')]: {
+			marginRight: 10,
+		},
 	},
-	buttonOthers: {
+	buttonHowItWorks: {
 		color: theme.palette.primary.main,
 		backgroundColor: theme.palette.common.white,
 		borderRadius: 25,
@@ -32,7 +35,7 @@ const useStyles = makeStyles(theme => ({
 			opacity: 0.5,
 			backgroundColor: theme.palette.common.white,
 			boxShadow: 'none',
-		}
+		},
 	},
 	buttonLogin: {
 		color: theme.palette.primary.main,
@@ -129,25 +132,34 @@ const Navbar = () => {
 				<Toolbar id='top-navbar' classes={classes.topContainer} style={{ padding: 0 }}>
 					<div className={classes.containerLogo}>
 						<Typography variant="h4" className={classes.title}>JJ-rent</Typography>
-						<Button variant="contained" className={classes.buttonOthers}>How it works</Button>
+						<Button variant="contained" className={classes.buttonHowItWorks}>How it works</Button>
 					</div>
 					<div>
-						<Button variant="contained" className={classes.buttonLogin}>Log In</Button>
-						<Button variant="contained" className={classes.buttonSignup}>Sign Up</Button>
+						<Hidden xsDown>
+							<Button variant="contained" className={classes.buttonLogin}>Log In</Button>
+							<Button variant="contained" className={classes.buttonSignup}>Sign Up</Button>
+						</Hidden>
 					</div>
 				</Toolbar>
 				<Toolbar id='bottom-navbar' classes={classes.bottomContainer} style={{ padding: 0 }}>
-					<Button
-						aria-controls="simple-menu"
-						variant="contained"
-						aria-haspopup="true"
-						onClick={handleClick}
-						onMouseOver={handleClick}
-						startIcon={<CheckBoxOutlineBlankIcon/>}
-						className={classes.buttonCategories}
-					>
-						Categories
-					</Button>
+					<Hidden xsDown>
+						<Button
+							aria-controls="simple-menu"
+							variant="contained"
+							aria-haspopup="true"
+							onClick={handleClick}
+							onMouseOver={handleClick}
+							startIcon={<Menu/>}
+							className={classes.buttonCategories}
+						>
+							Categories
+						</Button>
+					</Hidden>
+					<Hidden smUp>
+						<Fab color="primary" aria-label="add" className={classes.buttonCart} onClick={() => console.log('clicked')}>
+							<Menu />
+						</Fab>
+					</Hidden>
 					<div className={classes.searchField}>
 						<SearchField />
 					</div>

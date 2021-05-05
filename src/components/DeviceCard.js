@@ -6,7 +6,6 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder'
 const useStyles = makeStyles(theme => ({
 	card: {
 		borderRadius: 15,
-		minHeight: 600,
 		backgroundColor: theme.palette.common.white,
 		boxShadow: theme.shadows[5],
 		'&:hover': {
@@ -16,21 +15,15 @@ const useStyles = makeStyles(theme => ({
 	},
 	cardActionArea: {
 		padding: 15,
-		minHeight: 'inherit',
 		display: 'flex',
 		justifyContent: 'space-between',
 		alignContent: 'flex-start',
 		alignItems: 'flex-start',
 		flexDirection: 'column'
 	},
-	media: {
-		width: 'auto',
-		height: 'auto',
-		marginBottom: 10
-	},
 	cardContent: {
 		padding: 0,
-		marginTop: 'auto'
+		marginTop: 'auto',
 	},
 	cardName: {
 		color: theme.palette.common.black,
@@ -41,6 +34,8 @@ const useStyles = makeStyles(theme => ({
 		boxOrient: 'vertical',
 		overflow: 'hidden',
 		letterSpacing: 'normal',
+		minHeight: 48,
+		paddingTop: 20,
 	},
 	cardDesc: {
 		color: theme.palette.common.black,
@@ -50,11 +45,12 @@ const useStyles = makeStyles(theme => ({
 		boxOrient: 'vertical',
 		overflow: 'hidden',
 		letterSpacing: 'normal',
+		minHeight: 40
 	},
 	cardAroundPrice: {
 		color: theme.palette.common.black,
 		fontSize: 12,
-		marginTop: 10
+		marginTop: 10,
 	},
 	cardPrice: {
 		color: theme.palette.common.black,
@@ -64,6 +60,7 @@ const useStyles = makeStyles(theme => ({
 	favoriteButton: {
 		display: 'block',
 		marginLeft: 'auto',
+		padding: 0,
 		color: theme.palette.grey[500],
 		'&:hover': {
 			backgroundColor: theme.palette.common.white,
@@ -71,8 +68,17 @@ const useStyles = makeStyles(theme => ({
 		}
 	},
 	imageContainer: {
-		display: 'flex',
-		justifyContent: 'space-between'
+		width: 'inherit',
+		paddingBottom: '100%',
+		position: 'relative',
+	},
+	media: {
+		position: 'absolute',
+		top: 0,
+		bottom: 0,
+		width: '100%',
+		height: '100%',
+		objectFit: 'contain',
 	}
 }))
 
@@ -80,13 +86,13 @@ const DeviceCard = ({ name, price, desc, image }) => {
 	const classes = useStyles()
 
 	return (
-		<Card className={classes.card}>
+		<Card className={classes.card} style={{ height: '100%' }}>
 			<CardActionArea className={classes.cardActionArea}>
 				<IconButton classes={{root: classes.favoriteButton}} onMouseDown={event => event.stopPropagation()}>
 					<FavoriteBorderIcon fontSize="small"/>
 				</IconButton>
 				<div className={classes.imageContainer}>
-					<img src={image} className={classes.media} style={{maxWidth: '100%'}}/>
+					<img src={image} className={classes.media}/>					
 				</div>
 				<CardContent classes={{root: classes.cardContent}}>
 					<Typography className={classes.cardName}>

@@ -15,12 +15,24 @@ import Container from '@material-ui/core/Container'
 
 import { ALL_PHONES } from './queries'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
 	root: {
 		paddingLeft: 75,
 		paddingRight: 75,
-	},
-})
+		[theme.breakpoints.down('md')]: {
+			paddingLeft: 40,
+			paddingRight: 40,
+		},
+		[theme.breakpoints.down('sm')]: {
+			paddingLeft: 15,
+			paddingRight: 15,
+		},
+		[theme.breakpoints.down('xs')]: {
+			paddingLeft: 10,
+			paddingRight: 10,
+		},
+	}
+}))
 
 const App = () => {
 	const classes = useStyles()
@@ -52,3 +64,6 @@ const App = () => {
 }
 
 export default App
+
+
+//TODO work on sidemenu on small screen
