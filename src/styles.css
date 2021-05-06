@@ -3,3 +3,7 @@ body{
 	padding: 0;
 	box-sizing: border-box;
 }
+
+#appbarStyle {
+	background: linear-gradient(rgb(255, 255, 255) calc(75% + 8px), transparent 50%);
+}

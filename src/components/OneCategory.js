@@ -50,26 +50,26 @@ const useStyles = makeStyles(theme => ({
 		'&:hover': {
 			backgroundColor: theme.palette.common.white,
 			boxShadow: theme.shadows[10],
-		}
+		},
 	},
 }))
 
-const PhonesComponent = () => {
+const OneCategory = ({ name }) => {
 	const classes = useStyles()
 
 	return (
 		<div className={classes.root} >
-			<Typography variant='h4' className={classes.categoryName}>Phones</Typography>
+			<Typography variant='h4' className={classes.categoryName}>{name}</Typography>
 			<Grid container spacing={2} className={classes.containerGrid} >
 				{valuesForList.map(value => (
-					<Grid item xs={12} sm={6} md={3} lg={3} key={value.name} className={classes.gridItem} style={{ height: '100%' }}>
+					<Grid item xs={12} sm={6} md={3} lg={3} key={value.name} style={{ height: '100%' }}>
 						<DeviceCard name={value.name} price={value.price} desc={value.desc} image={value.image} />
 					</Grid>
 				))}
 			</Grid>
-			<Button variant="contained" className={classes.viewAllButton}>View all</Button>
+			<Button variant="contained" className={classes.viewAllButton} style={{ display: (name === 'Recommended' ? 'none' : 'block' )}}>View all</Button>
 		</div>
 	)
 }
 
-export default PhonesComponent
+export default OneCategory

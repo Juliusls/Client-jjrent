@@ -8,8 +8,11 @@ import Navbar from './components/Navigation/Navbar'
 import Phones from './components/Phones'
 import Laptops from './components/Laptops'
 import Jumbotron from './components/Jumbotron'
-import PhonesComponent from './components/PhonesComponent'
+import OneCategory from './components/OneCategory'
+import Footer from './components/Footer'
+import HowItWorks from './components/HowItWorks'
 
+import { howItWorksData } from './data'
 
 import Container from '@material-ui/core/Container'
 
@@ -17,6 +20,7 @@ import { ALL_PHONES } from './queries'
 
 const useStyles = makeStyles(theme => ({
 	root: {
+		maxWidth: 3840,
 		paddingLeft: 75,
 		paddingRight: 75,
 		[theme.breakpoints.down('md')]: {
@@ -31,12 +35,18 @@ const useStyles = makeStyles(theme => ({
 			paddingLeft: 10,
 			paddingRight: 10,
 		},
-	}
+		[theme.breakpoints.up('xl')]: {
+			paddingLeft: 100,
+			paddingRight: 100,
+		},
+	},
+	offset: theme.mixins.toolbar,
 }))
 
 const App = () => {
 	const classes = useStyles()
 	const result = useQuery(ALL_PHONES)
+
 
 	if (result.loading)  {
 		return <div>loading...</div>
@@ -44,12 +54,20 @@ const App = () => {
 
 	return (
 		<Router>
-			<Container maxWidth='xl' className={classes.root}>
+			<Container className={classes.root}>
 				<Navbar />
-				<Jumbotron />
-				<PhonesComponent />
-				<PhonesComponent />
+				<div className={classes.offset} />
+				<div className={classes.offset} />
 				<Switch>
+					<Route exact path='/'>
+						<Jumbotron />
+						<OneCategory name='Recommended'/>
+						<HowItWorks data={howItWorksData}/>
+						<OneCategory name='Phones'/>
+						<OneCategory name='Laptops'/>
+						<OneCategory name='Smartwatches'/>
+						<OneCategory name='Headphones'/>
+					</Route>
 					<Route path='/laptops'>
 						<Laptops />
 					</Route>
@@ -57,6 +75,7 @@ const App = () => {
 						<Phones />
 					</Route>
 				</Switch>
+				<Footer />
 			</Container>
 		</Router>
 

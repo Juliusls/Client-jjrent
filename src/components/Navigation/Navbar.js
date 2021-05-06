@@ -6,15 +6,39 @@ import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket'
 
 import CategoriesMenu from './CategoriesMenu'
 import SearchField from './SearchField'
+import LeftSideMenu from './LeftSideMenu'
 
+var fullWindowWidth = window.innerWidth
+console.log(fullWindowWidth)
 
 const useStyles = makeStyles(theme => ({
-	appbar: {			
+	appbar: {	
 		backgroundColor: theme.palette.common.white,
-		boxShadow: 'none'
+		boxShadow: 'none',
+		paddingLeft: 75,
+		paddingRight: 75,
+		zIndex: 2,
+		[theme.breakpoints.down('md')]: {
+			paddingLeft: 40,
+			paddingRight: 40,
+		},
+		[theme.breakpoints.down('sm')]: {
+			paddingLeft: 15,
+			paddingRight: 15,
+		},
+		[theme.breakpoints.down('xs')]: {
+			paddingLeft: 10,
+			paddingRight: 10,
+		},
+		[theme.breakpoints.up('xl')]: {
+			paddingLeft: 100,
+			paddingRight: 100,
+		},
 	},
 	root: {
 		flexGrow: 1,
+		maxWidth: 'inherit',		
+
 	},
 	title: {
 		color: theme.palette.primary.main,
@@ -108,6 +132,8 @@ const useStyles = makeStyles(theme => ({
 	},
 	bottomContainer: {
 		display: 'flex',
+		background: 'transparent',
+		boxShadow: 'none'
 	},
 	searchField: {
 		flexGrow: 1,
@@ -118,6 +144,7 @@ const useStyles = makeStyles(theme => ({
 
 const Navbar = () => {
 	const classes = useStyles()
+	const [leftSideMenuIsOpen, setLeftSideMenuIsOpen] = useState(false)
 	const [menuIsOpen, setMenuIsOpen] = useState(false)
 	const handleClick = (event) => {
 		setMenuIsOpen(event.currentTarget)
@@ -128,8 +155,8 @@ const Navbar = () => {
 
 	return (
 		<div className={classes.root}>
-			<AppBar position="static" className={classes.appbar}>
-				<Toolbar id='top-navbar' classes={classes.topContainer} style={{ padding: 0 }}>
+			<AppBar position="fixed" className={classes.appbar} id='appbarStyle'>
+				<Toolbar id='top-navbar' className={classes.topContainer} style={{ padding: 0 }}>
 					<div className={classes.containerLogo}>
 						<Typography variant="h4" className={classes.title}>JJ-rent</Typography>
 						<Button variant="contained" className={classes.buttonHowItWorks}>How it works</Button>
@@ -141,7 +168,7 @@ const Navbar = () => {
 						</Hidden>
 					</div>
 				</Toolbar>
-				<Toolbar id='bottom-navbar' classes={classes.bottomContainer} style={{ padding: 0 }}>
+				<Toolbar id='bottom-navbar' className={classes.bottomContainer} style={{ padding: 0 }}>
 					<Hidden xsDown>
 						<Button
 							aria-controls="simple-menu"
@@ -156,7 +183,7 @@ const Navbar = () => {
 						</Button>
 					</Hidden>
 					<Hidden smUp>
-						<Fab color="primary" aria-label="add" className={classes.buttonCart} onClick={() => console.log('clicked')}>
+						<Fab color="primary" aria-label="add" className={classes.buttonCart} onClick={() => setLeftSideMenuIsOpen(true)}>
 							<Menu />
 						</Fab>
 					</Hidden>
@@ -168,6 +195,7 @@ const Navbar = () => {
 					</Fab>
 				</Toolbar>
 				<CategoriesMenu menuIsOpen={menuIsOpen} handleClose={handleClose} />
+				<LeftSideMenu leftSideMenuIsOpen={leftSideMenuIsOpen} setLeftSideMenuIsOpen={setLeftSideMenuIsOpen}/>
 			</AppBar>
 		</div>
 	)

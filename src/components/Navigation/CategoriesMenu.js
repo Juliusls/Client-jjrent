@@ -5,7 +5,7 @@ import { Menu, MenuItem, ListItemIcon, ListItemText, Fade } from '@material-ui/c
 import PhoneIphoneIcon from '@material-ui/icons/PhoneIphone'
 import LaptopMacIcon from '@material-ui/icons/LaptopMac'
 import WatchIcon from '@material-ui/icons/Watch'
-import CameraAltIcon from '@material-ui/icons/CameraAlt'
+import HeadsetIcon from '@material-ui/icons/Headset'
 
 const CategoriesMenu = ({ menuIsOpen, handleClose }) => {
 	return (
@@ -41,9 +41,9 @@ const CategoriesMenu = ({ menuIsOpen, handleClose }) => {
 			</MenuItem>
 			<MenuItem onClick={handleClose}>
 				<ListItemIcon>
-					<CameraAltIcon fontSize="small" />
+					<HeadsetIcon fontSize="small" />
 				</ListItemIcon>
-				<ListItemText primary="Headphone" />
+				<ListItemText primary="Headphones" />
 			</MenuItem>
 		</Menu>
 	)

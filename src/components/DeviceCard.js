@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { makeStyles, Card, CardActionArea, CardContent, Typography, Box, IconButton } from '@material-ui/core/'
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder'
+import FavoriteIcon from '@material-ui/icons/Favorite'
 
 const useStyles = makeStyles(theme => ({
 	card: {
@@ -67,6 +68,9 @@ const useStyles = makeStyles(theme => ({
 			color: theme.palette.grey[900]
 		}
 	},
+	favoriteButtonIcon: {
+		color: theme.palette.primary.main
+	},
 	imageContainer: {
 		width: 'inherit',
 		paddingBottom: '100%',
@@ -84,12 +88,16 @@ const useStyles = makeStyles(theme => ({
 
 const DeviceCard = ({ name, price, desc, image }) => {
 	const classes = useStyles()
+	const [favorited, setFavorited] = useState(false)
 
 	return (
 		<Card className={classes.card} style={{ height: '100%' }}>
 			<CardActionArea className={classes.cardActionArea}>
-				<IconButton classes={{root: classes.favoriteButton}} onMouseDown={event => event.stopPropagation()}>
-					<FavoriteBorderIcon fontSize="small"/>
+				<IconButton classes={{root: classes.favoriteButton}} onMouseDown={event => event.stopPropagation()} onTouchStart={(event) => event.stopPropagation()} onClick={() => setFavorited(!favorited)}>
+					{favorited 
+						? <FavoriteIcon className={classes.favoriteButtonIcon} />
+						: <FavoriteBorderIcon />
+					}
 				</IconButton>
 				<div className={classes.imageContainer}>
 					<img src={image} className={classes.media}/>					

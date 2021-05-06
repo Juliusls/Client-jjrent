@@ -19,8 +19,8 @@ const useStyles = makeStyles(theme => ({
 			marginLeft: 25,
 		},
 		[theme.breakpoints.down('xs')]: {
-			marginTop: 12,
-			marginLeft: 10,
+			marginTop: 0,
+			marginLeft: 0,
 		},
 	},
 	text: {
@@ -35,8 +35,8 @@ const useStyles = makeStyles(theme => ({
 			marginLeft: 25,
 		},
 		[theme.breakpoints.down('xs')]: {
-			marginTop: 12,
-			marginLeft: 10,
+			marginTop: 10,
+			marginLeft: 0,
 		},
 	},
 	buttonDiscover: {
@@ -59,8 +59,8 @@ const useStyles = makeStyles(theme => ({
 			marginLeft: 25,
 		},
 		[theme.breakpoints.down('xs')]: {
-			marginTop: 12,
-			marginLeft: 10,
+			marginTop: 10,
+			marginLeft: 0,
 		},
 	},
 	containerJumbotron: {
