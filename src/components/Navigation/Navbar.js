@@ -8,9 +8,6 @@ import CategoriesMenu from './CategoriesMenu'
 import SearchField from './SearchField'
 import LeftSideMenu from './LeftSideMenu'
 
-var fullWindowWidth = window.innerWidth
-console.log(fullWindowWidth)
-
 const useStyles = makeStyles(theme => ({
 	appbar: {	
 		backgroundColor: theme.palette.common.white,

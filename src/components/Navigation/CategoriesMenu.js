@@ -1,13 +1,40 @@
 import React from 'react'
 
-import { Menu, MenuItem, ListItemIcon, ListItemText, Fade } from '@material-ui/core'
+import { makeStyles, Menu, MenuItem, ListItemIcon, ListItemText, Fade } from '@material-ui/core'
 
 import PhoneIphoneIcon from '@material-ui/icons/PhoneIphone'
 import LaptopMacIcon from '@material-ui/icons/LaptopMac'
 import WatchIcon from '@material-ui/icons/Watch'
 import HeadsetIcon from '@material-ui/icons/Headset'
 
+const useStyles = makeStyles(theme => ({
+	menuComponent: {
+		marginTop: 10,
+	},
+	menuComponentPaper: {
+		borderRadius: 25,
+		width: 200,
+		padding: 10
+	},
+	menuItem: {
+		backgroundColor: 'white',
+		'&:hover $child': {
+			color: 'red'
+		}
+	},
+	iconStyle: {
+		color: theme.palette.grey[900],
+	}, 
+	listItemText: {
+		color: theme.palette.grey[900],
+		fontSize: 18,
+	}
+}))
+
 const CategoriesMenu = ({ menuIsOpen, handleClose }) => {
+	const classes = useStyles()
+
+
 	return (
 		<Menu
 			anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
@@ -19,31 +46,52 @@ const CategoriesMenu = ({ menuIsOpen, handleClose }) => {
 			MenuListProps={{ onMouseLeave: handleClose }}
 			getContentAnchorEl={null}
 			TransitionComponent={Fade}
-
+			className={classes.menuComponent}
+			classes={{ paper: classes.menuComponentPaper }}
 		>
-			<MenuItem onClick={handleClose}>
+			<MenuItem 
+				onClick={handleClose}
+				// component='a'
+				// href='/phones'
+				className={classes.menuItem}
+			>	
 				<ListItemIcon>
-					<PhoneIphoneIcon fontSize="small" />
+					<PhoneIphoneIcon className={classes.iconStyle}/>
 				</ListItemIcon>
-				<ListItemText primary="Phones" />
+				<ListItemText primary="Phones" classes={{primary:classes.listItemText}}/>
 			</MenuItem>
-			<MenuItem onClick={handleClose}>
+			<MenuItem 
+				onClick={handleClose}
+				// component='a'
+				// href='/laptops'
+				className={classes.menuItem}
+			>
 				<ListItemIcon>
-					<LaptopMacIcon fontSize="small" />
+					<LaptopMacIcon className={classes.iconStyle}/>
 				</ListItemIcon>
-				<ListItemText primary="Laptops" />
+				<ListItemText primary="Laptops" classes={{primary:classes.listItemText}}/>
 			</MenuItem>
-			<MenuItem onClick={handleClose}>
+			<MenuItem 
+				onClick={handleClose}
+				// component='a'
+				// href='/smartwatches'
+				className={classes.menuItem}
+			>
 				<ListItemIcon>
-					<WatchIcon fontSize="small" />
+					<WatchIcon className={classes.iconStyle}/>
 				</ListItemIcon>
-				<ListItemText primary="Smart Watches" />
+				<ListItemText primary="Smartwatches" classes={{primary:classes.listItemText}}/>
 			</MenuItem>
-			<MenuItem onClick={handleClose}>
+			<MenuItem 
+				onClick={handleClose}
+				// component='a'
+				// href='/headphones'
+				className={classes.menuItem}
+			>
 				<ListItemIcon>
-					<HeadsetIcon fontSize="small" />
+					<HeadsetIcon className={classes.iconStyle}/>
 				</ListItemIcon>
-				<ListItemText primary="Headphones" />
+				<ListItemText primary="Headphones" classes={{primary:classes.listItemText}}/>
 			</MenuItem>
 		</Menu>
 	)
