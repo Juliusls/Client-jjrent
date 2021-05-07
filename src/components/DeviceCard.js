@@ -20,43 +20,11 @@ const useStyles = makeStyles(theme => ({
 		justifyContent: 'space-between',
 		alignContent: 'flex-start',
 		alignItems: 'flex-start',
-		flexDirection: 'column'
-	},
-	cardContent: {
-		padding: 0,
-		marginTop: 'auto',
-	},
-	cardName: {
-		color: theme.palette.common.black,
-		fontSize: 16,
-		fontWeight: 'bold',
-		display: 'box',
-		lineClamp: 2,
-		boxOrient: 'vertical',
-		overflow: 'hidden',
-		letterSpacing: 'normal',
-		minHeight: 48,
-		paddingTop: 20,
-	},
-	cardDesc: {
-		color: theme.palette.common.black,
-		fontSize: 14,
-		display: 'box',
-		lineClamp: 2,
-		boxOrient: 'vertical',
-		overflow: 'hidden',
-		letterSpacing: 'normal',
-		minHeight: 40
-	},
-	cardAroundPrice: {
-		color: theme.palette.common.black,
-		fontSize: 12,
-		marginTop: 10,
-	},
-	cardPrice: {
-		color: theme.palette.common.black,
-		fontSize: 16,
-		fontWeight: 'bold',
+		flexDirection: 'column',
+		[theme.breakpoints.down('xs')]: {
+			flexDirection: 'row',
+			padding: 12,
+		},
 	},
 	favoriteButton: {
 		display: 'block',
@@ -68,13 +36,37 @@ const useStyles = makeStyles(theme => ({
 			color: theme.palette.grey[900]
 		}
 	},
+	favoriteButtonOrder:{
+		[theme.breakpoints.down('xs')]: {
+			order: 3,
+		},
+	},
 	favoriteButtonIcon: {
-		color: theme.palette.primary.main
+		color: theme.palette.primary.main,
+		[theme.breakpoints.down('xs')]: {
+			fontSize: 22
+		},
+	},
+	notFavoritedIcon: {
+		color: theme.palette.grey[500],
+		[theme.breakpoints.down('xs')]: {
+			fontSize: 22
+		},
 	},
 	imageContainer: {
 		width: 'inherit',
 		paddingBottom: '100%',
 		position: 'relative',
+		[theme.breakpoints.down('xs')]: {
+			order: 1,
+			padding: 0,
+			width: 80,
+			position: 'static',
+			marginTop: 'auto',
+			marginBottom: 'auto',
+			marginLeft: 10,
+			marginRight: 10,
+		},
 	},
 	media: {
 		position: 'absolute',
@@ -83,7 +75,62 @@ const useStyles = makeStyles(theme => ({
 		width: '100%',
 		height: '100%',
 		objectFit: 'contain',
-	}
+		[theme.breakpoints.down('xs')]: {
+			maxHeight: 'inherit',
+			width: 'inherit',
+			height: 'auto',
+			position: 'static',
+			marginTop: 'auto',
+		},
+	},
+	cardContent: {
+		padding: 0,
+		paddingTop: 20,
+		marginTop: 'auto',
+		[theme.breakpoints.down('xs')]: {
+			order: 2,
+			marginTop: 0,
+			paddingTop: 0,
+			flexGrow: 1
+		},
+	},
+	cardName: {
+		color: theme.palette.common.black,
+		fontSize: 16,
+		fontWeight: 'bold',
+		display: 'box',
+		lineClamp: 2,
+		boxOrient: 'vertical',
+		overflow: 'hidden',
+		letterSpacing: 'normal',
+		minHeight: 48,
+		[theme.breakpoints.down('xs')]: {
+			lineClamp: 4,
+		},
+	},
+	cardDesc: {
+		color: theme.palette.common.black,
+		fontSize: 14,
+		display: 'box',
+		lineClamp: 2,
+		boxOrient: 'vertical',
+		overflow: 'hidden',
+		letterSpacing: 'normal',
+		minHeight: 40,
+		[theme.breakpoints.down('xs')]: {
+			lineClamp: 5,
+		},
+	},
+	cardAroundPrice: {
+		color: theme.palette.common.black,
+		fontSize: 12,
+		marginTop: 10,
+	},
+	cardPrice: {
+		color: theme.palette.common.black,
+		fontSize: 16,
+		fontWeight: 'bold',
+	},
 }))
 
 const DeviceCard = ({ name, price, desc, image }) => {
@@ -93,10 +140,10 @@ const DeviceCard = ({ name, price, desc, image }) => {
 	return (
 		<Card className={classes.card} style={{ height: '100%' }}>
 			<CardActionArea className={classes.cardActionArea}>
-				<IconButton classes={{root: classes.favoriteButton}} onMouseDown={event => event.stopPropagation()} onTouchStart={(event) => event.stopPropagation()} onClick={() => setFavorited(!favorited)}>
+				<IconButton className={classes.favoriteButtonOrder}  classes={{root: classes.favoriteButton}} onMouseDown={event => event.stopPropagation()} onTouchStart={(event) => event.stopPropagation()} onClick={() => setFavorited(!favorited)}>
 					{favorited 
 						? <FavoriteIcon className={classes.favoriteButtonIcon} />
-						: <FavoriteBorderIcon />
+						: <FavoriteBorderIcon className={classes.notFavoritedIcon}/>
 					}
 				</IconButton>
 				<div className={classes.imageContainer}>
@@ -109,12 +156,12 @@ const DeviceCard = ({ name, price, desc, image }) => {
 					<Typography className={classes.cardDesc}>
 						{desc}
 					</Typography>
-				</CardContent>
-				<Typography className={classes.cardAroundPrice}>
+					<Typography className={classes.cardAroundPrice}>
 						from 
-					<Box display='inline' className={classes.cardPrice}> €{price} </Box>
+						<Box display='inline' className={classes.cardPrice}> €{price} </Box>
 						per month
-				</Typography>
+					</Typography>
+				</CardContent>
 			</CardActionArea>
 		</Card>
 	)

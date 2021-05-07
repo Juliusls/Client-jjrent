@@ -15,7 +15,6 @@ const valuesForList = [
 	{image: tablet, name: 'Asus zenfone a5', price: 12, desc: 'Fusce vitae justo in mi rutrum finibus ut eget lorem'}
 ]
 
-
 const useStyles = makeStyles(theme => ({
 	root: {
 		flexGrow: 1,
@@ -24,13 +23,16 @@ const useStyles = makeStyles(theme => ({
 		marginTop: 25,
 		padding: 30,
 		[theme.breakpoints.down('sm')]: {
-			padding: 20,
+			padding: 15,
 		},
 	},
 	categoryName: {
 		color: theme.palette.primary.main,
 		fontWeight: 'bold',
-		marginBottom: 30
+		marginBottom: 30,
+		[theme.breakpoints.down('sm')]: {
+			marginBottom: 10,
+		},
 	},
 	containerGrid: {
 		alignItems: 'stretch'
@@ -50,6 +52,13 @@ const useStyles = makeStyles(theme => ({
 		'&:hover': {
 			backgroundColor: theme.palette.common.white,
 			boxShadow: theme.shadows[10],
+		},
+		[theme.breakpoints.down('sm')]: {
+			marginTop: 10,
+			paddingTop: 7,
+			paddingBottom: 7,
+			paddingRight: 14,
+			paddingLeft: 14,
 		},
 	},
 }))

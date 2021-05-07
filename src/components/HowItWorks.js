@@ -18,7 +18,10 @@ const useStyles = makeStyles(theme => ({
 	categoryName: {
 		color: theme.palette.primary.main,
 		fontWeight: 'bold',
-		marginBottom: 30
+		marginBottom: 30,
+		[theme.breakpoints.down('sm')]: {
+			marginBottom: 10,
+		},
 	},
 	containerGrid: {
 		alignItems: 'stretch',
@@ -39,6 +42,13 @@ const useStyles = makeStyles(theme => ({
 		'&:hover': {
 			backgroundColor: theme.palette.common.white,
 			boxShadow: theme.shadows[10],
+		},
+		[theme.breakpoints.down('sm')]: {
+			marginTop: 10,
+			paddingTop: 7,
+			paddingBottom: 7,
+			paddingRight: 14,
+			paddingLeft: 14,
 		},
 	},
 	gridItem: {

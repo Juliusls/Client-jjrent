@@ -21,6 +21,7 @@ const useStyles = makeStyles(theme => ({
 		[theme.breakpoints.down('xs')]: {
 			marginTop: 0,
 			marginLeft: 0,
+			fontSize: 35,
 		},
 	},
 	text: {
@@ -37,6 +38,7 @@ const useStyles = makeStyles(theme => ({
 		[theme.breakpoints.down('xs')]: {
 			marginTop: 10,
 			marginLeft: 0,
+			fontSize: 18,
 		},
 	},
 	buttonDiscover: {
@@ -71,9 +73,9 @@ const useStyles = makeStyles(theme => ({
 		color: 'white',
 		borderRadius: 25,
 		marginTop: 20,
-		// [theme.breakpoints.down('sm')]: {
-		// 	padding: 10
-		// },
+		[theme.breakpoints.down('xs')]: {
+			height: 350,
+		},
 	}
 }))
 
