@@ -10,7 +10,7 @@ import Laptops from './components/Laptops'
 import Jumbotron from './components/Jumbotron'
 import OneCategory from './components/OneCategory'
 import Footer from './components/Footer'
-import HowItWorks from './components/HowItWorks'
+import HowItWorks from './components/HowItWorks/HowItWorks'
 
 import { howItWorksData } from './data'
 
@@ -69,7 +69,7 @@ const App = () => {
 						<OneCategory name='Headphones'/>
 					</Route>
 					<Route path='/laptops'>
-						<Laptops />
+						<Laptops name='Laptops'/>
 					</Route>
 					<Route path='/phones'>
 						<Phones />
