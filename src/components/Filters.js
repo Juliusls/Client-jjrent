@@ -98,7 +98,40 @@ const useStyles = makeStyles(theme => ({
 		[theme.breakpoints.down('xs')]: {
 			margin: 15
 		},
-	}
+		order: 5
+	},
+	gridItemOne: {
+		[theme.breakpoints.down('sm')]: {
+			order: 1
+		},
+		[theme.breakpoints.down('xs')]: {
+			order: 1
+		},
+	},
+	gridItemTwo: {
+		[theme.breakpoints.down('sm')]: {
+			order: 2
+		},
+		[theme.breakpoints.down('xs')]: {
+			order: 2
+		},
+	},
+	gridItemThree: {
+		[theme.breakpoints.down('sm')]: {
+			order: 4
+		},
+		[theme.breakpoints.down('xs')]: {
+			order: 3
+		},
+	},
+	gridItemFour: {
+		[theme.breakpoints.down('sm')]: {
+			order: 3
+		},
+		[theme.breakpoints.down('xs')]: {
+			order: 4
+		},
+	},
 }))
 
 
@@ -134,7 +167,7 @@ const Filters = ({ brandNames, minPrice, maxPrice, setTopMenuOpen }) => {
 
 	return (
 		<Grid container spacing={2}>
-			<Grid item xs={12} sm={6} md={4} lg={12} xl={12}>
+			<Grid item xs={12} sm={6} md={4} lg={12} xl={12} className={classes.gridItemOne}>
 				<Card className={classes.card} style={{ height: '100%'}}>
 					<div className={classes.cardActionArea} classes={classes.shadowsRoot}>
 						<CardContent classes={{root: classes.cardContent}}>
@@ -151,7 +184,7 @@ const Filters = ({ brandNames, minPrice, maxPrice, setTopMenuOpen }) => {
 					</div>
 				</Card>
 			</Grid>
-			<Grid item xs={12} sm={6} md={4} lg={12} xl={12}>
+			<Grid item xs={12} sm={6} md={4} lg={12} xl={12} className={classes.gridItemTwo}>
 				<Card className={classes.card} style={{ height: '100%'}}>
 					<div className={classes.cardActionArea} classes={classes.shadowsRoot}>
 						<CardContent classes={{root: classes.cardContent}}>
@@ -174,7 +207,7 @@ const Filters = ({ brandNames, minPrice, maxPrice, setTopMenuOpen }) => {
 					</div>
 				</Card>
 			</Grid>
-			<Grid item xs={12} sm={6} md={4} lg={12} xl={12}>
+			<Grid item xs={12} sm={6} md={4} lg={12} xl={12} className={classes.gridItemThree}>
 				<Card className={classes.card} style={{ height: '100%'}}>
 					<div className={classes.cardActionArea} classes={classes.shadowsRoot}>
 						<CardContent classes={{root: classes.cardContent}}>
@@ -209,7 +242,7 @@ const Filters = ({ brandNames, minPrice, maxPrice, setTopMenuOpen }) => {
 					</div>
 				</Card>
 			</Grid>
-			<Grid item xs={12} sm={6} md={4} lg={12} xl={12}>
+			<Grid item xs={12} sm={6} md={4} lg={12} xl={12} className={classes.gridItemFour}>
 				<Card className={classes.card} style={{ height: '100%'}}>
 					<div className={classes.cardActionArea} classes={classes.shadowsRoot}>
 						<CardContent classes={{root: classes.cardContent}}>
