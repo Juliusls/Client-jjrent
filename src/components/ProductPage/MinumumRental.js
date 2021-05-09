@@ -43,16 +43,16 @@ const MinumumRental = () => {
 		<div>
 			<div className={classes.minimumRentContainer}>
 				<Typography className={classes.formLabelsTexts}>
-					1
+					1+
 				</Typography>
 				<Typography className={classes.formLabelsTexts} style={{ marginLeft: 16 }}>
-					3
+					3+
 				</Typography>
 				<Typography className={classes.formLabelsTexts} style={{ marginLeft: 19 }}>
-					6
+					6+
 				</Typography>
 				<Typography className={classes.formLabelsTexts}>
-					12
+					12+
 				</Typography>
 			</div>
 			<Slider
