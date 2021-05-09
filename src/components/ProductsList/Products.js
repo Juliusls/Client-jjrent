@@ -2,13 +2,13 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Typography, Divider, Hidden, Button } from '@material-ui/core/'
-import DeviceCard from './DeviceCard'
+import DeviceCard from '../DeviceCard'
 import Filters from './Filters'
 import TopFilter from './TopFilter'
-import laptop from '../Images/macbookpro.png'
-import watch from '../Images/watch.png'
-import headphones from '../Images/headphones.png'
-import tablet from '../Images/tablet.png'
+import laptop from '../../Images/macbookpro.png'
+import watch from '../../Images/watch.png'
+import headphones from '../../Images/headphones.png'
+import tablet from '../../Images/tablet.png'
 
 const valuesForList = [
 	{image: headphones, name: 'Omen 15-dh1076ng - Gaming Laptop - Igsntel® Core™ i7-10750H - 32GB - 512GB PCIe + 1TB HDD - NVIDIA® GeForce® RTX™ 2070 Super Max-Q', price: 64, desc: 'Fusce vitae justo in mi rutrum finibus ut eget lorem'},
@@ -106,7 +106,7 @@ const brandNames = ['apple', 'samsung', 'oneplus', 'lenovo']
 const maxPrice = 150
 const minPrice = 29
 
-const Laptops = ({ name }) => {
+const Products = ({ name }) => {
 	const classes = useStyles()
 	const [topMenuOpne, setTopMenuOpen] = useState(false)
 
@@ -139,4 +139,4 @@ const Laptops = ({ name }) => {
 	)
 }
 
-export default Laptops
+export default Products

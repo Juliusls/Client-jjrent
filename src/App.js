@@ -5,12 +5,12 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 
 import Navbar from './components/Navigation/Navbar'
-import Phones from './components/Phones'
-import Laptops from './components/Laptops'
+import Products from './components/ProductsList/Products'
 import Jumbotron from './components/Jumbotron'
-import OneCategory from './components/OneCategory'
+import OneCategory from './components/Onecategory'
 import Footer from './components/Footer'
 import HowItWorks from './components/HowItWorks/HowItWorks'
+import ProductPage from './components/ProductPage/ProductPage'
 
 import { howItWorksData } from './data'
 
@@ -68,11 +68,11 @@ const App = () => {
 						<OneCategory name='Smartwatches'/>
 						<OneCategory name='Headphones'/>
 					</Route>
-					<Route path='/laptops'>
-						<Laptops name='Laptops'/>
+					<Route path='/products'>
+						<Products name='Laptops'/>
 					</Route>
-					<Route path='/phones'>
-						<Phones />
+					<Route path='/product/12345'>
+						<ProductPage/>
 					</Route>
 				</Switch>
 				<Footer />
