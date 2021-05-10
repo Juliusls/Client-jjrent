@@ -51,23 +51,24 @@ const useStyles = makeStyles(theme => ({
 		display: 'none'
 	},
 	sliderRail: {
-		height: 3,
-		marginTop: 2,
+		height: 8,
+		marginTop: 3,
 	},
 	sliderThumb: {
-		height: 17,
-		width: 17,
+		height: 24,
+		width: 24,
 	},
 	sliderMark: {
-		height: 7,
-		width: 7,
+		height: 10,
+		width: 10,
 		borderRadius: 10,
-		marginTop: 0,
+		marginTop: 2,
 		opacity: 1
 	},
 	slideMarkActive: {
 		backgroundColor: theme.palette.primary.main,
-		borderRadius: 10
+		borderRadius: 10,
+		// height: 8,
 	},
 	minimumRentContainer: {
 		display: 'flex',

@@ -1,34 +1,27 @@
 import React, { useState } from 'react'
 
-import { makeStyles, Card, Typography, Box, IconButton, Button } from '@material-ui/core/'
+import { makeStyles, Card, Typography, Box, IconButton, Button, Tooltip, withStyles, Fade } from '@material-ui/core/'
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import LocalShippingOutlinedIcon from '@material-ui/icons/LocalShippingOutlined'
-import BeachAccessOutlinedIcon from '@material-ui/icons/BeachAccessOutlined'
 
 import MinimumRental from './MinumumRental'
+import ColorPicker from './ColorPicker'
 
 const useStyles = makeStyles(theme => ({
 	card: {
+		padding: 24,
 		borderRadius: 15,
 		backgroundColor: theme.palette.common.white,
 		boxShadow: theme.shadows[5],
-		// '&:hover': {
-		// 	backgroundColor: theme.palette.common.white,
-		// 	boxShadow: theme.shadows[10],
-		// },
-	},
-	cardActionArea: {
-		padding: 24,
-		display: 'flex',
-		justifyContent: 'space-between',
-		alignContent: 'flex-start',
-		alignItems: 'flex-start',
-		flexDirection: 'column',
-		[theme.breakpoints.down('xs')]: {
-			flexDirection: 'row',
-			padding: 12,
-		},
+		marginLeft: 'auto',
+		position: 'sticky',
+		top: 160,
+		width: '100%',
+		maxWidth: 700,
+		minHeight: 500,
+		marginTop: 60,
+		zIndex: 2,
 	},
 	favoriteButton: {
 		display: 'block',
@@ -45,15 +38,9 @@ const useStyles = makeStyles(theme => ({
 	},
 	favoriteButtonIcon: {
 		color: theme.palette.primary.main,
-		[theme.breakpoints.down('xs')]: {
-			fontSize: 22
-		},
 	},
 	notFavoritedIcon: {
 		color: theme.palette.grey[500],
-		[theme.breakpoints.down('xs')]: {
-			fontSize: 22
-		},
 	},
 	imageContainer: {
 		width: 'inherit',
@@ -93,35 +80,50 @@ const useStyles = makeStyles(theme => ({
 		color: theme.palette.common.black,
 		fontSize: 24,
 		fontWeight: 'bold',
-		display: 'box',
-		lineClamp: 2,
-		boxOrient: 'vertical',
-		overflow: 'hidden',
 		letterSpacing: 'normal',
-		minHeight: 48,
+		marginBottom: 16
 	},
-	cardDesc: {
+	textDesc: {
 		color: theme.palette.common.black,
 		fontSize: 16,
-		display: 'box',
-		lineClamp: 2,
-		boxOrient: 'vertical',
-		overflow: 'hidden',
 		letterSpacing: 'normal',
-		minHeight: 40,
-		[theme.breakpoints.down('xs')]: {
-			lineClamp: 5,
-		},
+		marginBottom: 16
+	},
+	textDelivery: {
+		color: theme.palette.common.black,
+		fontSize: 16,
+		letterSpacing: 'normal',
+		marginBottom: 32,
+		marginLeft: 16
+	},
+	textPeriod: {
+		color: theme.palette.common.black,
+		fontSize: 16,
+		letterSpacing: 'normal',
+	},
+	textColor: {
+		color: theme.palette.common.black,
+		fontSize: 16,
+		letterSpacing: 'normal',
+		marginTop: 16
+	},
+	minimumText: {
+		textDecoration: 'underline'
 	},
 	cardAroundPrice: {
 		color: theme.palette.common.black,
 		fontSize: 16,
-		marginTop: 10,
+		marginBottom: 16
 	},
 	cardPrice: {
 		color: theme.palette.common.black,
 		fontSize: 24,
 		fontWeight: 'bold',
+	},
+	oneColorText: {
+		color: theme.palette.primary.light,
+		fontSize: 20,
+		fontWeight: theme.typography.fontWeightBold,
 	},
 	buttonSubscribe: {
 		color: theme.palette.common.white,
@@ -144,57 +146,86 @@ const useStyles = makeStyles(theme => ({
 	},
 	iconTextContainer: {
 		display: 'flex'
+	},
+	arrow: {
+		color: theme.palette.common.black,
+	},
+	popper: {
+		opacity: 0.85
 	}
 }))
 
-const PriceCard = () => {
+const colors = ['blue', 'red', 'green']
 
+const BigTooltip = withStyles((theme) => ({
+	tooltip: {
+		backgroundColor: theme.palette.common.black,
+		color: theme.palette.common.white,
+		fontSize: 16,
+		padding: 10,
+		fontWeight: 'bold',
+		borderRadius: 10
+	},
+}))(Tooltip)
+
+const PriceCard = () => {
 	const classes = useStyles()
 	const [favorited, setFavorited] = useState(false)
+	const [selectedColor, setSelectedColor] = useState(colors[0])
 
 	return (
-		<Card className={classes.card} style={{ height: '100%' }}>
-			<div className={classes.cardActionArea}>
-				<div classes={{root: classes.cardContent}}>
-					<div className={classes.iconTextContainer}>
-						<Typography className={classes.cardName}>
-							Apple iPhone 12 128GB
-						</Typography>
-						<IconButton className={classes.favoriteButtonContainer}  classes={{root: classes.favoriteButton}} onMouseDown={event => event.stopPropagation()} onTouchStart={(event) => event.stopPropagation()} onClick={() => setFavorited(!favorited)}>
-							{favorited 
-								? <FavoriteIcon className={classes.favoriteButtonIcon}/>
-								: <FavoriteBorderIcon className={classes.notFavoritedIcon} />
-							}
-						</IconButton>
-					</div>
-					<Typography className={classes.cardDesc}>
-						6.1 Super Retina Display, Dual Rear Camera, 5G, Face ID
+		<Card className={classes.card} style={{ height: '100%'}}>
+			<div className={classes.cardContent} >
+				<div className={classes.iconTextContainer}>
+					<Typography className={classes.cardName}>
+						Apple MacBook Air (Late 2020) Laptop - Apple M1 - 8GB - 256GB SSD - Apple Integrated 7-core GPU
 					</Typography>
-					<Typography className={classes.cardAroundPrice}>
-						<Box display='inline' className={classes.cardPrice}> €20 </Box>
-						per month for 6 months, afterwards cancel anytime
-					</Typography>
-					<div className={classes.iconTextContainer}>
-						<LocalShippingOutlinedIcon />
-						<Typography className={classes.cardDesc}>
-							Delivery in 1–3 business days
-						</Typography>
-					</div>
-					<div className={classes.iconTextContainer}>
-						<BeachAccessOutlinedIcon />
-						<Typography className={classes.cardDesc}>
-						Insurance
-						</Typography>
-					</div>
-					<Typography className={classes.cardDesc}>
-						Select your minimum rental period
-					</Typography>
-					<MinimumRental />
-					<Button variant="contained" className={classes.buttonSubscribe}>Subscribe</Button>
+					<IconButton className={classes.favoriteButtonContainer}  classes={{root: classes.favoriteButton}} onMouseDown={event => event.stopPropagation()} onTouchStart={(event) => event.stopPropagation()} onClick={() => setFavorited(!favorited)}>
+						{favorited 
+							? <FavoriteIcon className={classes.favoriteButtonIcon}/>
+							: <FavoriteBorderIcon className={classes.notFavoritedIcon} />
+						}
+					</IconButton>
 				</div>
+				<Typography className={classes.textDesc}>
+					32.5MP, CMOS Sensor, 4K Video, Face and Eye detection, High continuos frame rate (30 frames per sec)
+				</Typography>
+				<Typography className={classes.cardAroundPrice}>
+					<Box display='inline' className={classes.cardPrice}> €20 </Box>
+						per month for 6 months, afterwards cancel anytime
+				</Typography>
+				<div className={classes.iconTextContainer}>
+					<LocalShippingOutlinedIcon />
+					<Typography className={classes.textDelivery}>
+							Delivery in 1–3 business days
+					</Typography>
+				</div>
+				<Typography className={classes.textPeriod}>
+					{'Select your '}
+					<BigTooltip 
+						arrow
+						classes={{ arrow: classes.arrow, popper: classes.popper }}
+						TransitionComponent={Fade}
+						TransitionProps={{ timeout: 600 }}
+						placement="top"
+						title='At the end of your minimum rental period, you can keep on renting for the same price or cancel your subscription by sending the product back for free. Switching to a longer rental plan to lower your monthly payments is also possible at any time.'
+					>
+						<Box display='inline' className={classes.minimumText}>minimum rental period</Box>
+					</BigTooltip>
+				</Typography>
+				<MinimumRental />
+				<Typography className={classes.textColor}>
+						Selected color:
+					<Box display='inline' className={classes.oneColorText}> {selectedColor}</Box>
+				</Typography>
+				<ColorPicker colors={colors} selectedColor={selectedColor} setSelectedColor={setSelectedColor}/>
+				<Button variant="contained" className={classes.buttonSubscribe}>Subscribe</Button>
 			</div>
 		</Card>
 	)
 }
 
 export default PriceCard
+
+
+// At the end of your minimum rental period, you can keep on renting for the same price or cancel your subscription by sending the product back for free. Switching to a longer rental plan to lower your monthly payments is also possible at any time.

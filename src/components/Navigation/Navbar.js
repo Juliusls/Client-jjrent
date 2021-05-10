@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
 		boxShadow: 'none',
 		paddingLeft: 75,
 		paddingRight: 75,
-		zIndex: 2,
+		zIndex: 3,
 		[theme.breakpoints.down('md')]: {
 			paddingLeft: 40,
 			paddingRight: 40,

@@ -12,6 +12,7 @@ const useStyles = makeStyles(theme => ({
 	containerDiv: {
 		height: 500,
 		display: 'flex',
+		marginBottom: 100
 	},
 	gridList: {
 		maxWidth: 94,

@@ -10,3 +10,8 @@ sm: 960
 md: 1280
 lg: 1920
 
+
+
+fix green colors
+padding in green div's
+price card margin on the bottom of the page
