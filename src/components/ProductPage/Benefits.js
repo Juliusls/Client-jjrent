@@ -16,6 +16,9 @@ const useStyles = makeStyles(theme => ({
 		boxShadow: theme.shadows[5],
 		maxWidth: '100%',
 		marginTop: 20,
+		[theme.breakpoints.down('sm')]: {
+			width: '100%',
+		},
 	},
 	itemName: {
 		color: '#4BD8BC',

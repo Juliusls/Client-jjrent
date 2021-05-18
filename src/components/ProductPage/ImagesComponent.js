@@ -12,7 +12,11 @@ const useStyles = makeStyles(theme => ({
 	containerDiv: {
 		height: 500,
 		display: 'flex',
-		marginBottom: 100
+		marginBottom: 100,
+		[theme.breakpoints.down('sm')]: {
+			maxWidth: '100%',
+			marginBottom: 50,
+		},
 	},
 	gridList: {
 		maxWidth: 94,

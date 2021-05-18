@@ -18,10 +18,18 @@ const useStyles = makeStyles(theme => ({
 		position: 'sticky',
 		top: 160,
 		width: '100%',
+		height: '100%',
 		maxWidth: 700,
 		minHeight: 500,
 		marginTop: 60,
 		zIndex: 2,
+		[theme.breakpoints.down('sm')]: {
+			position: 'static',
+			zIndex: 1,
+			height: 'inherit',
+			marginLeft: 0,
+			maxWidth: '100%',
+		},
 	},
 	favoriteButton: {
 		display: 'block',
@@ -174,7 +182,8 @@ const PriceCard = () => {
 	const [selectedColor, setSelectedColor] = useState(colors[0])
 
 	return (
-		<Card className={classes.card} style={{ height: '100%'}}>
+		// <Card className={classes.card} style={{ height: '100%'}}>
+		<Card className={classes.card} >
 			<div className={classes.cardContent} >
 				<div className={classes.iconTextContainer}>
 					<Typography className={classes.cardName}>
