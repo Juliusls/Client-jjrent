@@ -72,7 +72,7 @@ const useStyles = makeStyles(theme => ({
 		backgroundSize: 'cover',
 		color: 'white',
 		borderRadius: 25,
-		marginTop: 20,
+		marginTop: 10,
 		[theme.breakpoints.down('xs')]: {
 			height: 350,
 		},

@@ -5,5 +5,5 @@ body{
 }
 
 #appbarStyle {
-	background: linear-gradient(rgb(255, 255, 255) calc(75% + 8px), transparent 50%);
+	background: linear-gradient(rgb(255, 255, 255) calc(50% + 8px), transparent 50%);
 }

@@ -1,12 +1,17 @@
-import React, { useState } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import { Button, Typography, Toolbar, AppBar, Fab, Hidden } from '@material-ui/core'
-import Menu from '@material-ui/icons/Menu'
-import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket'
+import React, { useState, useRef } from 'react'
+import { Link } from 'react-router-dom'
+
+import { makeStyles, Toolbar, AppBar, Fab, Typography, Button, Hidden } from '@material-ui/core'
+import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined'
+import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined'
+import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined'
+import MenuOutlinedIcon from '@material-ui/icons/MenuOutlined'
 
 import CategoriesMenu from './CategoriesMenu'
-import SearchField from './SearchField'
+import AccountMenu from './AccountMenu'
+import CartMenu from './CartMenu'
 import LeftSideMenu from './LeftSideMenu'
+import SearchField from './SearchField'
 
 const useStyles = makeStyles(theme => ({
 	appbar: {	
@@ -35,61 +40,33 @@ const useStyles = makeStyles(theme => ({
 	root: {
 		flexGrow: 1,
 		maxWidth: 'inherit',		
-
 	},
-	title: {
-		color: theme.palette.primary.main,
-		fontWeight: 'bold',
-		marginRight: 40,
-		[theme.breakpoints.down('sm')]: {
-			marginRight: 10,
-		},
-	},
-	buttonHowItWorks: {
-		color: theme.palette.primary.main,
+	toolbarContainer: {
+		display: 'flex',
+		justifyContent: 'space-between',
 		backgroundColor: theme.palette.common.white,
-		borderRadius: 25,
-		fontSize: 13,
-		fontWeight: 'bold',
+		borderRadius: 25
+	},
+	buttonCart: {
+		color: theme.palette.primary.main,
+		backgroundColor: 'white',
 		boxShadow: 'none',
 		'&:hover': {
-			opacity: 0.5,
 			backgroundColor: theme.palette.common.white,
 			boxShadow: 'none',
-		},
-	},
-	buttonLogin: {
-		color: theme.palette.primary.main,
-		backgroundColor: theme.palette.common.white,
-		borderRadius: 25,
-		paddingTop: 10,
-		paddingBottom: 10,
-		paddingRight: 20,
-		paddingLeft: 20,
-		margin: 10,
-		fontSize: 20,
-		fontWeight: 'bold',
-		boxShadow: theme.shadows[5],
-		'&:hover': {
-			backgroundColor: theme.palette.common.white,
-			boxShadow: theme.shadows[10],
 		}
 	},
-	buttonSignup: {
-		color: theme.palette.common.white,
-		backgroundColor: theme.palette.primary.main,
-		borderRadius: 25,
-		paddingTop: 10,
-		paddingBottom: 10,
-		paddingRight: 20,
-		paddingLeft: 20,
-		fontSize: 20,
-		fontWeight: 'bold',
-		boxShadow: theme.shadows[5],
+	buttonSearch: {
+		color: theme.palette.primary.main,
+		backgroundColor: 'white',
+		boxShadow: 'none',
+		position: 'fixed',
+		bottom: 10,
+		left: 10,
+		zIndex: 2,
 		'&:hover': {
 			backgroundColor: theme.palette.common.white,
-			color: theme.palette.primary.main,
-			boxShadow: theme.shadows[10],
+			boxShadow: 'none',
 		}
 	},
 	buttonCategories: {
@@ -98,104 +75,123 @@ const useStyles = makeStyles(theme => ({
 		borderRadius: 30,
 		paddingTop: 10,
 		paddingBottom: 10,
-		paddingRight: 30,
-		paddingLeft: 30,
-		fontSize: 20,
+		paddingRight: 10,
+		paddingLeft: 20,
+		fontSize: 17,
 		fontWeight: 'bold',
-		boxShadow: theme.shadows[5],
+		boxShadow: 'none',
 		'&:hover': {
 			backgroundColor: theme.palette.common.white,
-			boxShadow: theme.shadows[10],
+			boxShadow: 'none',
 		}
 	},
-	buttonCart: {
+	title: {
 		color: theme.palette.primary.main,
-		backgroundColor: 'white',
-		boxShadow: theme.shadows[5],
-		'&:hover': {
-			backgroundColor: theme.palette.common.white,
-			boxShadow: theme.shadows[10],
-		}
+		fontWeight: 'bold',
+		fontSize: 30,
+		textDecoration: 'none',
+		[theme.breakpoints.down('xs')]: {
+			fontSize: 20,
+		},
 	},
-	topContainer: {
-		display: 'flex',
-		justifyContent: 'space-between',
-	},
-	containerLogo: {
-		flexGrow: 1,
-		display: 'flex',
-		justifyContent: 'flex-start',
-		alignItems: 'center'
-	},
-	bottomContainer: {
-		display: 'flex',
-		background: 'transparent',
-		boxShadow: 'none'
-	},
-	searchField: {
-		flexGrow: 1,
-		marginLeft: 10,
-		marginRight: 10,
+	iconsSize: {
+		fontSize: 35,
+		[theme.breakpoints.down('xs')]: {
+			fontSize: 30,
+		},
 	}
 }))
 
-const Navbar = () => {
+const NavBar = () => {
 	const classes = useStyles()
 	const [leftSideMenuIsOpen, setLeftSideMenuIsOpen] = useState(false)
-	const [menuIsOpen, setMenuIsOpen] = useState(false)
-	const handleClick = (event) => {
-		setMenuIsOpen(event.currentTarget)
+	const [categoriesMenuIsOpen, setCategoriesMenuIsOpen] = useState(false)
+	const [accountMenuIsOpen, setAccountMenuIsOpen] = useState(false)
+	const [cartMenuIsOpen, setCartMenuIsOpen] = useState(false)
+	const [searchFieldIsOpen, setSearchFieldIsOpen] = useState(false)
+
+	const searchInputRef = useRef()
+
+	const handleCategoriesClick = (event) => {
+		setCategoriesMenuIsOpen(event.currentTarget)
 	}
-	const handleClose = () => {
-		setMenuIsOpen(null)
+	const handlecategoriesClose = () => {
+		setCategoriesMenuIsOpen(null)
+	}
+	
+	const handleAccountClick = (event) => {
+		setAccountMenuIsOpen(event.currentTarget)
+	}
+	const handleAccountClose = () => {
+		setAccountMenuIsOpen(null)
+	}
+	
+	const handleCartClick = (event) => {
+		setCartMenuIsOpen(event.currentTarget)
+	}
+	const handleCartClose = () => {
+		setCartMenuIsOpen(null)
 	}
 
 	return (
 		<div className={classes.root}>
 			<AppBar position="fixed" className={classes.appbar} id='appbarStyle'>
-				<Toolbar id='top-navbar' className={classes.topContainer} style={{ padding: 0 }}>
-					<div className={classes.containerLogo}>
-						<Typography variant="h4" className={classes.title}>JJ-rent</Typography>
-						<Button variant="contained" className={classes.buttonHowItWorks}>How it works</Button>
-					</div>
-					<div>
-						<Hidden xsDown>
-							<Button variant="contained" className={classes.buttonLogin}>Log In</Button>
-							<Button variant="contained" className={classes.buttonSignup}>Sign Up</Button>
-						</Hidden>
-					</div>
-				</Toolbar>
-				<Toolbar id='bottom-navbar' className={classes.bottomContainer} style={{ padding: 0 }}>
+				<Toolbar id='top-navbar' className={classes.toolbarContainer} style={{ padding: 0 }}>
 					<Hidden xsDown>
 						<Button
 							aria-controls="simple-menu"
 							variant="contained"
 							aria-haspopup="true"
-							onClick={handleClick}
-							onMouseOver={handleClick}
-							startIcon={<Menu/>}
+							onClick={handleCategoriesClick}
+							startIcon={<MenuOutlinedIcon className={classes.iconsSize} style={{ fontSize: 35 }}/>}
 							className={classes.buttonCategories}
 						>
 							Categories
 						</Button>
 					</Hidden>
 					<Hidden smUp>
-						<Fab color="primary" aria-label="add" className={classes.buttonCart} onClick={() => setLeftSideMenuIsOpen(true)}>
-							<Menu />
+						<Fab color="primary" aria-label="add" className={classes.buttonCart} style={{ marginRight: 56 }} onClick={() => setLeftSideMenuIsOpen(true)}>
+							<MenuOutlinedIcon style={{ fontSize: 30 }} />
 						</Fab>
 					</Hidden>
-					<div className={classes.searchField}>
-						<SearchField />
+					
+					<Typography className={classes.title} component={ Link } to='/'>JJ-rent</Typography>
+
+					<div>
+						<Hidden xsDown>
+							<Fab color="primary" aria-label="add" className={classes.buttonCart} onClick={() => setSearchFieldIsOpen(true)}>
+								<SearchOutlinedIcon className={classes.iconsSize}/>
+							</Fab>
+						</Hidden>
+						<Fab color="primary" aria-label="add" className={classes.buttonCart} onClick={handleCartClick}>
+							<ShoppingCartOutlinedIcon className={classes.iconsSize}/>
+						</Fab>
+						<Fab color="primary" aria-label="add" className={classes.buttonCart} onClick={handleAccountClick}>
+							<AccountCircleOutlinedIcon className={classes.iconsSize}/>
+						</Fab>
 					</div>
-					<Fab color="primary" aria-label="add" className={classes.buttonCart}>
-						<ShoppingBasketIcon />
-					</Fab>
 				</Toolbar>
-				<CategoriesMenu menuIsOpen={menuIsOpen} handleClose={handleClose} />
-				<LeftSideMenu leftSideMenuIsOpen={leftSideMenuIsOpen} setLeftSideMenuIsOpen={setLeftSideMenuIsOpen}/>
+				{searchFieldIsOpen ? (
+					<SearchField searchFieldIsOpen={searchFieldIsOpen} setSearchFieldIsOpen={setSearchFieldIsOpen} searchInputRef={searchInputRef} />
+				) : null}
+				
 			</AppBar>
+			<Hidden smUp>
+				{searchFieldIsOpen ?
+					null
+					: (
+						<Fab color="primary" aria-label="add" className={classes.buttonSearch} onClick={() => setSearchFieldIsOpen(true)}>
+							<SearchOutlinedIcon className={classes.iconsSize}/>
+						</Fab>
+					)
+				}
+			</Hidden>
+			<CategoriesMenu categoriesMenuIsOpen={categoriesMenuIsOpen} handlecategoriesClose={handlecategoriesClose} />
+			<AccountMenu accountMenuIsOpen={accountMenuIsOpen} handleAccountClose={handleAccountClose} />
+			<CartMenu cartMenuIsOpen={cartMenuIsOpen} handleCartClose={handleCartClose} />
+			<LeftSideMenu leftSideMenuIsOpen={leftSideMenuIsOpen} setLeftSideMenuIsOpen={setLeftSideMenuIsOpen}/>
 		</div>
 	)
 }
 
-export default Navbar
+export default NavBar

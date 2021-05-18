@@ -12,9 +12,6 @@ const useStyles = makeStyles(theme => ({
 		width: 220,
 		minHeight: '100%'
 	},
-	// paper: {
-	// 	background: theme.palette.primary.lighter
-	// },
 	textList: {
 		fontWeight: 'bold',
 		color: theme.palette.primary.main,
@@ -68,12 +65,6 @@ const LeftSideMenu = ({ leftSideMenuIsOpen, setLeftSideMenuIsOpen }) => {
 						<ListItemText primary="Headphones" classes={{ primary: classes.textList }}/>
 					</ListItem>
 					<Divider light/>
-					<ListItem  button style={{ textDecoration: 'none' }}>
-						<ListItemText primary="Log In" classes={{ primary: classes.textList }}/>
-					</ListItem>
-					<ListItem  button style={{ textDecoration: 'none' }}>
-						<ListItemText primary="Sign Up" classes={{ primary: classes.textList }}/>
-					</ListItem>
 					<ListItem  button style={{ textDecoration: 'none' }}>
 						<ListItemText primary="How it works" classes={{ primary: classes.textList }}/>
 					</ListItem>

@@ -4,7 +4,7 @@ import './styles.css'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 
-import Navbar from './components/Navigation/Navbar'
+import NavBar from './components/Navigation/NavBar'
 import Products from './components/ProductsList/Products'
 import Jumbotron from './components/Jumbotron'
 import OneCategory from './components/Onecategory'
@@ -55,8 +55,7 @@ const App = () => {
 	return (
 		<Router>
 			<Container className={classes.root}>
-				<Navbar />
-				<div className={classes.offset} />
+				<NavBar />
 				<div className={classes.offset} />
 				<Switch>
 					<Route exact path='/'>
