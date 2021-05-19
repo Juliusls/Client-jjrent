@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { makeStyles, Card, Typography, Box, IconButton, Button, Tooltip, withStyles, Fade } from '@material-ui/core/'
+import { makeStyles, Card, Typography, Box, IconButton, Button, Tooltip, withStyles, Fade, Hidden } from '@material-ui/core/'
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import LocalShippingOutlinedIcon from '@material-ui/icons/LocalShippingOutlined'
@@ -28,7 +28,9 @@ const useStyles = makeStyles(theme => ({
 			zIndex: 1,
 			height: 'inherit',
 			marginLeft: 0,
-			maxWidth: '100%',
+			maxWidth: '-webkit-fill-available',
+			minHeight: 300,
+			marginTop: 30,
 		},
 	},
 	favoriteButton: {
@@ -121,12 +123,21 @@ const useStyles = makeStyles(theme => ({
 	cardAroundPrice: {
 		color: theme.palette.common.black,
 		fontSize: 16,
-		marginBottom: 16
+		marginBottom: 16,
+		// [theme.breakpoints.down('sm')]: {
+		// 	marginBottom: 0,
+		// 	fontSize: 12,
+		// 	flexGrow: 1,
+		// 	flexBasis: 0
+		// },
 	},
 	cardPrice: {
 		color: theme.palette.common.black,
 		fontSize: 24,
 		fontWeight: 'bold',
+		// [theme.breakpoints.down('sm')]: {
+		// 	fontSize: 18,
+		// },
 	},
 	oneColorText: {
 		color: theme.palette.primary.light,
@@ -151,6 +162,13 @@ const useStyles = makeStyles(theme => ({
 			backgroundColor: theme.palette.primary.main,
 			boxShadow: theme.shadows[10],
 		},
+		[theme.breakpoints.down('sm')]: {
+			marginBottom: 0,
+			maxHeight: 'inherit',
+			flexGrow: 1,
+			flexBasis: 0,
+			marginLeft: 10
+		},
 	},
 	iconTextContainer: {
 		display: 'flex'
@@ -160,7 +178,38 @@ const useStyles = makeStyles(theme => ({
 	},
 	popper: {
 		opacity: 0.85
-	}
+	},
+	bottomButtonSubscribe: {
+		color: theme.palette.common.white,
+		backgroundColor: theme.palette.primary.main,
+		borderRadius: 25,
+		paddingTop: 8,
+		paddingBottom: 8,
+		paddingRight: 16,
+		paddingLeft: 16,
+		fontSize: 16,
+		fontWeight: 'bold',
+		boxShadow: theme.shadows[5],
+		width: '100%',
+		position: 'fixed',
+		bottom: 10,
+		right: 10,
+		zIndex: 2,
+		maxWidth: '33%',
+		height: 56,
+		'&:hover': {
+			color: theme.palette.common.white,
+			backgroundColor: theme.palette.primary.main,
+			boxShadow: 'none',
+		},
+		[theme.breakpoints.down('md')]: {
+			right: 15,
+		},
+		[theme.breakpoints.down('xs')]: {
+			maxWidth: '40%',
+			right: 10,
+		},
+	},
 }))
 
 const colors = ['blue', 'red', 'green']
@@ -228,7 +277,12 @@ const PriceCard = () => {
 					<Box display='inline' className={classes.oneColorText}> {selectedColor}</Box>
 				</Typography>
 				<ColorPicker colors={colors} selectedColor={selectedColor} setSelectedColor={setSelectedColor}/>
-				<Button variant="contained" className={classes.buttonSubscribe}>Subscribe</Button>
+				<Hidden smDown>
+					<Button variant="contained" className={classes.buttonSubscribe}>Subscribe</Button>
+				</Hidden>
+				<Hidden mdUp>
+					<Button variant="contained" className={classes.bottomButtonSubscribe}>Subscribe</Button>					
+				</Hidden>
 			</div>
 		</Card>
 	)

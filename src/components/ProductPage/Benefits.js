@@ -17,16 +17,17 @@ const useStyles = makeStyles(theme => ({
 		maxWidth: '100%',
 		marginTop: 20,
 		[theme.breakpoints.down('sm')]: {
-			width: '100%',
+			width: '-webkit-fill-available',
 		},
 	},
 	itemName: {
-		color: '#4BD8BC',
+		color: '#274BA1',
 		fontSize: 16,
 		letterSpacing: 1,
 		fontWeight: theme.typography.fontWeightBold,
 		textAlign: 'center',
-		marginTop: 10
+		marginTop: 10,
+		padding: 5
 	},
 	gridItemDiv: {
 		minHeight: 200,
@@ -39,13 +40,13 @@ const useStyles = makeStyles(theme => ({
 		flexDirection: 'column',
 		alignItems: 'center',
 		justifyContent: 'center',
-		backgroundColor: '#E7FBF6',
+		backgroundColor: '#EFF3FC',
 	},
 	gridItem: {
 		// padding: 20
 	},
 	icon: {
-		color: '#4BD8BC',
+		color: '#274BA1',
 	}
 }))
 
@@ -54,37 +55,37 @@ const Benefits = () => {
 	return (
 		<Card className={classes.card}>
 			<Grid container spacing={3}>
-				<Grid item xs={3} sm={4} md={4} lg={4} xl={4} className={classes.gridItem}>
+				<Grid item xs={6} sm={4} md={4} lg={4} xl={4} className={classes.gridItem}>
 					<div className={classes.gridItemDiv}>
 						<EuroIcon style={{ fontSize: 40 }} className={classes.icon}/>
 						<Typography className={classes.itemName}>No deposit, no hidden costs</Typography>
 					</div>	
 				</Grid>
-				<Grid item xs={3} sm={4} md={4} lg={4} xl={4} className={classes.gridItem}>
+				<Grid item xs={6} sm={4} md={4} lg={4} xl={4} className={classes.gridItem}>
 					<div className={classes.gridItemDiv}>
 						<BeachAccessOutlinedIcon style={{ fontSize: 40 }} className={classes.icon}/>
 						<Typography className={classes.itemName}>Damage coverage</Typography>
 					</div>
 				</Grid>
-				<Grid item xs={3} sm={4} md={4} lg={4} xl={4} className={classes.gridItem}>
+				<Grid item xs={6} sm={4} md={4} lg={4} xl={4} className={classes.gridItem}>
 					<div className={classes.gridItemDiv}>
 						<SyncOutlinedIcon style={{ fontSize: 40 }} className={classes.icon}/>
 						<Typography className={classes.itemName}>Flexible rental period with purchase option</Typography>
 					</div>
 				</Grid>
-				<Grid item xs={3} sm={4} md={4} lg={4} xl={4} className={classes.gridItem}>
+				<Grid item xs={6} sm={4} md={4} lg={4} xl={4} className={classes.gridItem}>
 					<div className={classes.gridItemDiv}>
 						<EmailOutlinedIcon style={{ fontSize: 40 }} className={classes.icon}/>
 						<Typography className={classes.itemName}>Free easy returns</Typography>
 					</div>
 				</Grid>
-				<Grid item xs={3} sm={4} md={4} lg={4} xl={4} className={classes.gridItem}>
+				<Grid item xs={6} sm={4} md={4} lg={4} xl={4} className={classes.gridItem}>
 					<div className={classes.gridItemDiv}>
 						<ThumbUpAltOutlinedIcon style={{ fontSize: 40 }} className={classes.icon}/>
 						<Typography className={classes.itemName}>Great Condition Promise</Typography>
 					</div>
 				</Grid>
-				<Grid item xs={3} sm={4} md={4} lg={4} xl={4} className={classes.gridItem}> 
+				<Grid item xs={6} sm={4} md={4} lg={4} xl={4} className={classes.gridItem}> 
 					<div className={classes.gridItemDiv}>
 						<EcoOutlinedIcon style={{ fontSize: 40 }} className={classes.icon}/>
 						<Typography className={classes.itemName}>Less e-waste, more sustainability</Typography>

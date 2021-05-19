@@ -18,7 +18,8 @@ const useStyles = makeStyles(theme => ({
 		fontSize: 15,
 		margin: 10,
 		color: theme.palette.common.black,
-		align: 'center'
+		align: 'center',
+		textAlign: 'center'
 	},
 	getInTouch: {
 		color: theme.palette.primary.main,

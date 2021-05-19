@@ -3,6 +3,7 @@ import React from 'react'
 import { makeStyles, Hidden } from '@material-ui/core'
 
 import ImagesComponent from './ImagesComponent'
+import ImagesCarousel from './ImagesCarousel'
 import PriceCard from './PriceCard'
 import Specifications from './Specifications'
 import InsideTheBox from './InsideTheBox'
@@ -20,6 +21,7 @@ const useStyles = makeStyles(theme => ({
 		marginBottom: 20,
 		[theme.breakpoints.down('sm')]: {
 			maxWidth: '100%',
+			marginRight: 0,
 		},
 	}
 }))
@@ -41,7 +43,7 @@ const ProductPage = () => {
 			</Hidden>
 			<Hidden mdUp>
 				<div className={classes.pageFlow}>
-					<ImagesComponent />
+					<ImagesCarousel />
 					<PriceCard />
 					<Benefits />
 					<InsideTheBox />

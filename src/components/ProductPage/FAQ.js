@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
 		maxWidth: '100%',
 		marginTop: 20,
 		[theme.breakpoints.down('sm')]: {
-			width: '100%',
+			width: '-webkit-fill-available',
 		},
 	},
 	cardName: {
@@ -50,7 +50,7 @@ const useStyles = makeStyles(theme => ({
 
 const QandA = () => {
 	const classes = useStyles()
-	const [expanded, setExpanded] = useState('panel1')
+	const [expanded, setExpanded] = useState(null)
 
 	const handleChange = (panel) => (event, newExpanded) => {
 		setExpanded(newExpanded ? panel : false)

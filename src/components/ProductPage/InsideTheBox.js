@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
 		maxWidth: '100%',
 		marginTop: 20,
 		[theme.breakpoints.down('sm')]: {
-			width: '100%',
+			width: '-webkit-fill-available',
 		},
 	},
 	cardName: {
@@ -27,6 +27,7 @@ const useStyles = makeStyles(theme => ({
 		fontSize: 16,
 		letterSpacing: 1,
 		fontWeight: theme.typography.fontWeightBold,
+		textAlign: 'center'
 	},
 	gridItem: {
 		minHeight: 150,
@@ -39,6 +40,9 @@ const useStyles = makeStyles(theme => ({
 		flexDirection: 'column',
 		alignItems: 'center',
 		justifyContent: 'center',
+	},
+	iconsSize: {
+		fontSize: 40
 	}
 }))
 
@@ -50,28 +54,28 @@ const InsideTheBox = () => {
 				Inside the box
 			</Typography>
 			<Grid container spacing={3}>
-				<Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+				<Grid item xs={6} sm={4} md={4} lg={4} xl={4}>
 					<div className={classes.gridItem}>
-						<CameraAltOutlinedIcon style={{ fontSize: 40 }}/>
+						<CameraAltOutlinedIcon className={classes.iconsSize}/>
 						<Typography className={classes.itemName}>iPhone</Typography>
 					</div>	
 				</Grid>
-				<Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+				<Grid item xs={6} sm={4} md={4} lg={4} xl={4}>
 					<div className={classes.gridItem}>
-						<CameraAltOutlinedIcon style={{ fontSize: 40 }}/>
+						<CameraAltOutlinedIcon className={classes.iconsSize}/>
 						<Typography className={classes.itemName}>Charging Cable</Typography>
 					</div>
 				</Grid>
-				<Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+				<Grid item xs={6} sm={4} md={4} lg={4} xl={4}>
 					<div className={classes.gridItem}>
-						<CameraAltOutlinedIcon style={{ fontSize: 40 }}/>
+						<CameraAltOutlinedIcon className={classes.iconsSize}/>
 						<Typography className={classes.itemName}>SIM card remover</Typography>
 					</div>
 
 				</Grid>
-				<Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+				<Grid item xs={6} sm={4} md={4} lg={4} xl={4}>
 					<div className={classes.gridItem}>
-						<CameraAltOutlinedIcon style={{ fontSize: 40 }}/>
+						<CameraAltOutlinedIcon className={classes.iconsSize}/>
 						<Typography className={classes.itemName}>User manual</Typography>
 					</div>
 				</Grid>

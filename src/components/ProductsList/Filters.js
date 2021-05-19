@@ -12,6 +12,7 @@ const useStyles = makeStyles(theme => ({
 	},
 	cardActionArea: {
 		padding: 20,
+		paddingRight: 30,
 		display: 'flex',
 		justifyContent: 'space-between',
 		alignContent: 'flex-start',
@@ -19,6 +20,7 @@ const useStyles = makeStyles(theme => ({
 		flexDirection: 'column',
 		[theme.breakpoints.down('xs')]: {
 			padding: 20,
+			paddingRight: 30,
 		},
 	},
 	cardContent: {
@@ -44,8 +46,8 @@ const useStyles = makeStyles(theme => ({
 		width: 'inherit',
 	},
 	sliderTrack: {
-		height: 3,
-		marginTop: 2,
+		height: 9,
+		marginTop: 3,
 	},
 	sliderTrackNone: {
 		display: 'none'
@@ -53,6 +55,8 @@ const useStyles = makeStyles(theme => ({
 	sliderRail: {
 		height: 8,
 		marginTop: 3,
+		borderRadius: 10,
+		marginRight: 10
 	},
 	sliderThumb: {
 		height: 24,

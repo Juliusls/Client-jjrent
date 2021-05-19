@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
 		maxWidth: '100%',
 		marginTop: 20,
 		[theme.breakpoints.down('sm')]: {
-			width: '100%',
+			width: '-webkit-fill-available',
 		},
 	},
 	cardName: {
@@ -44,39 +44,39 @@ const Specifications = () => {
 				Specifications
 			</Typography>
 			<Grid container spacing={3}>
-				<Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
+				<Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
 					<Typography className={classes.specName}>Memory</Typography>
 					<Typography className={classes.theSpec}>6GB</Typography>
 				</Grid>
-				<Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
+				<Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
 					<Typography className={classes.specName}>Display</Typography>
 					<Typography className={classes.theSpec}>6.7-Inch (SUPER RETINA OLED, 1284 x 2778 Pixels)</Typography>
 				</Grid>
-				<Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
+				<Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
 					<Typography className={classes.specName}>Battery</Typography>
 					<Typography className={classes.theSpec}>3687mAh</Typography>
 				</Grid>
-				<Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
+				<Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
 					<Typography className={classes.specName}>Storage</Typography>
 					<Typography className={classes.theSpec}>256GB</Typography>
 				</Grid>
-				<Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
+				<Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
 					<Typography className={classes.specName}>Processor</Typography>
 					<Typography className={classes.theSpec}>Apple A14 Bionic</Typography>
 				</Grid>
-				<Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
+				<Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
 					<Typography className={classes.specName}>Dimensions</Typography>
 					<Typography className={classes.theSpec}>16.1 x 7.8 x 0.74 cm • 0.23 kg</Typography>
 				</Grid>
-				<Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
+				<Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
 					<Typography className={classes.specName}>Rear Camera</Typography>
 					<Typography className={classes.theSpec}>12MP + 12MP + 12MP</Typography>
 				</Grid>
-				<Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
+				<Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
 					<Typography className={classes.specName}>Front Camera</Typography>
 					<Typography className={classes.theSpec}>12MP</Typography>
 				</Grid>
-				<Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
+				<Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
 					<Typography className={classes.specName}>Operating System</Typography>
 					<Typography className={classes.theSpec}>iOS14</Typography>
 				</Grid>

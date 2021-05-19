@@ -6,6 +6,7 @@ import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined'
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined'
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined'
 import MenuOutlinedIcon from '@material-ui/icons/MenuOutlined'
+import HelpOutlineOutlinedIcon from '@material-ui/icons/HelpOutlineOutlined'
 
 import CategoriesMenu from './CategoriesMenu'
 import AccountMenu from './AccountMenu'
@@ -163,6 +164,9 @@ const NavBar = () => {
 								<SearchOutlinedIcon className={classes.iconsSize}/>
 							</Fab>
 						</Hidden>
+						<Fab color="primary" aria-label="add" className={classes.buttonCart} component={ Link } to='/howitworks'>
+							<HelpOutlineOutlinedIcon className={classes.iconsSize}/>
+						</Fab>
 						<Fab color="primary" aria-label="add" className={classes.buttonCart} onClick={handleCartClick}>
 							<ShoppingCartOutlinedIcon className={classes.iconsSize}/>
 						</Fab>

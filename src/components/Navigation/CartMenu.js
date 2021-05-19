@@ -9,7 +9,10 @@ const useStyles = makeStyles(theme => ({
 		height: 300,
 		padding: 10,
 		paddingLeft: 30,
-		marginTop: 14
+		marginTop: 14,
+		[theme.breakpoints.down('sm')]: {
+			width: 250,
+		},
 	},
 	menuItem: {
 		color: theme.palette.grey[900],

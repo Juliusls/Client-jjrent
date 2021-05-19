@@ -9,8 +9,9 @@ import Products from './components/ProductsList/Products'
 import Jumbotron from './components/Jumbotron'
 import OneCategory from './components/Onecategory'
 import Footer from './components/Footer'
-import HowItWorks from './components/HowItWorks/HowItWorks'
+import HowItWorksComponent from './components/HowItWorks/HowItWorksComponent'
 import ProductPage from './components/ProductPage/ProductPage'
+import HowItWorks from './components/HowItWorks/HowItWorks'
 
 import { howItWorksData } from './data'
 
@@ -61,7 +62,7 @@ const App = () => {
 					<Route exact path='/'>
 						<Jumbotron />
 						<OneCategory name='Recommended'/>
-						<HowItWorks data={howItWorksData}/>
+						<HowItWorksComponent data={howItWorksData}/>
 						<OneCategory name='Phones'/>
 						<OneCategory name='Laptops'/>
 						<OneCategory name='Smartwatches'/>
@@ -72,6 +73,9 @@ const App = () => {
 					</Route>
 					<Route path='/product/12345'>
 						<ProductPage/>
+					</Route>
+					<Route path='/howitworks'>
+						<HowItWorks />
 					</Route>
 				</Switch>
 				<Footer />
