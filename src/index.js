@@ -5,7 +5,6 @@ import App from './App'
 import { ThemeProvider } from '@material-ui/styles'
 import theme from './theme'
 
-
 import { ApolloClient, ApolloProvider, HttpLink, InMemoryCache } from '@apollo/client'
 
 const client = new ApolloClient({

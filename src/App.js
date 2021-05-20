@@ -12,12 +12,13 @@ import Footer from './components/Footer'
 import HowItWorksComponent from './components/HowItWorks/HowItWorksComponent'
 import ProductPage from './components/ProductPage/ProductPage'
 import HowItWorks from './components/HowItWorks/HowItWorks'
+import AddProduct from './components/AddProduct'
 
 import { howItWorksData } from './data'
 
 import Container from '@material-ui/core/Container'
 
-import { ALL_PHONES } from './queries'
+import { ALL_PHONES } from './graphql/queries'
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -48,10 +49,11 @@ const App = () => {
 	const classes = useStyles()
 	const result = useQuery(ALL_PHONES)
 
-
 	if (result.loading)  {
 		return <div>loading...</div>
 	}
+
+	console.log(result.data.allPhones)
 
 	return (
 		<Router>
@@ -76,6 +78,9 @@ const App = () => {
 					</Route>
 					<Route path='/howitworks'>
 						<HowItWorks />
+					</Route>
+					<Route path='/admin/productupload'>
+						<AddProduct />
 					</Route>
 				</Switch>
 				<Footer />

@@ -1,0 +1,12 @@
+require('dotenv').config()
+
+let REACT_APP_UPLOAD_PRESET = process.env.REACT_APP_UPLOAD_PRESET
+let REACT_APP_CLOUD_NAME = process.env.REACT_APP_CLOUD_NAME
+let CLOUDINARY_URL = process.env.CLOUDINARY_URL
+
+
+module.exports = {
+	REACT_APP_UPLOAD_PRESET,
+	REACT_APP_CLOUD_NAME,
+	CLOUDINARY_URL
+}

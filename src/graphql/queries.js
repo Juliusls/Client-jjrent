@@ -1,5 +1,18 @@
 import { gql } from '@apollo/client'
 
+export const ADD_WATCH = gql`
+    mutation addWatch($input: WatchInput!) {
+        addWatch(input: $input) {
+			description
+			name
+			imageIds {
+			  imageName
+			  publicId
+			}
+		}
+    }
+`
+
 export const ALL_PHONES = gql`
 	query {
 		allPhones  {
@@ -14,8 +27,7 @@ export const ALL_PHONES = gql`
 				sixPrice
 				twelvePrice
 			}
-			underTheHood {
-				sim
+			phoneSpecs {
 				memory
 				battery
 				display
@@ -24,12 +36,13 @@ export const ALL_PHONES = gql`
 				dimensions
 				rearCamera
 				frontCamera
-				opearatingSystem
+				operatingSystem
 			}
 			variants {
 				color
 				unitsInTheWarehouse
 			}
 		}
-}
+	}
 `
+
