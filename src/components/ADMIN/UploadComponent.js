@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { useDropzone } from 'react-dropzone'
 
-import theme from '../theme'
+import theme from '../../theme'
 
 import BackupIcon from '@material-ui/icons/Backup'
 
@@ -69,7 +69,7 @@ const UploadComponent = ({ setFieldValue, values }) => {
 		// }
 	})
 	
-	const thumbs = values.files.map(file => (
+	const thumbs = values.files.length > 0 && values.files.map(file => (
 		<div style={thumb} key={file.name}>
 			<div>
 				<img

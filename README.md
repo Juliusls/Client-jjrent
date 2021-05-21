@@ -15,3 +15,8 @@ lg: 1920
 fix green colors
 padding in green div's
 price card margin on the bottom of the page
+
+
+// TODO yup in all sections
+// TODO not found route
+// <Route path='*' component={ NotFound } />

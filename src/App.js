@@ -1,5 +1,5 @@
 import React from 'react'
-import { useQuery } from '@apollo/client'
+// import { useQuery } from '@apollo/client'
 import './styles.css'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
@@ -12,13 +12,13 @@ import Footer from './components/Footer'
 import HowItWorksComponent from './components/HowItWorks/HowItWorksComponent'
 import ProductPage from './components/ProductPage/ProductPage'
 import HowItWorks from './components/HowItWorks/HowItWorks'
-import AddProduct from './components/AddProduct'
+import Dashboard from './components/ADMIN/Dashboard'
 
 import { howItWorksData } from './data'
 
 import Container from '@material-ui/core/Container'
 
-import { ALL_PHONES } from './graphql/queries'
+// import { ALL_PHONES } from './graphql/queries'
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -45,22 +45,39 @@ const useStyles = makeStyles(theme => ({
 	offset: theme.mixins.toolbar,
 }))
 
-const App = () => {
+  
+const Layout = ({ children }) => {
 	const classes = useStyles()
-	const result = useQuery(ALL_PHONES)
-
-	if (result.loading)  {
-		return <div>loading...</div>
-	}
-
-	console.log(result.data.allPhones)
 
 	return (
-		<Router>
+		<section>
 			<Container className={classes.root}>
 				<NavBar />
 				<div className={classes.offset} />
-				<Switch>
+				{children}
+				<Footer/>
+			</Container>
+		</section>
+	)
+  
+}
+
+const App = () => {
+	// const result = useQuery(ALL_PHONES)
+
+	// if (result.loading)  {
+	// 	return <div>loading...</div>
+	// }
+
+	// console.log(result.data.allPhones)
+
+	return (
+		<Router>
+			<Switch>
+				<Route exact path='/admin/dashboard'>
+					<Dashboard />
+				</Route>
+				<Layout>
 					<Route exact path='/'>
 						<Jumbotron />
 						<OneCategory name='Recommended'/>
@@ -79,18 +96,10 @@ const App = () => {
 					<Route path='/howitworks'>
 						<HowItWorks />
 					</Route>
-					<Route path='/admin/productupload'>
-						<AddProduct />
-					</Route>
-				</Switch>
-				<Footer />
-			</Container>
+				</Layout>
+			</Switch>
 		</Router>
-
 	)
 }
 
 export default App
-
-
-//TODO work on sidemenu on small screen
