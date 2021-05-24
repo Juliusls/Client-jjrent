@@ -10,10 +10,10 @@ import { makeStyles, Typography, Button, FormControl, FormGroup, FormControlLabe
 import AddIcon from '@material-ui/icons/Add'
 import RemoveIcon from '@material-ui/icons/Remove'
 
-import { ADD_WATCH } from '../../graphql/mutations'
+import { ADD_PHONE } from '../../graphql/mutations'
 import config from '../../utils/config'
 import UploadComponent from './UploadComponent'
-import { watchInsideTheBox, watchBrands, watchTypes, watchCompatibility, prodcutPriceData } from '../../data'
+import { phoneInsideTheBox, phoneBrands, prodcutPriceData } from '../../data'
 
 const useStyles = makeStyles({
 	priceContainer: {
@@ -29,25 +29,24 @@ const useStyles = makeStyles({
 })
 
 const initialValues = {
-	watchName: '',
+	phoneName: '',
 	description: '',
 	brand: '',
-	insideTheBox: [],
 	onePrice: 0,
 	threePrice: 0,
 	sixPrice: 0,
 	twelvePrice: 0,
-	type: '',
-	modelYear: 2020,
-	batteryLife: '',
-	connectivity: '',
-	compatibility: '',
-	buildMaterial: '',
-	bandSize: '',
-	waterResistance: '',
-	wirelessAndLocation: '',
-	specialFeatures: '',
-	activityTracking: '',
+	insideTheBox: [],
+	sim: '',
+	memory: 0,
+	battery: 0,
+	display: '',
+	storage: 0,
+	processor: '',
+	dimensions: '',
+	rearCamera: '',
+	frontCamera: '',
+	operatingSystem: '',
 	variants: [],
 	files: []
 }
@@ -62,21 +61,20 @@ const NewProductForm = ({ values, errors, touched, handleChange, handleBlur, han
 	return (
 		<div>
 			<div>
-				<Typography variant='h4' style={{ textAlign: 'center', marginTop: 20 }}>Create a Watch</Typography>
+				<Typography variant='h4' style={{ textAlign: 'center', marginTop: 20 }}>Create a Phone</Typography>
 				<form onSubmit={handleSubmit}>
-					<Typography variant='h6'>Watch Name</Typography>
+					<Typography variant='h6'>Phone Name</Typography>
 					<Field
 						component={TextField}
 						onChange={handleChange}
 						onBlur={handleBlur}
-						value={values.watchName}
-						error={touched.watchName && Boolean(errors.watchName)}
-						helperText={touched.watchName && errors.watchName}
-						id="watchName"
-						name="watchName"
-						label="Watch Name"
+						value={values.phoneName}
+						error={touched.phoneName && Boolean(errors.phoneName)}
+						helperText={touched.phoneName && errors.phoneName}
+						id="phoneName"
+						name="phoneName"
+						label="Phone Name"
 						variant="outlined"
-						type="text"
 						fullWidth
 					/>	
 					<Typography variant='h6'>Description</Typography>
@@ -91,12 +89,11 @@ const NewProductForm = ({ values, errors, touched, handleChange, handleBlur, han
 						name="description"
 						label="Description"
 						variant="outlined"
-						type="text"
 						fullWidth
 					/>
 					<Typography variant='h6'>Brand</Typography>
 					<Field component={RadioGroup} name="brand" row defaultValue='Apple'>
-						{watchBrands.map(brand => 
+						{phoneBrands.map(brand => 
 							<FormControlLabel
 								key={brand}
 								value={brand}
@@ -128,24 +125,28 @@ const NewProductForm = ({ values, errors, touched, handleChange, handleBlur, han
 							)}
 						</div>
 					</FormControl>
-					<Typography variant='h6'>Type</Typography>
-					<Field component={RadioGroup} name="type" row defaultValue='Smartwatch'>
-						{watchTypes.map(type =>
-							<FormControlLabel
-								key={type}
-								value={type}
-								control={<Radio/>}
-								label={type}
-							/>
-						)}
-					</Field>
+					<Typography variant='h6'>Sim</Typography>
+					<Field
+						component={TextField}
+						onChange={handleChange}
+						onBlur={handleBlur}
+						value={values.sim}
+						error={touched.sim && Boolean(errors.sim)}
+						helperText={touched.sim && errors.sim}
+						id="sim"
+						name="sim"
+						label="Sim"
+						variant="outlined"
+						type="text"
+						fullWidth
+					/>
 					<FormControl component="fieldset">
 						<Typography variant='h6'>Inside The Box</Typography>
 						{errors.insideTheBox && touched.insideTheBox && 
 							<Typography variant='caption' style={{ color: '#f44336' }}>{errors.insideTheBox}</Typography>
 						}
 						<FormGroup row>
-							{watchInsideTheBox.map(option =>
+							{phoneInsideTheBox.map(option =>
 								<FormControlLabel
 									key={option}
 									control={
@@ -162,155 +163,145 @@ const NewProductForm = ({ values, errors, touched, handleChange, handleBlur, han
 							)}
 						</FormGroup>
 					</FormControl>
-					<Typography variant='h6' >Model Year</Typography>
+					<Typography variant='h6'>Memory, GB</Typography>
 					<Field
 						component={TextField}
 						onChange={handleChange}
 						onBlur={handleBlur}
-						value={values.modelYear}
-						error={touched.modelYear && Boolean(errors.modelYear)}
-						helperText={touched.modelYear && errors.modelYear}
-						id="modelYear"
-						name="modelYear"
-						label="Model Year"
+						value={values.memory}
+						error={touched.memory && Boolean(errors.memory)}
+						helperText={touched.memory && errors.memory}
+						id="memory"
+						name="memory"
+						label="Memory"
+						variant="outlined"
 						type="number"
-						variant="outlined"
 						fullWidth
 					/>
-					<Typography variant='h6' >Battery Life</Typography>
+					<Typography variant='h6'>Battery, mAh</Typography>
 					<Field
 						component={TextField}
 						onChange={handleChange}
 						onBlur={handleBlur}
-						value={values.batteryLife}
-						error={touched.batteryLife && Boolean(errors.batteryLife)}
-						helperText={touched.batteryLife && errors.batteryLife}
-						id="batteryLife"
-						name="batteryLife"
-						label="Battery Life"
+						value={values.battery}
+						error={touched.battery && Boolean(errors.battery)}
+						helperText={touched.battery && errors.battery}
+						id="battery"
+						name="battery"
+						label="Battery"
 						variant="outlined"
-						type="text"
+						type="number"
 						fullWidth
 					/>
-					<Typography variant='h6'>Connectivity</Typography>
+					<Typography variant='h6'>Display</Typography>
 					<Field
 						component={TextField}
 						onChange={handleChange}
 						onBlur={handleBlur}
-						value={values.connectivity}
-						error={touched.connectivity && Boolean(errors.connectivity)}
-						helperText={touched.connectivity && errors.connectivity}
-						id="connectivity"
-						name="connectivity"
-						label="Connectivity"
+						value={values.display}
+						error={touched.display && Boolean(errors.display)}
+						helperText={touched.display && errors.display}
+						id="display"
+						name="display"
+						label="Display"
 						variant="outlined"
 						type="text"
 						fullWidth
 					/>
-					<Typography variant='h6' >Compatibility</Typography>
-					<Field component={RadioGroup} name="compatibility" row defaultValue='Android / iOS'>
-						{watchCompatibility.map(comp => 
-							<FormControlLabel
-								key={comp}
-								value={comp}
-								control={<Radio/>}
-								label={comp}
-							/>
-						)}
-					</Field>
-					<Typography variant='h6'>Build Material</Typography>
+					<Typography variant='h6'>Storage, GB</Typography>
 					<Field
 						component={TextField}
 						onChange={handleChange}
 						onBlur={handleBlur}
-						value={values.buildMaterial}
-						error={touched.buildMaterial && Boolean(errors.buildMaterial)}
-						helperText={touched.buildMaterial && errors.buildMaterial}
-						id="buildMaterial"
-						name="buildMaterial"
-						label="Build Material"
+						value={values.storage}
+						error={touched.storage && Boolean(errors.storage)}
+						helperText={touched.storage && errors.storage}
+						id="storage"
+						name="storage"
+						label="Storage"
 						variant="outlined"
-						type="text"
+						type="number"
 						fullWidth
 					/>
-					<Typography variant='h6'>Band Size</Typography>
+					<Typography variant='h6'>Processor</Typography>
 					<Field
 						component={TextField}
 						onChange={handleChange}
 						onBlur={handleBlur}
-						value={values.bandSize}
-						error={touched.bandSize && Boolean(errors.bandSize)}
-						helperText={touched.bandSize && errors.bandSize}
-						id="bandSize"
-						name="bandSize"
-						label="Band Size"
+						value={values.processor}
+						error={touched.processor && Boolean(errors.processor)}
+						helperText={touched.processor && errors.processor}
+						id="processor"
+						name="processor"
+						label="Processor"
 						variant="outlined"
 						type="text"
 						fullWidth
 					/>
-					<Typography variant='h6'>Water Resistance</Typography>
+					<Typography variant='h6'>Dimensions</Typography>
+					<Typography variant='body2'>Format: 30.41 x 21.24 x 1.56 cm - 1.4 kg</Typography>
 					<Field
 						component={TextField}
 						onChange={handleChange}
 						onBlur={handleBlur}
-						value={values.waterResistance}
-						error={touched.waterResistance && Boolean(errors.waterResistance)}
-						helperText={touched.waterResistance && errors.waterResistance}
-						id="waterResistance"
-						name="waterResistance"
-						label="Water Resistance"
+						value={values.dimensions}
+						error={touched.dimensions && Boolean(errors.dimensions)}
+						helperText={touched.dimensions && errors.dimensions}
+						id="dimensions"
+						name="dimensions"
+						label="Dimensions"
 						variant="outlined"
 						type="text"
 						fullWidth
 					/>
-					<Typography variant='h6' >Wireless And Location</Typography>
+					<Typography variant='h6'>Rear Camera</Typography>
 					<Field
 						component={TextField}
 						onChange={handleChange}
 						onBlur={handleBlur}
-						value={values.wirelessAndLocation}
-						error={touched.wirelessAndLocation && Boolean(errors.wirelessAndLocation)}
-						helperText={touched.wirelessAndLocation && errors.wirelessAndLocation}
-						id="wirelessAndLocation"
-						name="wirelessAndLocation"
-						label="Wireless And Location"
+						value={values.rearCamera}
+						error={touched.rearCamera && Boolean(errors.rearCamera)}
+						helperText={touched.rearCamera && errors.rearCamera}
+						id="rearCamera"
+						name="rearCamera"
+						label="Rear Camera"
 						variant="outlined"
 						type="text"
 						fullWidth
 					/>
-					<Typography variant='h6' >Special Features</Typography>
-					<Typography variant='body2' style={{ marginBottom: 10 }}>List of features</Typography>
+
+
+					<Typography variant='h6'>Front Camera</Typography>
 					<Field
 						component={TextField}
 						onChange={handleChange}
 						onBlur={handleBlur}
-						value={values.specialFeatures}
-						error={touched.specialFeatures && Boolean(errors.specialFeatures)}
-						helperText={touched.specialFeatures && errors.specialFeatures}
-						id="specialFeatures"
-						name="specialFeatures"
-						label="Special Features"
+						value={values.frontCamera}
+						error={touched.frontCamera && Boolean(errors.frontCamera)}
+						helperText={touched.frontCamera && errors.frontCamera}
+						id="frontCamera"
+						name="frontCamera"
+						label="Front Camera"
 						variant="outlined"
 						type="text"
 						fullWidth
 					/>
-					<Typography variant='h6' >Activity Tracking</Typography>
-					<Typography variant='body2' style={{ marginBottom: 10 }}>List of activity tracing features</Typography>
+					<Typography variant='h6'>Operating System</Typography>
 					<Field
 						component={TextField}
 						onChange={handleChange}
 						onBlur={handleBlur}
-						value={values.activityTracking}
-						error={touched.activityTracking && Boolean(errors.activityTracking)}
-						helperText={touched.activityTracking && errors.activityTracking}
-						id="activityTracking"
-						name="activityTracking"
-						label="Activity Tracking"
+						value={values.operatingSystem}
+						error={touched.operatingSystem && Boolean(errors.operatingSystem)}
+						helperText={touched.operatingSystem && errors.operatingSystem}
+						id="operatingSystem"
+						name="operatingSystem"
+						label="Operating System"
 						variant="outlined"
 						type="text"
 						fullWidth
 					/>
-					<Typography variant='h6' >Color Variants</Typography>
+					<Typography variant='h6'>Color Variants</Typography>
 					<Typography variant='body2' style={{ marginBottom: 10 }}>Color name and units in the warehouse</Typography>
 					<FieldArray
 						name="variants"
@@ -374,25 +365,24 @@ const NewProductForm = ({ values, errors, touched, handleChange, handleBlur, han
 	)
 }
 
-const AddProduct = () => {
+const AddPhone = () => {
 	const history = useHistory()
-	const [ addWatch ]  = useMutation(ADD_WATCH)
+	const [ addPhone ]  = useMutation(ADD_PHONE)
 
 	const handleSubmit = async (values) => {
-
 
 		try {
 			const imagesForDbArray = Promise.all(values.files.map(async file => {
 				let formData = new FormData()
-
-				formData.append('file', file)
-				formData.append('upload_preset', config.REACT_APP_UPLOAD_PRESET)
+				await formData.append('file', file)
+				await formData.append('upload_preset', config.REACT_APP_UPLOAD_PRESET)
 	
 				const response = await axios.post(
 					`https://api.cloudinary.com/v1_1/${config.REACT_APP_CLOUD_NAME}/image/upload`, 
 					formData
 				)
-				const newImage = await {
+
+				const newImage = {
 					imageName: file.name,
 					publicId: response.data.public_id
 				}
@@ -402,15 +392,17 @@ const AddProduct = () => {
 
 			const imagesArray = await imagesForDbArray
 
+			// console.log('imagesArray', imagesArray)
+
 			let variantsToNumbers = values.variants.map(variant => (
 				{
 					color: variant.color,
 					unitsInTheWarehouse: parseInt(variant.unitsInTheWarehouse) 
 				}
 			))
-		
+			
 			const inputconst = { 
-				watchName: values.watchName, 
+				phoneName: values.phoneName, 
 				description: values.description,
 				brand: values.brand,
 				insideTheBox: values.insideTheBox,
@@ -418,26 +410,27 @@ const AddProduct = () => {
 				threePrice: values.threePrice,
 				sixPrice: values.sixPrice,
 				twelvePrice: values.twelvePrice,
-				type: values.type,
-				modelYear: values.modelYear,
-				batteryLife: values.batteryLife,
-				connectivity: values.connectivity,
-				compatibility: values.compatibility,
-				buildMaterial: values.buildMaterial,
-				bandSize: values.bandSize,
-				waterResistance: values.waterResistance,
-				wirelessAndLocation: values.wirelessAndLocation,
-				specialFeatures: values.specialFeatures,
-				activityTracking: values.activityTracking,
+				sim: values.sim,
+				memory: values.memory,
+				battery: values.battery,
+				display: values.display,
+				storage: values.storage,
+				processor: values.processor,
+				dimensions: values.dimensions,
+				rearCamera: values.rearCamera,
+				frontCamera: values.frontCamera,
+				operatingSystem: values.operatingSystem,
 				variants: variantsToNumbers,
 				imageIds: imagesArray 
 			}
 
-			await addWatch({ variables: { input: inputconst } })
-			history.push('/admin/dashboard')
+			console.log('inputconst', inputconst)
+
+			await addPhone({ variables: { input: inputconst } })
+			history.push('/admin/dashboard/')
 
 		} catch (error) {
-			console.log('error')
+			console.log('error', error)
 		}
 		
 	}
@@ -464,4 +457,4 @@ const AddProduct = () => {
 	)
 }
 
-export default AddProduct
+export default AddPhone

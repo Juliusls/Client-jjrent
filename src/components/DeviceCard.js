@@ -3,6 +3,10 @@ import React, { useState } from 'react'
 import { makeStyles, Card, CardActionArea, CardContent, Typography, Box, IconButton } from '@material-ui/core/'
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder'
 import FavoriteIcon from '@material-ui/icons/Favorite'
+import { Image } from 'cloudinary-react'
+
+import config from '../utils/config'
+
 
 const useStyles = makeStyles(theme => ({
 	card: {
@@ -147,7 +151,7 @@ const DeviceCard = ({ name, price, desc, image }) => {
 					}
 				</IconButton>
 				<div className={classes.imageContainer}>
-					<img src={image} className={classes.media}/>					
+					<Image publicId={image[0].publicId} cloudName={config.REACT_APP_CLOUD_NAME} className={classes.media} />
 				</div>
 				<CardContent classes={{root: classes.cardContent}}>
 					<Typography className={classes.cardName}>

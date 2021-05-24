@@ -4,11 +4,11 @@ export const ALL_PHONES = gql`
 	query {
 		allPhones  {
 			id
-			name
+			phoneName
 			description
 			brand
 			insideTheBox
-			prices {
+			phonePrices {
 				onePrice
 				threePrice
 				sixPrice
@@ -29,6 +29,53 @@ export const ALL_PHONES = gql`
 				color
 				unitsInTheWarehouse
 			}
+			imageIds {
+				imageName
+				publicId
+			}
 		}
 	}
 `
+
+export const ALL_PHONES_MINI = gql`
+	query {
+		allPhones  {
+			id
+			phoneName
+			description
+			phonePrices {
+				twelvePrice
+			}
+			imageIds {
+				imageName
+				publicId
+			}
+		}
+	}
+`
+
+export const ALL_PHONES_MIDI = gql`
+	query {
+		allPhones  {
+			id
+			phoneName
+			description
+			brand
+			phonePrices {
+				onePrice
+				threePrice
+				sixPrice
+				twelvePrice
+			}
+			variants {
+				color
+				unitsInTheWarehouse
+			}
+			imageIds {
+				imageName
+				publicId
+			}
+		}
+	}
+`
+

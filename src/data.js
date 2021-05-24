@@ -16,6 +16,14 @@ export const howItWorksData = {
 	]
 }
 
+export const prodcutPriceData = [
+	{ name: 'onePrice', label: 'One Month Price' },
+	{ name: 'threePrice', label: 'Three Months Price' },
+	{ name: 'sixPrice', label: 'Six Months Price' },
+	{ name: 'twelvePrice', label: 'Twelve Months Price' }
+
+]
+
 
 // WATCH
 export const watchInsideTheBox = [
@@ -30,13 +38,6 @@ export const watchTypes = [
 export const watchCompatibility = [
 	'iOS', 'Android', 'Android / iOS'
 ]
-export const prodcutPriceData = [
-	{ name: 'onePrice', label: 'One Month Price' },
-	{ name: 'threePrice', label: 'Three Months Price' },
-	{ name: 'sixPrice', label: 'Six Months Price' },
-	{ name: 'twelvePrice', label: 'Twelve Months Price' }
-
-]
 
 // LAPTOP
 export const laptopInsideTheBox = [
@@ -44,4 +45,13 @@ export const laptopInsideTheBox = [
 ]
 export const laptopBrands = [
 	'Apple', 'Lenovo', 'Dell'
+]
+
+
+// PHONE
+export const phoneInsideTheBox = [
+	'Phone', 'Charging Cable', 'Charger', 'SIM card remover', 'User manual', 'Case', 'Screen protector', 
+]
+export const phoneBrands = [
+	'Apple', 'Samsung', 'OnePlus', 'Xiomi'
 ]

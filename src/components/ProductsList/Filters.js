@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { makeStyles, Grid, Card, Typography, CardContent, FormControlLabel, Checkbox, FormControl, RadioGroup, Radio, Slider, Hidden, Button } from '@material-ui/core/'
 
 const useStyles = makeStyles(theme => ({
@@ -140,16 +140,9 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-const Filters = ({ brandNames, minPrice, maxPrice, setTopMenuOpen }) => {
-	const getDefaultCheckboxes = () =>
-		brandNames.map(name => ({
-			name: name,
-			checked: false,
-		}))
+const Filters = ({ setTopMenuOpen, brandsChecked, setBandsChecked, sortBy, setSortBy, priceRange, setPriceRange, minRentPeriod, setMinRentPeriod, brandNames, minPrice, maxPrice }) => {
+
 	const classes = useStyles()
-	const [brandsChecked, setBandsChecked] = useState(getDefaultCheckboxes())
-	const [sortBy, setSortBy] = React.useState('lowToHigh')
-	const [priceRange, setPriceRange] = React.useState([minPrice, maxPrice])
 
 	const handleCheckBoxChange = (event) => {
 		setBandsChecked(brandsChecked.map(brandChecked => brandChecked.name === event.target.name ? { ...brandChecked, checked: !brandChecked.checked} : brandChecked))
@@ -168,7 +161,10 @@ const Filters = ({ brandNames, minPrice, maxPrice, setTopMenuOpen }) => {
 	}, [brandsChecked]) 
 	useEffect(() => {
 		console.log('sortBy: ', sortBy)
-	}, [sortBy]) 
+	}, [sortBy])
+	useEffect(() => {
+		console.log('minRentPeriod: ', minRentPeriod)
+	}, [minRentPeriod]) 
 
 	return (
 		<Grid container spacing={2}>
@@ -234,11 +230,12 @@ const Filters = ({ brandNames, minPrice, maxPrice, setTopMenuOpen }) => {
 								</Typography>
 							</div>
 							<Slider
-								defaultValue={1}
+								defaultValue={4}
 								classes={{ track: classes.sliderTrackNone, thumb: classes.sliderThumb, rail: classes.sliderRail, mark: classes.sliderMark, markActive: classes.slideMarkActive }}
 								aria-labelledby="discrete-slider"
 								valueLabelDisplay="off"
 								step={1}
+								onChange={(event, newValue) => setMinRentPeriod(newValue)}
 								marks
 								min={1}
 								max={4}

@@ -110,9 +110,9 @@ const NewProductForm = ({ values, errors, touched, handleChange, handleBlur, han
 									component={TextField}
 									onChange={handleChange}
 									onBlur={handleBlur}
-									value={values.[priceTerm.name]}
-									error={touched.[priceTerm.name]&& Boolean(errors.[priceTerm.name])}
-									helperText={touched.[priceTerm.name] && errors.[priceTerm.name]}
+									value={values[priceTerm.name]}
+									error={touched[priceTerm.name]&& Boolean(errors[priceTerm.name])}
+									helperText={touched[priceTerm.name] && errors[priceTerm.name]}
 									id={priceTerm.name}
 									name={priceTerm.name}
 									label={priceTerm.label}
@@ -355,9 +355,8 @@ const AddLaptop = () => {
 	const handleSubmit = async (values) => {
 
 		try {
-			const formData = new FormData()
-
 			const imagesForDbArray = Promise.all(values.files.map(async file => {
+				let formData = new FormData()
 				formData.append('file', file)
 				formData.append('upload_preset', config.REACT_APP_UPLOAD_PRESET)
 	
@@ -366,7 +365,7 @@ const AddLaptop = () => {
 					formData
 				)
 				const newImage = {
-					imageName: response.data.original_filename,
+					imageName: file.name,
 					publicId: response.data.public_id
 				}
 
@@ -411,7 +410,7 @@ const AddLaptop = () => {
 			console.log('inputconst', inputconst)
 
 			await addLaptop({ variables: { input: inputconst } })
-			history.push('/admin/')
+			history.push('/admin/dashboard')
 
 		} catch (error) {
 			console.log('error', error)

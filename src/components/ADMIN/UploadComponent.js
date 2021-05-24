@@ -22,7 +22,7 @@ const baseStyle = {
 
 const thumbsContainer = {
 	display: 'flex',
-	flexDirection: 'row',
+	flexDirection: 'column',
 	flexWrap: 'wrap',
 	marginTop: 16
 }

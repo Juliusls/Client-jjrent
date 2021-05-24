@@ -1,8 +1,8 @@
 import React from 'react'
-// import { useQuery } from '@apollo/client'
+import { useQuery } from '@apollo/client'
 import './styles.css'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles, Backdrop, CircularProgress } from '@material-ui/core'
 
 import NavBar from './components/Navigation/NavBar'
 import Products from './components/ProductsList/Products'
@@ -18,7 +18,7 @@ import { howItWorksData } from './data'
 
 import Container from '@material-ui/core/Container'
 
-// import { ALL_PHONES } from './graphql/queries'
+import { ALL_PHONES_MINI } from './graphql/queries'
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -63,37 +63,46 @@ const Layout = ({ children }) => {
 }
 
 const App = () => {
-	// const result = useQuery(ALL_PHONES)
+	const phonesResult = useQuery(ALL_PHONES_MINI)
 
-	// if (result.loading)  {
-	// 	return <div>loading...</div>
-	// }
-
-	// console.log(result.data.allPhones)
+	if (phonesResult.loading)  {
+		return (
+			<Backdrop open={open}>
+				<CircularProgress color="inherit" />
+			</Backdrop>
+		)
+	}
 
 	return (
 		<Router>
 			<Switch>
-				<Route exact path='/admin/dashboard'>
-					<Dashboard />
-				</Route>
+				<Route path='/admin/dashboard' component={Dashboard}/>
 				<Layout>
 					<Route exact path='/'>
 						<Jumbotron />
-						<OneCategory name='Recommended'/>
+						<OneCategory name='Recommended' data={phonesResult.data.allPhones}/>
 						<HowItWorksComponent data={howItWorksData}/>
-						<OneCategory name='Phones'/>
-						<OneCategory name='Laptops'/>
-						<OneCategory name='Smartwatches'/>
-						<OneCategory name='Headphones'/>
+						<OneCategory name='Phones' data={phonesResult.data.allPhones}/>
+						<OneCategory name='Laptops' data={phonesResult.data.allPhones}/>
+						<OneCategory name='Smartwatches' data={phonesResult.data.allPhones}/>
+						<OneCategory name='Headphones' data={phonesResult.data.allPhones}/>
 					</Route>
-					<Route path='/products'>
+					<Route exact path='/laptops'>
 						<Products name='Laptops'/>
 					</Route>
-					<Route path='/product/12345'>
+					<Route exact path='/smartphones'>
+						<Products name='Smartphones'/>
+					</Route>
+					<Route exact path='/watches'>
+						<Products name='Watches'/>
+					</Route>
+					<Route exact path='/headphones'>
+						<Products name='Headphones'/>
+					</Route>
+					<Route exact path='/product/12345'>
 						<ProductPage/>
 					</Route>
-					<Route path='/howitworks'>
+					<Route exact path='/howitworks'>
 						<HowItWorks />
 					</Route>
 				</Layout>
@@ -103,3 +112,5 @@ const App = () => {
 }
 
 export default App
+
+// TODO add option later to give only first or random four for eveyr request

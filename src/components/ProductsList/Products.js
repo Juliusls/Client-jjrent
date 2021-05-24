@@ -5,21 +5,24 @@ import { Grid, Typography, Divider, Hidden, Button } from '@material-ui/core/'
 import DeviceCard from '../DeviceCard'
 import Filters from './Filters'
 import TopFilter from './TopFilter'
-import laptop from '../../Images/macbookpro.png'
-import watch from '../../Images/watch.png'
-import headphones from '../../Images/headphones.png'
-import tablet from '../../Images/tablet.png'
+// import laptop from '../../Images/macbookpro.png'
+// import watch from '../../Images/watch.png'
+// import headphones from '../../Images/headphones.png'
+// import tablet from '../../Images/tablet.png'
 
-const valuesForList = [
-	{image: headphones, name: 'Omen 15-dh1076ng - Gaming Laptop - Igsntel® Core™ i7-10750H - 32GB - 512GB PCIe + 1TB HDD - NVIDIA® GeForce® RTX™ 2070 Super Max-Q', price: 64, desc: 'Fusce vitae justo in mi rutrum finibus ut eget lorem'},
-	{image: laptop, name: 'Apple MacBook Air (Late 2020) Laptop - Apple M1 - 8GB - 256GB SSD - Apple Inteasdagrated 7-core GPU', price: 25, desc: 'Bluetooth, Magnetically attaches and pairs, Compatible with iPad Air (4th generation), iPad Pro 12.9-inch (3rd generation) or later, iPad Pro 11-inch (1st generation) or later'},
-	{image: watch, name: 'Lenovo ThinkPad E15 G2 Laptop - Intel® Core™ i5-1135G7 - 8GB - 256GB SSD - Inteasdasl® Iris® Xe Graphics', price: 53, desc: 'Fusce vitae justo in mi rutrum finibus ut eget lorem'},
-	{image: tablet, name: 'Asus zensdffone a5', price: 12, desc: 'Fusce vitae justo in mi rutrum finibus ut eget lorem'},
-	{image: watch, name: 'Lenovo ThsdfinkPad E15 G2 Laptop - Intel® Core™ i5-1135G7 - 8GB - 256GB SSD - Intel® Iris® Xe Graphics', price: 53, desc: 'Fusce vitae justo in mi rutrum finibus ut eget lorem'},
-	{image: headphones, name: 'Omen 15-sdfdh1076ng - Gaming Laptop - Intel® Core™ i7-10750H - 32GB - 512GB PCIe + 1TB HDD - NVIDIA® GeForce® RTX™ 2070 Super Max-Q', price: 64, desc: 'Fusce vitae justo in mi rutrum finibus ut eget lorem'},
-	{image: tablet, name: 'Asus zenfondsfde a5', price: 12, desc: 'Fusce vitae justo in mi rutrum finibus ut eget lorem'},
-	{image: laptop, name: 'Apple MacBook Air (Late 2020) Laptop - Apple M1 - 8GsdfB - 256GB SSD - Apple Integrated 7-core GPU', price: 25, desc: 'Bluetooth, Magnetically attaches and pairs, Compatible with iPad Air (4th generation), iPad Pro 12.9-inch (3rd generation) or later, iPad Pro 11-inch (1st generation) or later'},
-]
+import { useQuery } from '@apollo/client'
+import { ALL_PHONES_MIDI } from '../../graphql/queries'
+
+// const valuesForList = [
+// 	{image: headphones, name: 'Omen 15-dh1076ng - Gaming Laptop - Igsntel® Core™ i7-10750H - 32GB - 512GB PCIe + 1TB HDD - NVIDIA® GeForce® RTX™ 2070 Super Max-Q', price: 64, desc: 'Fusce vitae justo in mi rutrum finibus ut eget lorem'},
+// 	{image: laptop, name: 'Apple MacBook Air (Late 2020) Laptop - Apple M1 - 8GB - 256GB SSD - Apple Inteasdagrated 7-core GPU', price: 25, desc: 'Bluetooth, Magnetically attaches and pairs, Compatible with iPad Air (4th generation), iPad Pro 12.9-inch (3rd generation) or later, iPad Pro 11-inch (1st generation) or later'},
+// 	{image: watch, name: 'Lenovo ThinkPad E15 G2 Laptop - Intel® Core™ i5-1135G7 - 8GB - 256GB SSD - Inteasdasl® Iris® Xe Graphics', price: 53, desc: 'Fusce vitae justo in mi rutrum finibus ut eget lorem'},
+// 	{image: tablet, name: 'Asus zensdffone a5', price: 12, desc: 'Fusce vitae justo in mi rutrum finibus ut eget lorem'},
+// 	{image: watch, name: 'Lenovo ThsdfinkPad E15 G2 Laptop - Intel® Core™ i5-1135G7 - 8GB - 256GB SSD - Intel® Iris® Xe Graphics', price: 53, desc: 'Fusce vitae justo in mi rutrum finibus ut eget lorem'},
+// 	{image: headphones, name: 'Omen 15-sdfdh1076ng - Gaming Laptop - Intel® Core™ i7-10750H - 32GB - 512GB PCIe + 1TB HDD - NVIDIA® GeForce® RTX™ 2070 Super Max-Q', price: 64, desc: 'Fusce vitae justo in mi rutrum finibus ut eget lorem'},
+// 	{image: tablet, name: 'Asus zenfondsfde a5', price: 12, desc: 'Fusce vitae justo in mi rutrum finibus ut eget lorem'},
+// 	{image: laptop, name: 'Apple MacBook Air (Late 2020) Laptop - Apple M1 - 8GsdfB - 256GB SSD - Apple Integrated 7-core GPU', price: 25, desc: 'Bluetooth, Magnetically attaches and pairs, Compatible with iPad Air (4th generation), iPad Pro 12.9-inch (3rd generation) or later, iPad Pro 11-inch (1st generation) or later'},
+// ]
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -102,13 +105,67 @@ const useStyles = makeStyles(theme => ({
 	},
 }))
 
-const brandNames = ['apple', 'samsung', 'oneplus', 'lenovo']
-const maxPrice = 150
-const minPrice = 29
+let brandNames = ['apple', 'samsung', 'oneplus', 'lenovo']
+let maxPrice = 150
+let minPrice = 29
+let mainData = null
 
 const Products = ({ name }) => {
 	const classes = useStyles()
+	const getDefaultCheckboxes = () =>
+		brandNames.map(name => ({
+			name: name,
+			checked: false,
+		}))
+
 	const [topMenuOpne, setTopMenuOpen] = useState(false)
+	
+	const [brandsChecked, setBandsChecked] = useState(getDefaultCheckboxes())
+	const [sortBy, setSortBy] = useState('lowToHigh')
+	const [priceRange, setPriceRange] = useState([minPrice, maxPrice])
+	const [minRentPeriod, setMinRentPeriod] = useState(4)
+
+	const phoneData = useQuery(ALL_PHONES_MIDI)
+
+	if (phoneData.loading) return <p>Loading ...</p>
+
+	if (name === 'Smartphones') {
+		mainData = phoneData.data.allPhones
+	}
+
+	console.log(mainData)
+
+	// filter for SORTING
+
+	// filter for MONTLYPRICE
+	const price = (phone) => {
+		if (minRentPeriod === 4) {
+			return phone.phonePrices.twelvePrice
+		} else if (minRentPeriod === 3) {
+			return phone.phonePrices.sixPrice
+		} else if (minRentPeriod === 2) {
+			return phone.phonePrices.threePrice
+		} else if (minRentPeriod === 1) {
+			return phone.phonePrices.onePrice
+		}
+	}
+
+	// filter for MINRENTPERIOD
+
+	// filter for BRANDS
+
+	const dataValues = () => {
+		switch (name) {
+		case name = 'Smartphones':
+			return mainData.map(phone => (
+				<Grid item xs={12} sm={6} md={4} lg={4} key={phone.id}>
+					<DeviceCard name={phone.phoneName} price={price(phone)} desc={phone.description} image={phone.imageIds.filter(image => image.imageName.includes('thumb_1_main'))} />
+				</Grid>
+			))	
+		default:
+			return null
+		}
+	}
 
 	return (
 		<div className={classes.root} >
@@ -117,7 +174,7 @@ const Products = ({ name }) => {
 			<div className={classes.flexboxContainer}>
 				<Hidden xsDown>
 					<div className={classes.firstGridContaner}>
-						<Filters brandNames={brandNames} maxPrice={maxPrice} minPrice={minPrice}/>
+						<Filters brandNames={brandNames} maxPrice={maxPrice} minPrice={minPrice} brandsChecked={brandsChecked} setBandsChecked={setBandsChecked} sortBy={sortBy} setSortBy={setSortBy} priceRange={priceRange} setPriceRange={setPriceRange} minRentPeriod={minRentPeriod} setMinRentPeriod={setMinRentPeriod} />
 					</div>
 					<Hidden lgUp>
 						<Divider classes={{ root: classes.dividerSecondary }}/>
@@ -127,13 +184,9 @@ const Products = ({ name }) => {
 					<Button variant="contained" className={classes.buttonFilter} onClick={() => setTopMenuOpen(true)}>Filter</Button>
 				</Hidden>
 				<Grid container spacing={2} className={classes.secondGridContaner}>
-					{valuesForList.map(value => (
-						<Grid item xs={12} sm={6} md={4} lg={4} key={value.name}>
-							<DeviceCard name={value.name} price={value.price} desc={value.desc} image={value.image} />
-						</Grid>
-					))}
+					{dataValues()}
 				</Grid>
-				<TopFilter topMenuOpne={topMenuOpne} setTopMenuOpen={setTopMenuOpen} brandNames={brandNames} maxPrice={maxPrice} minPrice={minPrice}/>
+				<TopFilter topMenuOpne={topMenuOpne} setTopMenuOpen={setTopMenuOpen} maxPrice={maxPrice} minPrice={minPrice} brandNames={brandNames} brandsChecked={brandsChecked} setBandsChecked={setBandsChecked} sortBy={sortBy} setSortBy={setSortBy} priceRange={priceRange} setPriceRange={setPriceRange} minRentPeriod={minRentPeriod} setMinRentPeriod={setMinRentPeriod}/>
 			</div>
 		</div>
 	)

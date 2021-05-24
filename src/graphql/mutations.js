@@ -75,3 +75,41 @@ export const ADD_LAPTOP = gql`
 		}
     }
 `
+
+export const ADD_PHONE = gql`
+	mutation addPhone($input: PhoneInput!) {
+		addPhone(input: $input) {
+		id
+		phoneName
+		description
+		brand
+		insideTheBox
+		phoneSpecs {
+			sim
+			memory
+			battery
+			display
+			storage
+			processor
+			dimensions
+			rearCamera
+			frontCamera
+			operatingSystem
+		}
+		phonePrices {
+			onePrice
+			threePrice
+			sixPrice
+			twelvePrice
+		}
+		variants {
+			color
+			unitsInTheWarehouse
+		}
+		imageIds {
+			imageName
+			publicId
+		}
+		}
+	}
+`
