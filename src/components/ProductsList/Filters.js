@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { makeStyles, Grid, Card, Typography, CardContent, FormControlLabel, Checkbox, FormControl, RadioGroup, Radio, Slider, Hidden, Button } from '@material-ui/core/'
 
 const useStyles = makeStyles(theme => ({
@@ -140,7 +140,9 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-const Filters = ({ setTopMenuOpen, brandsChecked, setBandsChecked, sortBy, setSortBy, priceRange, setPriceRange, minRentPeriod, setMinRentPeriod, brandNames, minPrice, maxPrice }) => {
+const Filters = ({ setTopMenuOpen, sortBy, setSortBy, priceRange, setPriceRange, setMinRentPeriod, brandsList, minPrice, maxPrice }) => {
+	const [brandsChecked, setBandsChecked] = useState(brandsList.map(name => ({ name: name, checked: false })))
+
 
 	const classes = useStyles()
 
@@ -152,19 +154,19 @@ const Filters = ({ setTopMenuOpen, brandsChecked, setBandsChecked, sortBy, setSo
 		setPriceRange(newValue)
 	}
 	
-	useEffect(() => {
-		console.log('priceRange: ', priceRange)
-	}, [priceRange]) 
+	// useEffect(() => {
+	// 	console.log('priceRange: ', priceRange)
+	// }, [priceRange]) 
 
 	useEffect(() => {
 		console.log('checkedItems: ', brandsChecked)
 	}, [brandsChecked]) 
-	useEffect(() => {
-		console.log('sortBy: ', sortBy)
-	}, [sortBy])
-	useEffect(() => {
-		console.log('minRentPeriod: ', minRentPeriod)
-	}, [minRentPeriod]) 
+	// useEffect(() => {
+	// 	console.log('sortBy: ', sortBy)
+	// }, [sortBy])
+	// useEffect(() => {
+	// 	console.log('minRentPeriod: ', minRentPeriod)
+	// }, [minRentPeriod]) 
 
 	return (
 		<Grid container spacing={2}>
@@ -251,7 +253,7 @@ const Filters = ({ setTopMenuOpen, brandsChecked, setBandsChecked, sortBy, setSo
 							<Typography className={classes.cardName}>
 								Brands
 							</Typography>
-							{brandNames.map(brand => (
+							{brandsList.map(brand => (
 								<FormControlLabel
 									key={brand}
 									control={

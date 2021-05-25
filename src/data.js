@@ -53,5 +53,5 @@ export const phoneInsideTheBox = [
 	'Phone', 'Charging Cable', 'Charger', 'SIM card remover', 'User manual', 'Case', 'Screen protector', 
 ]
 export const phoneBrands = [
-	'Apple', 'Samsung', 'OnePlus', 'Xiomi'
+	'Apple', 'Samsung', 'OnePlus', 'Xiaomi'
 ]

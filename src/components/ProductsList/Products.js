@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Typography, Divider, Hidden, Button } from '@material-ui/core/'
@@ -105,40 +104,31 @@ const useStyles = makeStyles(theme => ({
 	},
 }))
 
-let brandNames = ['apple', 'samsung', 'oneplus', 'lenovo']
 let maxPrice = 150
 let minPrice = 29
 let mainData = null
 
 const Products = ({ name }) => {
 	const classes = useStyles()
-	const getDefaultCheckboxes = () =>
-		brandNames.map(name => ({
-			name: name,
-			checked: false,
-		}))
+	const phoneData = useQuery(ALL_PHONES_MIDI)
 
 	const [topMenuOpne, setTopMenuOpen] = useState(false)
-	
-	const [brandsChecked, setBandsChecked] = useState(getDefaultCheckboxes())
+
 	const [sortBy, setSortBy] = useState('lowToHigh')
 	const [priceRange, setPriceRange] = useState([minPrice, maxPrice])
 	const [minRentPeriod, setMinRentPeriod] = useState(4)
 
-	const phoneData = useQuery(ALL_PHONES_MIDI)
-
 	if (phoneData.loading) return <p>Loading ...</p>
+
 
 	if (name === 'Smartphones') {
 		mainData = phoneData.data.allPhones
-	}
-
-	console.log(mainData)
+	}	
 
 	// filter for SORTING
 
 	// filter for MONTLYPRICE
-	const price = (phone) => {
+	const phonePrice = (phone) => {
 		if (minRentPeriod === 4) {
 			return phone.phonePrices.twelvePrice
 		} else if (minRentPeriod === 3) {
@@ -151,15 +141,15 @@ const Products = ({ name }) => {
 	}
 
 	// filter for MINRENTPERIOD
-
-	// filter for BRANDS
+	let brandsList = [...new Set(mainData.map(item => item.brand))]
+	
 
 	const dataValues = () => {
 		switch (name) {
 		case name = 'Smartphones':
 			return mainData.map(phone => (
 				<Grid item xs={12} sm={6} md={4} lg={4} key={phone.id}>
-					<DeviceCard name={phone.phoneName} price={price(phone)} desc={phone.description} image={phone.imageIds.filter(image => image.imageName.includes('thumb_1_main'))} />
+					<DeviceCard name={phone.phoneName} price={phonePrice(phone)} desc={phone.description} image={phone.imageIds.filter(image => image.imageName.includes('thumb_1_main'))} />
 				</Grid>
 			))	
 		default:
@@ -174,7 +164,7 @@ const Products = ({ name }) => {
 			<div className={classes.flexboxContainer}>
 				<Hidden xsDown>
 					<div className={classes.firstGridContaner}>
-						<Filters brandNames={brandNames} maxPrice={maxPrice} minPrice={minPrice} brandsChecked={brandsChecked} setBandsChecked={setBandsChecked} sortBy={sortBy} setSortBy={setSortBy} priceRange={priceRange} setPriceRange={setPriceRange} minRentPeriod={minRentPeriod} setMinRentPeriod={setMinRentPeriod} />
+						<Filters brandsList={brandsList} maxPrice={maxPrice} minPrice={minPrice} sortBy={sortBy} setSortBy={setSortBy} priceRange={priceRange} setPriceRange={setPriceRange} minRentPeriod={minRentPeriod} setMinRentPeriod={setMinRentPeriod} />
 					</div>
 					<Hidden lgUp>
 						<Divider classes={{ root: classes.dividerSecondary }}/>
@@ -186,7 +176,7 @@ const Products = ({ name }) => {
 				<Grid container spacing={2} className={classes.secondGridContaner}>
 					{dataValues()}
 				</Grid>
-				<TopFilter topMenuOpne={topMenuOpne} setTopMenuOpen={setTopMenuOpen} maxPrice={maxPrice} minPrice={minPrice} brandNames={brandNames} brandsChecked={brandsChecked} setBandsChecked={setBandsChecked} sortBy={sortBy} setSortBy={setSortBy} priceRange={priceRange} setPriceRange={setPriceRange} minRentPeriod={minRentPeriod} setMinRentPeriod={setMinRentPeriod}/>
+				<TopFilter topMenuOpne={topMenuOpne} setTopMenuOpen={setTopMenuOpen} maxPrice={maxPrice} minPrice={minPrice} brandsList={brandsList} sortBy={sortBy} setSortBy={setSortBy} priceRange={priceRange} setPriceRange={setPriceRange} minRentPeriod={minRentPeriod} setMinRentPeriod={setMinRentPeriod}/>
 			</div>
 		</div>
 	)
