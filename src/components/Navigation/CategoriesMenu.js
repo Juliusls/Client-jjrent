@@ -1,11 +1,12 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+
 
 import { makeStyles, Menu, MenuItem, ListItemIcon, ListItemText, Fade } from '@material-ui/core'
 
 import PhoneIphoneIcon from '@material-ui/icons/PhoneIphone'
 import LaptopMacIcon from '@material-ui/icons/LaptopMac'
 import WatchIcon from '@material-ui/icons/Watch'
-import HeadsetIcon from '@material-ui/icons/Headset'
 
 const useStyles = makeStyles(theme => ({
 	menuComponentPaper: {
@@ -52,20 +53,20 @@ const CategoriesMenu = ({ categoriesMenuIsOpen, handlecategoriesClose }) => {
 		>
 			<MenuItem 
 				onClick={handlecategoriesClose}
-				// component='a'
-				// href='/phones'
+				component= { Link }
+				to='/smartphones'
 				className={classes.menuItem}
 				style={{backgroundColor: 'white'}}
 			>	
 				<ListItemIcon className={classes.iconContainerStyle}>
 					<PhoneIphoneIcon className={classes.iconStyle}/>
 				</ListItemIcon>
-				<ListItemText primary="Phones" classes={{primary: classes.listItemText}}/>
+				<ListItemText primary="Smartphones" classes={{primary: classes.listItemText}}/>
 			</MenuItem>
 			<MenuItem 
 				onClick={handlecategoriesClose}
-				// component='a'
-				// href='/laptops'
+				component= { Link }
+				to='/laptops'
 				className={classes.menuItem}
 				style={{backgroundColor: 'white'}}
 			>
@@ -76,8 +77,8 @@ const CategoriesMenu = ({ categoriesMenuIsOpen, handlecategoriesClose }) => {
 			</MenuItem>
 			<MenuItem 
 				onClick={handlecategoriesClose}
-				// component='a'
-				// href='/smartwatches'
+				component= { Link }
+				to='/smartwatches'
 				className={classes.menuItem}
 				style={{backgroundColor: 'white'}}
 			>
@@ -85,18 +86,6 @@ const CategoriesMenu = ({ categoriesMenuIsOpen, handlecategoriesClose }) => {
 					<WatchIcon className={classes.iconStyle}/>
 				</ListItemIcon>
 				<ListItemText primary="Smartwatches" classes={{primary:classes.listItemText}}/>
-			</MenuItem>
-			<MenuItem 
-				onClick={handlecategoriesClose}
-				// component='a'
-				// href='/headphones'
-				className={classes.menuItem}
-				style={{backgroundColor: 'white'}}
-			>
-				<ListItemIcon className={classes.iconContainerStyle}>
-					<HeadsetIcon className={classes.iconStyle}/>
-				</ListItemIcon>
-				<ListItemText primary="Headphones" classes={{primary:classes.listItemText}}/>
 			</MenuItem>
 		</Menu>
 	)

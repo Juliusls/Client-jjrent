@@ -82,10 +82,9 @@ const App = () => {
 						<Jumbotron />
 						<OneCategory name='Recommended' data={phonesResult.data.allPhones}/>
 						<HowItWorksComponent data={howItWorksData}/>
-						<OneCategory name='Phones' data={phonesResult.data.allPhones}/>
+						<OneCategory name='Smartphones' data={phonesResult.data.allPhones}/>
 						<OneCategory name='Laptops' data={phonesResult.data.allPhones}/>
 						<OneCategory name='Smartwatches' data={phonesResult.data.allPhones}/>
-						<OneCategory name='Headphones' data={phonesResult.data.allPhones}/>
 					</Route>
 					<Route exact path='/laptops'>
 						<Products name='Laptops'/>
@@ -95,9 +94,6 @@ const App = () => {
 					</Route>
 					<Route exact path='/watches'>
 						<Products name='Watches'/>
-					</Route>
-					<Route exact path='/headphones'>
-						<Products name='Headphones'/>
 					</Route>
 					<Route exact path='/product/12345'>
 						<ProductPage/>

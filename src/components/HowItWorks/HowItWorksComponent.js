@@ -3,6 +3,8 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Typography, Button } from '@material-ui/core/'
 import HowItWorksCard from './HowItWorksCard'
+import { Link } from 'react-router-dom'
+
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -25,9 +27,9 @@ const useStyles = makeStyles(theme => ({
 	},
 	containerGrid: {
 		alignItems: 'stretch',
-		justifyItems: 'stretch'
 	},
 	findOutMoreButton: {
+		display: 'block',
 		color: theme.palette.primary.main,
 		backgroundColor: theme.palette.common.white,
 		borderRadius: 25,
@@ -36,6 +38,10 @@ const useStyles = makeStyles(theme => ({
 		paddingRight: 20,
 		paddingLeft: 20,
 		marginTop: 30,
+		marginLeft: 'auto',
+		marginRight: 'auto',
+		width: 180,
+		textAlign: 'center',
 		fontSize: 15,
 		fontWeight: 'bold',
 		boxShadow: theme.shadows[5],
@@ -69,7 +75,7 @@ const HowItWorksComponent = ({ data }) => {
 					</Grid>
 				))}
 			</Grid>
-			<Button variant="contained" className={classes.findOutMoreButton}>Find out more</Button>
+			<Button variant="contained" className={classes.findOutMoreButton} component={ Link } to='howitworks'>Find out more</Button>
 		</div>
 	)
 }

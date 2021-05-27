@@ -163,10 +163,10 @@ const NavBar = () => {
 							<Fab color="primary" aria-label="add" className={classes.buttonCart} onClick={() => setSearchFieldIsOpen(true)}>
 								<SearchOutlinedIcon className={classes.iconsSize}/>
 							</Fab>
+							<Fab color="primary" aria-label="add" className={classes.buttonCart} component={ Link } to='/howitworks'>
+								<HelpOutlineOutlinedIcon className={classes.iconsSize}/>
+							</Fab>
 						</Hidden>
-						<Fab color="primary" aria-label="add" className={classes.buttonCart} component={ Link } to='/howitworks'>
-							<HelpOutlineOutlinedIcon className={classes.iconsSize}/>
-						</Fab>
 						<Fab color="primary" aria-label="add" className={classes.buttonCart} onClick={handleCartClick}>
 							<ShoppingCartOutlinedIcon className={classes.iconsSize}/>
 						</Fab>
