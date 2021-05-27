@@ -142,7 +142,7 @@ const DeviceCard = ({ name, price, desc, image }) => {
 	const [favorited, setFavorited] = useState(false)
 
 	return (
-		<Card className={classes.card} style={{ height: '100%' }}>
+		<Card className={classes.card} style={{ height: 'inherit' }}>
 			<CardActionArea className={classes.cardActionArea}>
 				<IconButton className={classes.favoriteButtonOrder}  classes={{root: classes.favoriteButton}} onMouseDown={event => event.stopPropagation()} onTouchStart={(event) => event.stopPropagation()} onClick={() => setFavorited(!favorited)}>
 					{favorited 

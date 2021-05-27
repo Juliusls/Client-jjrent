@@ -96,7 +96,7 @@ export const ADD_PHONE = gql`
 			frontCamera
 			operatingSystem
 		}
-		phonePrices {
+		prices {
 			onePrice
 			threePrice
 			sixPrice

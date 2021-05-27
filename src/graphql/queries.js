@@ -8,7 +8,7 @@ export const ALL_PHONES = gql`
 			description
 			brand
 			insideTheBox
-			phonePrices {
+			prices {
 				onePrice
 				threePrice
 				sixPrice
@@ -43,7 +43,7 @@ export const ALL_PHONES_MINI = gql`
 			id
 			phoneName
 			description
-			phonePrices {
+			prices {
 				twelvePrice
 			}
 			imageIds {
@@ -61,7 +61,7 @@ export const ALL_PHONES_MIDI = gql`
 			phoneName
 			description
 			brand
-			phonePrices {
+			prices {
 				onePrice
 				threePrice
 				sixPrice

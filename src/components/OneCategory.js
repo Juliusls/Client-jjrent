@@ -71,7 +71,7 @@ const OneCategory = ({ name, data }) => {
 		case name = 'Phones':
 			return data.map(phone => (
 				<Grid item xs={12} sm={6} md={3} lg={3} key={phone.id} style={{ height: '100%' }}>
-					<DeviceCard name={phone.phoneName} price={phone.phonePrices.twelvePrice} desc={phone.description} image={phone.imageIds.filter(image => image.imageName.includes('thumb_1_main'))} />
+					<DeviceCard name={phone.phoneName} price={phone.prices.twelvePrice} desc={phone.description} image={phone.imageIds.filter(image => image.imageName.includes('thumb_1_main'))} />
 				</Grid>
 			))
 			// case name = 'Recommended':

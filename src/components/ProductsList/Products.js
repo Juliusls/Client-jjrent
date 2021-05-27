@@ -4,24 +4,9 @@ import { Grid, Typography, Divider, Hidden, Button } from '@material-ui/core/'
 import DeviceCard from '../DeviceCard'
 import Filters from './Filters'
 import TopFilter from './TopFilter'
-// import laptop from '../../Images/macbookpro.png'
-// import watch from '../../Images/watch.png'
-// import headphones from '../../Images/headphones.png'
-// import tablet from '../../Images/tablet.png'
 
 import { useQuery } from '@apollo/client'
 import { ALL_PHONES_MIDI } from '../../graphql/queries'
-
-// const valuesForList = [
-// 	{image: headphones, name: 'Omen 15-dh1076ng - Gaming Laptop - Igsntel® Core™ i7-10750H - 32GB - 512GB PCIe + 1TB HDD - NVIDIA® GeForce® RTX™ 2070 Super Max-Q', price: 64, desc: 'Fusce vitae justo in mi rutrum finibus ut eget lorem'},
-// 	{image: laptop, name: 'Apple MacBook Air (Late 2020) Laptop - Apple M1 - 8GB - 256GB SSD - Apple Inteasdagrated 7-core GPU', price: 25, desc: 'Bluetooth, Magnetically attaches and pairs, Compatible with iPad Air (4th generation), iPad Pro 12.9-inch (3rd generation) or later, iPad Pro 11-inch (1st generation) or later'},
-// 	{image: watch, name: 'Lenovo ThinkPad E15 G2 Laptop - Intel® Core™ i5-1135G7 - 8GB - 256GB SSD - Inteasdasl® Iris® Xe Graphics', price: 53, desc: 'Fusce vitae justo in mi rutrum finibus ut eget lorem'},
-// 	{image: tablet, name: 'Asus zensdffone a5', price: 12, desc: 'Fusce vitae justo in mi rutrum finibus ut eget lorem'},
-// 	{image: watch, name: 'Lenovo ThsdfinkPad E15 G2 Laptop - Intel® Core™ i5-1135G7 - 8GB - 256GB SSD - Intel® Iris® Xe Graphics', price: 53, desc: 'Fusce vitae justo in mi rutrum finibus ut eget lorem'},
-// 	{image: headphones, name: 'Omen 15-sdfdh1076ng - Gaming Laptop - Intel® Core™ i7-10750H - 32GB - 512GB PCIe + 1TB HDD - NVIDIA® GeForce® RTX™ 2070 Super Max-Q', price: 64, desc: 'Fusce vitae justo in mi rutrum finibus ut eget lorem'},
-// 	{image: tablet, name: 'Asus zenfondsfde a5', price: 12, desc: 'Fusce vitae justo in mi rutrum finibus ut eget lorem'},
-// 	{image: laptop, name: 'Apple MacBook Air (Late 2020) Laptop - Apple M1 - 8GsdfB - 256GB SSD - Apple Integrated 7-core GPU', price: 25, desc: 'Bluetooth, Magnetically attaches and pairs, Compatible with iPad Air (4th generation), iPad Pro 12.9-inch (3rd generation) or later, iPad Pro 11-inch (1st generation) or later'},
-// ]
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -104,9 +89,8 @@ const useStyles = makeStyles(theme => ({
 	},
 }))
 
-let maxPrice = 150
-let minPrice = 29
 let mainData = null
+let dataForMinMAx = null
 
 const Products = ({ name }) => {
 	const classes = useStyles()
@@ -114,42 +98,66 @@ const Products = ({ name }) => {
 
 	const [topMenuOpne, setTopMenuOpen] = useState(false)
 
+	const [pricesArray, setPricesArray] = useState([])
+	const [brandsArray, setBrandsArray] = useState([])
 	const [sortBy, setSortBy] = useState('lowToHigh')
-	const [priceRange, setPriceRange] = useState([minPrice, maxPrice])
 	const [minRentPeriod, setMinRentPeriod] = useState(4)
 
 	if (phoneData.loading) return <p>Loading ...</p>
 
-
 	if (name === 'Smartphones') {
 		mainData = phoneData.data.allPhones
+		dataForMinMAx = phoneData.data.allPhones
 	}	
 
-	// filter for SORTING
-
-	// filter for MONTLYPRICE
-	const phonePrice = (phone) => {
-		if (minRentPeriod === 4) {
-			return phone.phonePrices.twelvePrice
-		} else if (minRentPeriod === 3) {
-			return phone.phonePrices.sixPrice
-		} else if (minRentPeriod === 2) {
-			return phone.phonePrices.threePrice
-		} else if (minRentPeriod === 1) {
-			return phone.phonePrices.onePrice
-		}
+	// filter for BRANDS
+	let brandsList = [...new Set(mainData.map(item => item.brand))]
+	if (brandsArray && brandsArray.length !== 0) {
+		mainData = mainData.filter(obj => brandsArray.includes(obj.brand))
 	}
 
 	// filter for MINRENTPERIOD
-	let brandsList = [...new Set(mainData.map(item => item.brand))]
-	
+	const priceSwitch = (value) => {
+		if (minRentPeriod === 4) {
+			return value.prices.twelvePrice
+		} else if (minRentPeriod === 3) {
+			return value.prices.sixPrice
+		} else if (minRentPeriod === 2) {
+			return value.prices.threePrice
+		} else if (minRentPeriod === 1) {
+			return value.prices.onePrice
+		}
+	}
+
+	// filter for SORTING
+	switch (sortBy) {
+	case 'lowToHigh':
+		mainData = mainData.slice().sort((a, b) => {
+			if (priceSwitch(a) > priceSwitch(b)) return 1
+			if (priceSwitch(a) < priceSwitch(b)) return -1
+			return 0
+		})
+		break
+	case 'highToLow':
+		mainData = mainData.slice().sort((a, b) => {
+			if (priceSwitch(a)< priceSwitch(b)) return 1
+			if (priceSwitch(a) > priceSwitch(b)) return -1
+			return 0
+		})
+		break
+	default:
+		mainData
+	}
+
+	// filter for MONTLYPRICE
+	mainData = mainData.slice().filter(item => pricesArray[0] <= priceSwitch(item) && priceSwitch(item) <= pricesArray[1])
 
 	const dataValues = () => {
 		switch (name) {
 		case name = 'Smartphones':
 			return mainData.map(phone => (
 				<Grid item xs={12} sm={6} md={4} lg={4} key={phone.id}>
-					<DeviceCard name={phone.phoneName} price={phonePrice(phone)} desc={phone.description} image={phone.imageIds.filter(image => image.imageName.includes('thumb_1_main'))} />
+					<DeviceCard name={phone.phoneName} price={priceSwitch(phone)} desc={phone.description} image={phone.imageIds.filter(image => image.imageName.includes('thumb_1_main'))} />
 				</Grid>
 			))	
 		default:
@@ -164,7 +172,7 @@ const Products = ({ name }) => {
 			<div className={classes.flexboxContainer}>
 				<Hidden xsDown>
 					<div className={classes.firstGridContaner}>
-						<Filters brandsList={brandsList} maxPrice={maxPrice} minPrice={minPrice} sortBy={sortBy} setSortBy={setSortBy} priceRange={priceRange} setPriceRange={setPriceRange} minRentPeriod={minRentPeriod} setMinRentPeriod={setMinRentPeriod} />
+						<Filters setBrandsArray={setBrandsArray} brandsList={brandsList} sortBy={sortBy} setSortBy={setSortBy} minRentPeriod={minRentPeriod} setMinRentPeriod={setMinRentPeriod} setPricesArray={setPricesArray} minPrice={Math.min(...dataForMinMAx.map(item => priceSwitch(item)))} maxPrice={Math.max(...dataForMinMAx.map(item => priceSwitch(item)))}/>
 					</div>
 					<Hidden lgUp>
 						<Divider classes={{ root: classes.dividerSecondary }}/>
@@ -176,7 +184,7 @@ const Products = ({ name }) => {
 				<Grid container spacing={2} className={classes.secondGridContaner}>
 					{dataValues()}
 				</Grid>
-				<TopFilter topMenuOpne={topMenuOpne} setTopMenuOpen={setTopMenuOpen} maxPrice={maxPrice} minPrice={minPrice} brandsList={brandsList} sortBy={sortBy} setSortBy={setSortBy} priceRange={priceRange} setPriceRange={setPriceRange} minRentPeriod={minRentPeriod} setMinRentPeriod={setMinRentPeriod}/>
+				<TopFilter topMenuOpne={topMenuOpne} setTopMenuOpen={setTopMenuOpen} brandsList={brandsList} sortBy={sortBy} setSortBy={setSortBy} minRentPeriod={minRentPeriod} setMinRentPeriod={setMinRentPeriod} setPricesArray={setPricesArray} minPrice={Math.min(...dataForMinMAx.map(item => priceSwitch(item)))} maxPrice={Math.max(...dataForMinMAx.map(item => priceSwitch(item)))} />
 			</div>
 		</div>
 	)

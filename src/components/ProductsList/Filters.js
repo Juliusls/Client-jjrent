@@ -139,10 +139,9 @@ const useStyles = makeStyles(theme => ({
 	},
 }))
 
-
-const Filters = ({ setTopMenuOpen, sortBy, setSortBy, priceRange, setPriceRange, setMinRentPeriod, brandsList, minPrice, maxPrice }) => {
+const Filters = ({ setBrandsArray, setTopMenuOpen, sortBy, setSortBy, minRentPeriod, setMinRentPeriod, brandsList, setPricesArray, minPrice, maxPrice}) => {
 	const [brandsChecked, setBandsChecked] = useState(brandsList.map(name => ({ name: name, checked: false })))
-
+	const [priceRange, setPriceRange] = useState([minPrice, maxPrice])
 
 	const classes = useStyles()
 
@@ -153,20 +152,19 @@ const Filters = ({ setTopMenuOpen, sortBy, setSortBy, priceRange, setPriceRange,
 	const handlePriceChange = (event, newValue) => {
 		setPriceRange(newValue)
 	}
-	
-	// useEffect(() => {
-	// 	console.log('priceRange: ', priceRange)
-	// }, [priceRange]) 
 
 	useEffect(() => {
-		console.log('checkedItems: ', brandsChecked)
-	}, [brandsChecked]) 
-	// useEffect(() => {
-	// 	console.log('sortBy: ', sortBy)
-	// }, [sortBy])
-	// useEffect(() => {
-	// 	console.log('minRentPeriod: ', minRentPeriod)
-	// }, [minRentPeriod]) 
+		let brandsStrings = brandsChecked.filter(brand => brand.checked === true).map(obj => obj.name)
+		setBrandsArray(brandsStrings)
+	}, [brandsChecked])
+		
+	useEffect(() => {
+		setPriceRange([minPrice, maxPrice])
+	}, [minRentPeriod])
+	
+	useEffect(() => {
+		setPricesArray(priceRange)
+	}, [priceRange]) 
 
 	return (
 		<Grid container spacing={2}>
