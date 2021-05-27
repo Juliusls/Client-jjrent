@@ -8,7 +8,7 @@ export const ADD_WATCH = gql`
 			description
 			brand
 			insideTheBox
-			watchPrices {
+			prices {
 				onePrice
 				threePrice
 				sixPrice
@@ -47,7 +47,7 @@ export const ADD_LAPTOP = gql`
 			description
 			brand
 			insideTheBox
-			laptopPrices {
+			prices {
 				onePrice
 				threePrice
 				sixPrice
@@ -77,39 +77,38 @@ export const ADD_LAPTOP = gql`
 `
 
 export const ADD_PHONE = gql`
-	mutation addPhone($input: PhoneInput!) {
-		addPhone(input: $input) {
-		id
-		phoneName
-		description
-		brand
-		insideTheBox
-		phoneSpecs {
-			sim
-			memory
-			battery
-			display
-			storage
-			processor
-			dimensions
-			rearCamera
-			frontCamera
-			operatingSystem
-		}
-		prices {
-			onePrice
-			threePrice
-			sixPrice
-			twelvePrice
-		}
-		variants {
-			color
-			unitsInTheWarehouse
-		}
-		imageIds {
-			imageName
-			publicId
-		}
+	mutation addLaptop($input: LaptopInput!) {
+		addLaptop(input: $input) {
+			id
+			laptopName
+			description
+			brand
+			insideTheBox
+			prices {
+				onePrice
+				threePrice
+				sixPrice
+				twelvePrice
+			}
+			laptopSpecs {
+				model
+				memory
+				display
+				storage
+				graphics
+				processor
+				dimensions
+				operatingSystem
+				keyboardLanguage
+			}
+			variants {
+				color
+				unitsInTheWarehouse
+			}
+			imageIds {
+				imageName
+				publicId
+			}
 		}
 	}
 `

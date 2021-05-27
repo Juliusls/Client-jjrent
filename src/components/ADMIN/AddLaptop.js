@@ -353,7 +353,6 @@ const AddLaptop = () => {
 	const [ addLaptop ]  = useMutation(ADD_LAPTOP)
 
 	const handleSubmit = async (values) => {
-
 		try {
 			const imagesForDbArray = Promise.all(values.files.map(async file => {
 				let formData = new FormData()
@@ -374,16 +373,12 @@ const AddLaptop = () => {
 
 			const imagesArray = await imagesForDbArray
 
-			console.log('imagesArray', imagesArray)
-
 			let variantsToNumbers = values.variants.map(variant => (
 				{
 					color: variant.color,
 					unitsInTheWarehouse: parseInt(variant.unitsInTheWarehouse) 
 				}
 			))
-
-			console.log('variantsToNumbers', variantsToNumbers)
 			
 			const inputconst = { 
 				laptopName: values.laptopName, 

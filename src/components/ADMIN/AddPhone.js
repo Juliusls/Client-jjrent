@@ -392,8 +392,6 @@ const AddPhone = () => {
 
 			const imagesArray = await imagesForDbArray
 
-			// console.log('imagesArray', imagesArray)
-
 			let variantsToNumbers = values.variants.map(variant => (
 				{
 					color: variant.color,

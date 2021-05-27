@@ -379,12 +379,9 @@ const AddProduct = () => {
 	const [ addWatch ]  = useMutation(ADD_WATCH)
 
 	const handleSubmit = async (values) => {
-
-
 		try {
 			const imagesForDbArray = Promise.all(values.files.map(async file => {
 				let formData = new FormData()
-
 				formData.append('file', file)
 				formData.append('upload_preset', config.REACT_APP_UPLOAD_PRESET)
 	
@@ -432,6 +429,8 @@ const AddProduct = () => {
 				variants: variantsToNumbers,
 				imageIds: imagesArray 
 			}
+
+			console.log('inputconst', inputconst)
 
 			await addWatch({ variables: { input: inputconst } })
 			history.push('/admin/dashboard')
