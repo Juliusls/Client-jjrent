@@ -10,7 +10,7 @@ import { makeStyles, Typography, Button, FormControl, FormGroup, FormControlLabe
 import AddIcon from '@material-ui/icons/Add'
 import RemoveIcon from '@material-ui/icons/Remove'
 
-import { ADD_PHONE } from '../../graphql/mutations'
+import { ADD_PHONE } from '../../graphql/phones/mutations'
 import config from '../../utils/config'
 import UploadComponent from './UploadComponent'
 import { phoneInsideTheBox, phoneBrands, prodcutPriceData } from '../../data'
@@ -456,3 +456,5 @@ const AddPhone = () => {
 }
 
 export default AddPhone
+
+// TODO yup validation

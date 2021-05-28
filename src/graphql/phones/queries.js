@@ -1,5 +1,42 @@
 import { gql } from '@apollo/client'
 
+export const FIND_PHONE = gql`
+  query findPhone($id: String!) {
+    findPhone(id: $id) {
+		id
+		phoneName
+		description
+		brand
+		insideTheBox
+		prices {
+			onePrice
+			threePrice
+			sixPrice
+			twelvePrice
+		}
+		phoneSpecs {
+			memory
+			battery
+			display
+			storage
+			processor
+			dimensions
+			rearCamera
+			frontCamera
+			operatingSystem
+		}
+		variants {
+			color
+			unitsInTheWarehouse
+		}
+		imageIds {
+			imageName
+			publicId
+		}
+    }
+  }
+`
+
 export const ALL_PHONES = gql`
 	query {
 		allPhones  {

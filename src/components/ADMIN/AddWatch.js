@@ -10,7 +10,7 @@ import { makeStyles, Typography, Button, FormControl, FormGroup, FormControlLabe
 import AddIcon from '@material-ui/icons/Add'
 import RemoveIcon from '@material-ui/icons/Remove'
 
-import { ADD_WATCH } from '../../graphql/mutations'
+import { ADD_WATCH } from '../../graphql/watches/mutations'
 import config from '../../utils/config'
 import UploadComponent from './UploadComponent'
 import { watchInsideTheBox, watchBrands, watchTypes, watchCompatibility, prodcutPriceData } from '../../data'
@@ -234,6 +234,7 @@ const NewProductForm = ({ values, errors, touched, handleChange, handleBlur, han
 						fullWidth
 					/>
 					<Typography variant='h6'>Band Size</Typography>
+					<Typography variant='body2'>M / L (145-205 mm)</Typography>
 					<Field
 						component={TextField}
 						onChange={handleChange}
@@ -249,6 +250,7 @@ const NewProductForm = ({ values, errors, touched, handleChange, handleBlur, han
 						fullWidth
 					/>
 					<Typography variant='h6'>Water Resistance</Typography>
+					<Typography variant='body2'>Yes (IPX7)</Typography>
 					<Field
 						component={TextField}
 						onChange={handleChange}
@@ -464,3 +466,5 @@ const AddProduct = () => {
 }
 
 export default AddProduct
+
+// TODO yup validation

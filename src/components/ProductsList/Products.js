@@ -6,7 +6,9 @@ import Filters from './Filters'
 import TopFilter from './TopFilter'
 
 import { useQuery } from '@apollo/client'
-import { ALL_PHONES_MIDI } from '../../graphql/queries'
+import { ALL_PHONES_MIDI } from '../../graphql/phones/queries'
+import { ALL_LAPTOPS_MIDI } from '../../graphql/laptops/queries'
+import { ALL_WATCHES_MIDI } from '../../graphql/watches/queries'
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -95,6 +97,8 @@ let dataForMinMAx = null
 const Products = ({ name }) => {
 	const classes = useStyles()
 	const phoneData = useQuery(ALL_PHONES_MIDI)
+	const laptopData = useQuery(ALL_LAPTOPS_MIDI)
+	const watchData = useQuery(ALL_WATCHES_MIDI)
 
 	const [topMenuOpne, setTopMenuOpen] = useState(false)
 
@@ -103,12 +107,18 @@ const Products = ({ name }) => {
 	const [sortBy, setSortBy] = useState('lowToHigh')
 	const [minRentPeriod, setMinRentPeriod] = useState(4)
 
-	if (phoneData.loading) return <p>Loading ...</p>
+	if (phoneData.loading || laptopData.loading || watchData.loading) return <p>Loading ...</p>
 
 	if (name === 'Smartphones') {
 		mainData = phoneData.data.allPhones
 		dataForMinMAx = phoneData.data.allPhones
-	}	
+	} else if (name === 'Laptops') {
+		mainData = laptopData.data.allLaptops
+		dataForMinMAx = laptopData.data.allLaptops
+	} else if (name === 'Smartwatches') {
+		mainData = watchData.data.allWatches
+		dataForMinMAx = watchData.data.allWatches
+	}
 
 	// filter for BRANDS
 	let brandsList = [...new Set(mainData.map(item => item.brand))]
@@ -158,6 +168,18 @@ const Products = ({ name }) => {
 			return mainData.map(phone => (
 				<Grid item xs={12} sm={6} md={4} lg={4} key={phone.id}>
 					<DeviceCard name={phone.phoneName} price={priceSwitch(phone)} desc={phone.description} image={phone.imageIds.filter(image => image.imageName.includes('thumb_1_main'))} />
+				</Grid>
+			))
+		case name = 'Laptops':
+			return mainData.map(laptop => (
+				<Grid item xs={12} sm={6} md={4} lg={4} key={laptop.id}>
+					<DeviceCard name={laptop.laptopName} price={priceSwitch(laptop)} desc={laptop.description} image={laptop.imageIds.filter(image => image.imageName.includes('thumb_1_main'))} />
+				</Grid>
+			))
+		case name = 'Smartwatches':
+			return mainData.map(watch => (
+				<Grid item xs={12} sm={6} md={4} lg={4} key={watch.id}>
+					<DeviceCard name={watch.watchName} price={priceSwitch(watch)} desc={watch.description} image={watch.imageIds.filter(image => image.imageName.includes('thumb_1_main'))} />
 				</Grid>
 			))	
 		default:

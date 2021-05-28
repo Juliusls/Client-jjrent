@@ -4,6 +4,10 @@ import { makeStyles, Card, CardActionArea, CardContent, Typography, Box, IconBut
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import { Image } from 'cloudinary-react'
+import { useHistory } from 'react-router-dom'
+
+// import { Link } from 'react-router-dom'
+
 
 import config from '../utils/config'
 
@@ -137,13 +141,19 @@ const useStyles = makeStyles(theme => ({
 	},
 }))
 
-const DeviceCard = ({ name, price, desc, image }) => {
+const DeviceCard = ({ name, price, desc, image, id }) => {
 	const classes = useStyles()
+	const history = useHistory()
+
 	const [favorited, setFavorited] = useState(false)
 
+	const handleCardClick = (id) => {
+		history.push(`/product/${id}`)
+	}
+
 	return (
-		<Card className={classes.card} style={{ height: 'inherit' }}>
-			<CardActionArea className={classes.cardActionArea}>
+		<Card className={classes.card} style={{ height: 'inherit' }} >
+			<CardActionArea className={classes.cardActionArea} onClick={() => handleCardClick(id)}>
 				<IconButton className={classes.favoriteButtonOrder}  classes={{root: classes.favoriteButton}} onMouseDown={event => event.stopPropagation()} onTouchStart={(event) => event.stopPropagation()} onClick={() => setFavorited(!favorited)}>
 					{favorited 
 						? <FavoriteIcon className={classes.favoriteButtonIcon} />

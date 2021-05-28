@@ -61,32 +61,24 @@ const useStyles = makeStyles(theme => ({
 const OneCategory = ({ name, data }) => {
 	const classes = useStyles()
 
-	console.log(name)
-
 	const dataValues = () => {
 		switch (name) {
 		case name = 'Smartphones':
 			return data.map(phone => (
 				<Grid item xs={12} sm={6} md={3} lg={3} key={phone.id} style={{ height: '100%' }}>
-					<DeviceCard name={phone.phoneName} price={phone.prices.twelvePrice} desc={phone.description} image={phone.imageIds.filter(image => image.imageName.includes('thumb_1_main'))} />
+					<DeviceCard name={phone.phoneName} price={phone.prices.twelvePrice} desc={phone.description} image={phone.imageIds.filter(image => image.imageName.includes('thumb_1_main'))} id={phone.id}/>
 				</Grid>
 			))
 		case name = 'Laptops':
-			return data.map(phone => (
-				<Grid item xs={12} sm={6} md={3} lg={3} key={phone.id} style={{ height: '100%' }}>
-					<DeviceCard name={phone.phoneName} price={phone.prices.twelvePrice} desc={phone.description} image={phone.imageIds.filter(image => image.imageName.includes('thumb_1_main'))} />
+			return data.map(laptop => (
+				<Grid item xs={12} sm={6} md={3} lg={3} key={laptop.id} style={{ height: '100%' }}>
+					<DeviceCard name={laptop.laptopName} price={laptop.prices.twelvePrice} desc={laptop.description} image={laptop.imageIds.filter(image => image.imageName.includes('thumb_1_main'))} id={laptop.id}/>
 				</Grid>
 			))
 		case name = 'Smartwatches':
-			return data.map(phone => (
-				<Grid item xs={12} sm={6} md={3} lg={3} key={phone.id} style={{ height: '100%' }}>
-					<DeviceCard name={phone.phoneName} price={phone.prices.twelvePrice} desc={phone.description} image={phone.imageIds.filter(image => image.imageName.includes('thumb_1_main'))} />
-				</Grid>
-			))
-		case name = 'Recommended':
-			return data.map(phone => (
-				<Grid item xs={12} sm={6} md={3} lg={3} key={phone.id} style={{ height: '100%' }}>
-					<DeviceCard name={phone.phoneName} price={phone.prices.twelvePrice} desc={phone.description} image={phone.imageIds.filter(image => image.imageName.includes('thumb_1_main'))} />
+			return data.map(watch => (
+				<Grid item xs={12} sm={6} md={3} lg={3} key={watch.id} style={{ height: '100%' }}>
+					<DeviceCard name={watch.watchName} price={watch.prices.twelvePrice} desc={watch.description} image={watch.imageIds.filter(image => image.imageName.includes('thumb_1_main'))} id={watch.id}/>
 				</Grid>
 			))	
 		default:

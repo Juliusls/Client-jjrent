@@ -10,7 +10,7 @@ import { makeStyles, Typography, Button, FormControl, FormGroup, FormControlLabe
 import AddIcon from '@material-ui/icons/Add'
 import RemoveIcon from '@material-ui/icons/Remove'
 
-import { ADD_LAPTOP } from '../../graphql/mutations'
+import { ADD_LAPTOP } from '../../graphql/laptops/mutations'
 import config from '../../utils/config'
 import UploadComponent from './UploadComponent'
 import { laptopInsideTheBox, laptopBrands, prodcutPriceData } from '../../data'
@@ -178,6 +178,8 @@ const NewProductForm = ({ values, errors, touched, handleChange, handleBlur, han
 						fullWidth
 					/>
 					<Typography variant='h6'>Display</Typography>
+					<Typography variant='body2'>15.6 inches (1920 x 1080)</Typography>
+					<Typography variant='body2'>15.6 inches (1920 x 1080) 60Hz</Typography>
 					<Field
 						component={TextField}
 						onChange={handleChange}
@@ -436,3 +438,5 @@ const AddLaptop = () => {
 }
 
 export default AddLaptop
+
+// TODO yup validation

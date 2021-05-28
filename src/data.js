@@ -44,7 +44,7 @@ export const laptopInsideTheBox = [
 	'Laptop', 'Power adapter', 'Charging cable'
 ]
 export const laptopBrands = [
-	'Apple', 'Lenovo', 'Dell'
+	'Apple', 'Lenovo', 'Dell', 'Razer'
 ]
 
 
@@ -54,4 +54,26 @@ export const phoneInsideTheBox = [
 ]
 export const phoneBrands = [
 	'Apple', 'Samsung', 'OnePlus', 'Xiaomi'
+]
+
+
+
+// Recommended products ids
+export const recommendedProductsIds = [
+	{
+		id: '60b0ae9ca624718f93dee30e',
+		productName: 'Suunto 7 GPS Sports watch'
+	},
+	{
+		id: '60abbc1dcc1da53eef2f0e66',
+		productName: 'Samsung Galaxy Z Fold 2 256GB'
+	},
+	{
+		id: '60abb941cc1da53eef2f0e63',
+		productName: 'Apple iPhone 12 mini 64GB'
+	},
+	{
+		id: '60b0a648a624718f93dee30c',
+		productName: 'Razer Book 13 Laptop - Intel® Core™ i7-1165G7 - 16GB - 256GB SSD - Intel® Iris® Xe Graphics'
+	},
 ]
