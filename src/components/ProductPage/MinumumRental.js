@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-const MinumumRental = () => {
+const MinumumRental = ({ setMinRentPeriod }) => {
 	const classes = useStyles()
 
 	return (
@@ -56,12 +56,13 @@ const MinumumRental = () => {
 				</Typography>
 			</div>
 			<Slider
-				defaultValue={1}
+				defaultValue={4}
 				classes={{ track: classes.sliderTrackNone, thumb: classes.sliderThumb, rail: classes.sliderRail, mark: classes.sliderMark, markActive: classes.slideMarkActive }}
 				aria-labelledby="discrete-slider"
 				valueLabelDisplay="off"
 				step={1}
 				marks
+				onChange={(event, newValue) => setMinRentPeriod(newValue)}
 				min={1}
 				max={4}
 			/>

@@ -39,21 +39,24 @@ const useStyles = makeStyles({
 	}
 })
 
-const ColorPicker = ({ colors, selectedColor, setSelectedColor }) => {
-	const classes = useStyles(colors)
+const ColorPicker = ({ variants, selectedColor, setSelectedColor }) => {
+	const classes = useStyles()
+
+
+	// const integer = '#24bd4d'
 
 	return (
 		<div className={classes.container}>
-			{colors.map(color => (
-				<div key={color} className={classes.radioContainter}>
+			{variants.map(variant => (
+				<div key={variant} className={classes.radioContainter}>
 					<Radio
-						checked={selectedColor === color}
+						checked={selectedColor === variant.color}
 						onChange={(event) => setSelectedColor(event.target.value)}
-						value={color}
+						value={variant.color}
 						classes={{ root: classes.radioButton}}
 						name="radio-button-demo"
-						icon={<div className={classes.icon} style={{ backgroundColor: color }}/>}
-						checkedIcon={<div className={classes.checkedIcon} style={{ backgroundColor: color }}/>}
+						icon={<div className={classes.icon} style={{ backgroundColor: variant.colorCode }}/>}
+						checkedIcon={<div className={classes.checkedIcon} style={{ backgroundColor: variant.colorCode }}/>}
 						inputProps={{ 'aria-label': 'A' }}
 					/>
 				</div>

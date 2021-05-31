@@ -1,18 +1,16 @@
-import React from 'react'
-
+import React, { useState } from 'react'
+import { Image } from 'cloudinary-react'
 import { makeStyles, Grid } from '@material-ui/core'
+import config from '../../utils/config'
 
-import ipad1Mini from '../../Images/ipad1Mini.png'
-import ipad2Mini from '../../Images/ipad2Mini.png'
-import ipad3Mini from '../../Images/ipad3Mini.png'
-import ipad4Mini from '../../Images/ipad4Mini.png'
-import ipad1Max from '../../Images/ipad1Max.png'
+// import ipad1Max from '../../Images/ipad1Max.png'
 
 const useStyles = makeStyles(theme => ({
 	containerDiv: {
 		height: 500,
 		display: 'flex',
 		marginBottom: 100,
+		maxWidth: '100%',
 		[theme.breakpoints.down('sm')]: {
 			maxWidth: '100%',
 			marginBottom: 50,
@@ -29,10 +27,17 @@ const useStyles = makeStyles(theme => ({
 		width: 94,
 		height: 94,
 		padding: 12,
-		'&:hover': {
-			boxShadow: theme.shadows[10],
-			borderRadius: 15
-		},
+		// '&:hover': {
+		// 	boxShadow: theme.shadows[10],
+		// 	borderRadius: 15
+		// },
+	},
+	imgContainerHover: {
+		width: 94,
+		height: 94,
+		padding: 12,
+		boxShadow: theme.shadows[10],
+		borderRadius: 15
 	},
 	image: {
 		objectFit: 'contain',
@@ -40,37 +45,45 @@ const useStyles = makeStyles(theme => ({
 		width: '100%',
 	},
 	bigImgContainer: {
-		height: '100%'
+		height: '100%',
+		maxWidth: 'inherit',
+		marginRight: 50
 	},
 	bigImage: {
 		objectFit: 'contain',
 		height: '100%',
 		width: '100%',
-		minHeight: 500
+		minHeight: 500,
+		maxWidth: 'inherit',
+		marginLeft: 25
 	},
 }))
 
-const ImagesComponent = () => {
+const ImagesComponent = ({ images }) => {
 	const classes = useStyles()
+	const thumbs = images.filter(image => image.imageName.includes('thumb'))
+
+
+	const [imageSelected, setImageSelected] = useState('1')
+
+	const handleImageSelect = (imageFullName) => {
+		const imageIndex = imageFullName.substring(imageFullName.indexOf('thumb') + 6).split('.')[0]
+		setImageSelected(imageIndex)
+	}
+	
+	const bigImage = images.filter(image => image.imageName.includes(`image_${imageSelected}`))
 
 	return (
 		<div className={classes.containerDiv}>
 			<Grid container className={classes.gridList} cols={1}>
-				<Grid item className={classes.imgContainer} classes={{ root: classes.imgClass}}>
-					<img src={ipad1Mini} className={classes.image}/>
-				</Grid>
-				<Grid item className={classes.imgContainer} classes={{ root: classes.imgClass}}>
-					<img src={ipad2Mini} className={classes.image}/>
-				</Grid>
-				<Grid item className={classes.imgContainer} classes={{ root: classes.imgClass}}>
-					<img src={ipad3Mini} className={classes.image}/>
-				</Grid>
-				<Grid item className={classes.imgContainer} classes={{ root: classes.imgClass}}>
-					<img src={ipad4Mini} className={classes.image}/>
-				</Grid>
+				{thumbs.map(thumb => 
+					<Grid item button className={(thumb.imageName.includes(`thumb_${imageSelected}`)) ? classes.imgContainerHover : classes.imgContainer} classes={{ root: classes.imgClass }} key={thumb.imageName} onClick={() => handleImageSelect(thumb.imageName)}>
+						<Image publicId={thumb.publicId} cloudName={config.REACT_APP_CLOUD_NAME} className={classes.image} />
+					</Grid>
+				)}
 			</Grid>
 			<div className={classes.bigImgContainer}>
-				<img src={ipad1Max} className={classes.bigImage} />
+				<Image publicId={bigImage[0].publicId} cloudName={config.REACT_APP_CLOUD_NAME} className={classes.bigImage} />
 			</div>
 		</div>
 	)

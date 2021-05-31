@@ -343,13 +343,13 @@ const NewProductForm = ({ values, errors, touched, handleChange, handleBlur, han
 					<Typography variant='h6'>Images</Typography>
 					<Typography variant='body1' style={{ marginBottom: 20}}>Image formats:</Typography>
 					<Typography variant='body1' >Main thumbs and images:</Typography>
-					<Typography variant='body2'>name_color_size_imageType.png</Typography>
-					<Typography variant='body2'>applewatch6_spacegrey_thumb_main.png</Typography>
-					<Typography variant='body2'>applewatch6_spacegrey_image_main.png</Typography>
+					<Typography variant='body2'>name_color_imageType_size_number.png</Typography>
+					<Typography variant='body2'>applewatch6_spacegrey_main_thumb_1.png</Typography>
+					<Typography variant='body2'>applewatch6_spacegrey_main_image_1.png</Typography>
 					<Typography variant='body1' style={{ marginTop: 10 }}>Other thumbs and images:</Typography>
-					<Typography variant='body2'>name_color_size.png</Typography>
-					<Typography variant='body2'>applewatch6_spacegrey_thumb.png</Typography>
-					<Typography variant='body2'>applewatch6_spacegrey_image.png</Typography>
+					<Typography variant='body2'>name_color_size_number.png</Typography>
+					<Typography variant='body2'>applewatch6_spacegrey_thumb_2.png</Typography>
+					<Typography variant='body2'>applewatch6_spacegrey_image_2.png</Typography>
 					<div  >
 						{errors.files && touched.files && 
 								<Typography variant='caption' style={{ color: '#f44336' }}>{errors.files}</Typography>

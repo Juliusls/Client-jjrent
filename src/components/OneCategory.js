@@ -66,19 +66,19 @@ const OneCategory = ({ name, data }) => {
 		case name = 'Smartphones':
 			return data.map(phone => (
 				<Grid item xs={12} sm={6} md={3} lg={3} key={phone.id} style={{ height: '100%' }}>
-					<DeviceCard name={phone.phoneName} price={phone.prices.twelvePrice} desc={phone.description} image={phone.imageIds.filter(image => image.imageName.includes('thumb_1_main'))} id={phone.id}/>
+					<DeviceCard name={phone.phoneName} price={phone.prices.twelvePrice} desc={phone.description} image={phone.imageIds.filter(image => image.imageName.includes('main_thumb_1'))} id={phone.id} category='smartphone'/>
 				</Grid>
 			))
 		case name = 'Laptops':
 			return data.map(laptop => (
 				<Grid item xs={12} sm={6} md={3} lg={3} key={laptop.id} style={{ height: '100%' }}>
-					<DeviceCard name={laptop.laptopName} price={laptop.prices.twelvePrice} desc={laptop.description} image={laptop.imageIds.filter(image => image.imageName.includes('thumb_1_main'))} id={laptop.id}/>
+					<DeviceCard name={laptop.laptopName} price={laptop.prices.twelvePrice} desc={laptop.description} image={laptop.imageIds.filter(image => image.imageName.includes('main_thumb_1'))} id={laptop.id} category='laptop'/>
 				</Grid>
 			))
 		case name = 'Smartwatches':
 			return data.map(watch => (
 				<Grid item xs={12} sm={6} md={3} lg={3} key={watch.id} style={{ height: '100%' }}>
-					<DeviceCard name={watch.watchName} price={watch.prices.twelvePrice} desc={watch.description} image={watch.imageIds.filter(image => image.imageName.includes('thumb_1_main'))} id={watch.id}/>
+					<DeviceCard name={watch.watchName} price={watch.prices.twelvePrice} desc={watch.description} image={watch.imageIds.filter(image => image.imageName.includes('main_thumb_1'))} id={watch.id} category='smartwatch'/>
 				</Grid>
 			))	
 		default:

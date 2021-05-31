@@ -104,7 +104,7 @@ const App = () => {
 					<Route exact path='/smartwatches'>
 						<Products name='Smartwatches'/>
 					</Route>
-					<Route exact path='/product/12345'>
+					<Route exact path='/:category/:id'>
 						<ProductPage/>
 					</Route>
 					<Route exact path='/howitworks'>

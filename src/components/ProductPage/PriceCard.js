@@ -16,12 +16,13 @@ const useStyles = makeStyles(theme => ({
 		boxShadow: theme.shadows[5],
 		marginLeft: 'auto',
 		position: 'sticky',
-		top: 160,
+		top: 80,
 		width: '100%',
 		height: '100%',
 		maxWidth: 700,
 		minHeight: 500,
 		marginTop: 60,
+		marginBottom: 20,
 		zIndex: 2,
 		[theme.breakpoints.down('sm')]: {
 			position: 'static',
@@ -212,8 +213,6 @@ const useStyles = makeStyles(theme => ({
 	},
 }))
 
-const colors = ['blue', 'red', 'green']
-
 const BigTooltip = withStyles((theme) => ({
 	tooltip: {
 		backgroundColor: theme.palette.common.black,
@@ -225,10 +224,26 @@ const BigTooltip = withStyles((theme) => ({
 	},
 }))(Tooltip)
 
-const PriceCard = () => {
+const PriceCard = ({ prices, desc, variants }) => {
 	const classes = useStyles()
 	const [favorited, setFavorited] = useState(false)
+	const colors = variants.map(variant => variant.color)
 	const [selectedColor, setSelectedColor] = useState(colors[0])
+	const [minRentPeriod, setMinRentPeriod] = useState(4)
+
+
+	// filter for MINRENTPERIOD
+	const priceSwitch = () => {
+		if (minRentPeriod === 4) {
+			return prices.twelvePrice
+		} else if (minRentPeriod === 3) {
+			return prices.sixPrice
+		} else if (minRentPeriod === 2) {
+			return prices.threePrice
+		} else if (minRentPeriod === 1) {
+			return prices.onePrice
+		}
+	}
 
 	return (
 		// <Card className={classes.card} style={{ height: '100%'}}>
@@ -246,16 +261,16 @@ const PriceCard = () => {
 					</IconButton>
 				</div>
 				<Typography className={classes.textDesc}>
-					32.5MP, CMOS Sensor, 4K Video, Face and Eye detection, High continuos frame rate (30 frames per sec)
+					{desc}
 				</Typography>
 				<Typography className={classes.cardAroundPrice}>
-					<Box display='inline' className={classes.cardPrice}> €20 </Box>
+					<Box display='inline' className={classes.cardPrice}>€{priceSwitch()} </Box>
 						per month for 6 months, afterwards cancel anytime
 				</Typography>
 				<div className={classes.iconTextContainer}>
 					<LocalShippingOutlinedIcon />
 					<Typography className={classes.textDelivery}>
-							Delivery in 1–3 business days
+						Delivery in 1–3 business days
 					</Typography>
 				</div>
 				<Typography className={classes.textPeriod}>
@@ -271,12 +286,12 @@ const PriceCard = () => {
 						<Box display='inline' className={classes.minimumText}>minimum rental period</Box>
 					</BigTooltip>
 				</Typography>
-				<MinimumRental />
+				<MinimumRental setMinRentPeriod={setMinRentPeriod} />
 				<Typography className={classes.textColor}>
 						Selected color:
 					<Box display='inline' className={classes.oneColorText}> {selectedColor}</Box>
 				</Typography>
-				<ColorPicker colors={colors} selectedColor={selectedColor} setSelectedColor={setSelectedColor}/>
+				<ColorPicker variants={variants} selectedColor={selectedColor} setSelectedColor={setSelectedColor}/>
 				<Hidden smDown>
 					<Button variant="contained" className={classes.buttonSubscribe}>Subscribe</Button>
 				</Hidden>

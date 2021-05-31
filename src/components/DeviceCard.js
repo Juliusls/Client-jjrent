@@ -11,7 +11,6 @@ import { useHistory } from 'react-router-dom'
 
 import config from '../utils/config'
 
-
 const useStyles = makeStyles(theme => ({
 	card: {
 		borderRadius: 15,
@@ -141,19 +140,21 @@ const useStyles = makeStyles(theme => ({
 	},
 }))
 
-const DeviceCard = ({ name, price, desc, image, id }) => {
+const DeviceCard = ({ name, price, desc, image, id, category }) => {
+
+
 	const classes = useStyles()
 	const history = useHistory()
 
 	const [favorited, setFavorited] = useState(false)
 
-	const handleCardClick = (id) => {
-		history.push(`/product/${id}`)
+	const handleCardClick = () => {
+		history.push(`/${category}/${id}`)
 	}
 
 	return (
 		<Card className={classes.card} style={{ height: 'inherit' }} >
-			<CardActionArea className={classes.cardActionArea} onClick={() => handleCardClick(id)}>
+			<CardActionArea className={classes.cardActionArea} onClick={() => handleCardClick()}>
 				<IconButton className={classes.favoriteButtonOrder}  classes={{root: classes.favoriteButton}} onMouseDown={event => event.stopPropagation()} onTouchStart={(event) => event.stopPropagation()} onClick={() => setFavorited(!favorited)}>
 					{favorited 
 						? <FavoriteIcon className={classes.favoriteButtonIcon} />

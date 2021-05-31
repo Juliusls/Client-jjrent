@@ -1,11 +1,13 @@
 import React from 'react'
 import Carousel from 'react-material-ui-carousel'
+import { Image } from 'cloudinary-react'
 import { makeStyles, Paper } from '@material-ui/core'
+import config from '../../utils/config'
 
-import ipad1Max from '../../Images/ipad1Max.png'
-import ipad2Max from '../../Images/ipad2Max.png'
-import ipad3Max from '../../Images/ipad3Max.png'
-import ipad4Max from '../../Images/ipad4Max.png'
+// import ipad1Max from '../../Images/ipad1Max.png'
+// import ipad2Max from '../../Images/ipad2Max.png'
+// import ipad3Max from '../../Images/ipad3Max.png'
+// import ipad4Max from '../../Images/ipad4Max.png'
 
 const useStyles = makeStyles(theme => ({
 	conatinerDiv: {
@@ -28,14 +30,10 @@ const useStyles = makeStyles(theme => ({
 	},
 }))
 
-const ImagesCarousel = () => {
+const ImagesCarousel = ({ images }) => {
 	const classes = useStyles()
-	let images = [
-		ipad1Max,
-		ipad2Max,
-		ipad3Max,
-		ipad4Max
-	]
+
+	const bigImages = images.filter(image => image.imageName.includes('image'))
 
 	return (
 		<div className={classes.conatinerDiv}>
@@ -46,11 +44,10 @@ const ImagesCarousel = () => {
 				navButtonsAlwaysInvisible={true}
 				animation='slide'
 			>
-				{images.map( (image, i) => 
+				{bigImages.map((image, i) => 
 					<Paper key={i} className={classes.bigImgContainer} classes={{root: classes.paperClass}}>
-						<img src={image} className={classes.bigImage} />
+						<Image publicId={image.publicId} cloudName={config.REACT_APP_CLOUD_NAME} className={classes.bigImage} />
 					</Paper> 
-				
 				)}
 			</Carousel>
 		</div>
