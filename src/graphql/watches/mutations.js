@@ -29,6 +29,7 @@ export const ADD_WATCH = gql`
 			}
 			variants {
 				color
+				colorCode
 				unitsInTheWarehouse
 			}
 			imageIds {

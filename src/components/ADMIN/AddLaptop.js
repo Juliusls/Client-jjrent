@@ -306,6 +306,15 @@ const NewProductForm = ({ values, errors, touched, handleChange, handleBlur, han
 										<Field
 											component={TextField}
 											variant="outlined"
+											name={`variants.${index}.colorCode`}
+											type="text"
+											id={`variantInput-${index}.colorCode`}
+											multiline
+											fullWidth											
+										/>
+										<Field
+											component={TextField}
+											variant="outlined"
 											name={`variants.${index}.unitsInTheWarehouse`}
 											type="number"
 											id={`variantInput-${index}.unitsInTheWarehouse`}
@@ -316,7 +325,7 @@ const NewProductForm = ({ values, errors, touched, handleChange, handleBlur, han
 									</div>
 								))
 								}
-								<IconButton id='addColorVarianttButton' color="primary" size='small'  component="span" onClick={() => push({ color: '', unitsInTheWarehouse: 0 })}>
+								<IconButton id='addColorVarianttButton' color="primary" size='small'  component="span" onClick={() => push({ color: '', colorCode: '', unitsInTheWarehouse: 0 })}>
 									<AddIcon />
 								</IconButton>
 								<IconButton color="primary" aria-label="upload picture" size='small' component="span" onClick={pop}>
@@ -378,6 +387,7 @@ const AddLaptop = () => {
 			let variantsToNumbers = values.variants.map(variant => (
 				{
 					color: variant.color,
+					colorCode: variant.colorCode,
 					unitsInTheWarehouse: parseInt(variant.unitsInTheWarehouse) 
 				}
 			))

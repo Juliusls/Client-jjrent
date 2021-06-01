@@ -27,6 +27,7 @@ export const ADD_PHONE = gql`
 			}
 			variants {
 				color
+				colorCode
 				unitsInTheWarehouse
 			}
 			imageIds {

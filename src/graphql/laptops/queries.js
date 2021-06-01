@@ -28,6 +28,7 @@ export const FIND_LAPTOP = gql`
 			}
 			variants {
 				color
+				colorCode
 				unitsInTheWarehouse
 			}
 			imageIds {
@@ -65,6 +66,7 @@ export const ALL_LAPTOPS = gql`
 			}
 			variants {
 				color
+				colorCode
 				unitsInTheWarehouse
 			}
 			imageIds {
@@ -108,6 +110,7 @@ export const ALL_LAPTOPS_MIDI = gql`
 			}
 			variants {
 				color
+				colorCode
 				unitsInTheWarehouse
 			}
 			imageIds {

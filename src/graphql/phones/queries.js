@@ -27,6 +27,7 @@ export const FIND_PHONE = gql`
 		}
 		variants {
 			color
+			colorCode
 			unitsInTheWarehouse
 		}
 		imageIds {
@@ -64,6 +65,7 @@ export const ALL_PHONES = gql`
 			}
 			variants {
 				color
+				colorCode
 				unitsInTheWarehouse
 			}
 			imageIds {
@@ -106,6 +108,7 @@ export const ALL_PHONES_MIDI = gql`
 			}
 			variants {
 				color
+				colorCode
 				unitsInTheWarehouse
 			}
 			imageIds {

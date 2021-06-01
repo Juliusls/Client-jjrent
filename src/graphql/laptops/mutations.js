@@ -27,6 +27,7 @@ export const ADD_LAPTOP = gql`
 			}
 			variants {
 				color
+				colorCode
 				unitsInTheWarehouse
 			}
 			imageIds {

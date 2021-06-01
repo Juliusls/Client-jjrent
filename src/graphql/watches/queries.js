@@ -29,6 +29,7 @@ query findWatch($id: String!) {
 		}
 		variants {
 			color
+			colorCode
 			unitsInTheWarehouse
 		}
 		imageIds {
@@ -68,6 +69,7 @@ export const ALL_WATCHES = gql`
 			}
 			variants {
 				color
+				colorCode
 				unitsInTheWarehouse
 			}
 			imageIds {
@@ -110,6 +112,7 @@ export const ALL_WATCHES_MIDI = gql`
 			}
 			variants {
 				color
+				colorCode
 				unitsInTheWarehouse
 			}
 			imageIds {

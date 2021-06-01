@@ -36,13 +36,6 @@ const useStyles = makeStyles(theme => ({
 	}
 }))
 
-const demoVariants = [
-	{color: 'Mystic Bronze', colorCode: '#B38C83', unitsInTheWarehouse: 30},
-	{color: 'Mystic Black', colorCode: '#000000', unitsInTheWarehouse: 20},
-	{color: 'Purple', colorCode: '#48364C', unitsInTheWarehouse: 10},
-	{color: 'Green', colorCode: 'green', unitsInTheWarehouse: 10},
-]
-
 const ProductPage = () => {
 	let mainData
 	const classes = useStyles()
@@ -93,6 +86,18 @@ const ProductPage = () => {
 		}
 	}
 
+	const nameSwitch = () => {
+		switch (category) {
+		case 'smartphone':
+			return mainData.phoneName
+		case 'laptop':
+			return mainData.laptopName
+		case 'smartwatch':
+			return mainData.watchName
+		default:
+			break
+		}
+	}
 
 	console.log(mainData)
 
@@ -106,12 +111,12 @@ const ProductPage = () => {
 					{specSwitch()}
 					<QandA />
 				</div>
-				<PriceCard prices={mainData.prices} desc={mainData.description} variants={demoVariants} />
+				<PriceCard name={nameSwitch()} prices={mainData.prices} desc={mainData.description} variants={mainData.variants} />
 			</Hidden>
 			<Hidden mdUp>
 				<div className={classes.pageFlow}>
 					<ImagesCarousel images={mainData.imageIds} />
-					<PriceCard prices={mainData.prices} desc={mainData.description} variants={demoVariants} />
+					<PriceCard name={nameSwitch()} prices={mainData.prices} desc={mainData.description} variants={mainData.variants} />
 					<Benefits />
 					<InsideTheBox insideTheBox={mainData.insideTheBox} />
 					{specSwitch()}

@@ -141,7 +141,7 @@ const useStyles = makeStyles(theme => ({
 		// },
 	},
 	oneColorText: {
-		color: theme.palette.primary.light,
+		color: theme.palette.common.black,
 		fontSize: 20,
 		fontWeight: theme.typography.fontWeightBold,
 	},
@@ -224,7 +224,7 @@ const BigTooltip = withStyles((theme) => ({
 	},
 }))(Tooltip)
 
-const PriceCard = ({ prices, desc, variants }) => {
+const PriceCard = ({ name, prices, desc, variants }) => {
 	const classes = useStyles()
 	const [favorited, setFavorited] = useState(false)
 	const colors = variants.map(variant => variant.color)
@@ -251,7 +251,7 @@ const PriceCard = ({ prices, desc, variants }) => {
 			<div className={classes.cardContent} >
 				<div className={classes.iconTextContainer}>
 					<Typography className={classes.cardName}>
-						Apple MacBook Air (Late 2020) Laptop - Apple M1 - 8GB - 256GB SSD - Apple Integrated 7-core GPU
+						{name}
 					</Typography>
 					<IconButton className={classes.favoriteButtonContainer}  classes={{root: classes.favoriteButton}} onMouseDown={event => event.stopPropagation()} onTouchStart={(event) => event.stopPropagation()} onClick={() => setFavorited(!favorited)}>
 						{favorited 

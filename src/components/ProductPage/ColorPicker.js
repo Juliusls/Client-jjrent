@@ -42,9 +42,6 @@ const useStyles = makeStyles({
 const ColorPicker = ({ variants, selectedColor, setSelectedColor }) => {
 	const classes = useStyles()
 
-
-	// const integer = '#24bd4d'
-
 	return (
 		<div className={classes.container}>
 			{variants.map(variant => (
