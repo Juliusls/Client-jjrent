@@ -16,6 +16,7 @@ const useStyles = makeStyles(theme => ({
 		borderRadius: 15,
 		backgroundColor: theme.palette.common.white,
 		boxShadow: theme.shadows[5],
+		position: 'relative',
 		'&:hover': {
 			backgroundColor: theme.palette.common.white,
 			boxShadow: theme.shadows[10],
@@ -35,9 +36,12 @@ const useStyles = makeStyles(theme => ({
 	},
 	favoriteButton: {
 		display: 'block',
-		marginLeft: 'auto',
 		padding: 0,
+		position: 'absolute',
+		top: 5,
+		right: 5,
 		color: theme.palette.grey[500],
+		zIndex: 2,
 		'&:hover': {
 			backgroundColor: theme.palette.common.white,
 			color: theme.palette.grey[900]
@@ -140,7 +144,7 @@ const useStyles = makeStyles(theme => ({
 	},
 }))
 
-const DeviceCard = ({ name, price, desc, image, id, category }) => {
+const DeviceCard = ({ name, price, desc, image, id, category, minRentPeriod }) => {
 
 
 	const classes = useStyles()
@@ -152,15 +156,27 @@ const DeviceCard = ({ name, price, desc, image, id, category }) => {
 		history.push(`/${category}/${id}`)
 	}
 
+	const priceTextSwitch = () => {
+		if (minRentPeriod === 4) {
+			return <Typography className={classes.cardAroundPrice}>from <Box display='inline' className={classes.cardPrice}> €{price}</Box> per month</Typography>
+		} else if (minRentPeriod === 3) {
+			return <Typography className={classes.cardAroundPrice}><Box display='inline' className={classes.cardPrice}> €{price}</Box> per month for 6 months</Typography>
+		} else if (minRentPeriod === 2) {
+			return <Typography className={classes.cardAroundPrice}><Box display='inline' className={classes.cardPrice}> €{price}</Box> per month for 3 months</Typography>
+		} else if (minRentPeriod === 1) {
+			return <Typography className={classes.cardAroundPrice}><Box display='inline' className={classes.cardPrice}> €{price}</Box> per month</Typography>
+		}
+	}
+
 	return (
 		<Card className={classes.card} style={{ height: 'inherit' }} >
+			<IconButton classes={{root: classes.favoriteButton}} onMouseDown={event => event.stopPropagation()} onTouchStart={(event) => event.stopPropagation()} onClick={() => setFavorited(!favorited)}>
+				{favorited 
+					? <FavoriteIcon className={classes.favoriteButtonIcon} />
+					: <FavoriteBorderIcon className={classes.notFavoritedIcon}/>
+				}
+			</IconButton>
 			<CardActionArea className={classes.cardActionArea} onClick={() => handleCardClick()}>
-				<IconButton className={classes.favoriteButtonOrder}  classes={{root: classes.favoriteButton}} onMouseDown={event => event.stopPropagation()} onTouchStart={(event) => event.stopPropagation()} onClick={() => setFavorited(!favorited)}>
-					{favorited 
-						? <FavoriteIcon className={classes.favoriteButtonIcon} />
-						: <FavoriteBorderIcon className={classes.notFavoritedIcon}/>
-					}
-				</IconButton>
 				<div className={classes.imageContainer}>
 					<Image publicId={image[0].publicId} cloudName={config.REACT_APP_CLOUD_NAME} className={classes.media} />
 				</div>
@@ -171,11 +187,7 @@ const DeviceCard = ({ name, price, desc, image, id, category }) => {
 					<Typography className={classes.cardDesc}>
 						{desc}
 					</Typography>
-					<Typography className={classes.cardAroundPrice}>
-						from 
-						<Box display='inline' className={classes.cardPrice}> €{price} </Box>
-						per month
-					</Typography>
+					{priceTextSwitch()}
 				</CardContent>
 			</CardActionArea>
 		</Card>

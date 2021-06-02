@@ -99,8 +99,6 @@ const ProductPage = () => {
 		}
 	}
 
-	console.log(mainData)
-
 	return (
 		<div className={classes.containerDiv} >
 			<Hidden smDown>

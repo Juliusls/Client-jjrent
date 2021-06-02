@@ -442,8 +442,6 @@ const AddProduct = () => {
 				imageIds: imagesArray 
 			}
 
-			console.log('inputconst', inputconst)
-
 			await addWatch({ variables: { input: inputconst } })
 			history.push('/admin/dashboard')
 

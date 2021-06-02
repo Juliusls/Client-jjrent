@@ -244,9 +244,20 @@ const PriceCard = ({ name, prices, desc, variants }) => {
 			return prices.onePrice
 		}
 	}
+	
+	const perMonthTextSwitch = () => {
+		if (minRentPeriod === 4) {
+			return '12 months'
+		} else if (minRentPeriod === 3) {
+			return '6 months'
+		} else if (minRentPeriod === 2) {
+			return '3 months'
+		} else if (minRentPeriod === 1) {
+			return '1 month'
+		}
+	}
 
 	return (
-		// <Card className={classes.card} style={{ height: '100%'}}>
 		<Card className={classes.card} >
 			<div className={classes.cardContent} >
 				<div className={classes.iconTextContainer}>
@@ -265,7 +276,7 @@ const PriceCard = ({ name, prices, desc, variants }) => {
 				</Typography>
 				<Typography className={classes.cardAroundPrice}>
 					<Box display='inline' className={classes.cardPrice}>€{priceSwitch()} </Box>
-						per month for 6 months, afterwards cancel anytime
+						per month for {perMonthTextSwitch()}, afterwards cancel anytime
 				</Typography>
 				<div className={classes.iconTextContainer}>
 					<LocalShippingOutlinedIcon />
@@ -304,6 +315,3 @@ const PriceCard = ({ name, prices, desc, variants }) => {
 }
 
 export default PriceCard
-
-
-// At the end of your minimum rental period, you can keep on renting for the same price or cancel your subscription by sending the product back for free. Switching to a longer rental plan to lower your monthly payments is also possible at any time.

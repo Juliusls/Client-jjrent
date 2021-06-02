@@ -1,5 +1,5 @@
 import React from 'react'
-import { makeStyles, Typography, Toolbar, AppBar, Divider, Button, Link, IconButton } from '@material-ui/core'
+import { makeStyles, Toolbar, AppBar, Divider, Button, Fab, Typography } from '@material-ui/core'
 import FacebookIcon from '@material-ui/icons/Facebook'
 import InstagramIcon from '@material-ui/icons/Instagram'
 
@@ -14,105 +14,131 @@ const useStyles = makeStyles(theme => ({
 		marginBottom: 50,
 		zIndex: 1
 	},
-	getInTouchText: {
-		fontSize: 15,
-		margin: 10,
-		color: theme.palette.common.black,
-		align: 'center',
-		textAlign: 'center'
+	firstToolbar: {
+		display: 'flex',
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'strech',
+		marginTop: 15,
+		marginBottom: 15,
+		[theme.breakpoints.down('sm')]: {
+			flexDirection: 'column',
+		},
 	},
-	getInTouch: {
+	primaryInfoDiv: {
+		display: 'flex',
+		flexDirection: 'row',
+		[theme.breakpoints.down('xs')]: {
+			flexDirection: 'column',
+		},
+	},
+	secondaryInfoDiv: {
+		display: 'flex',
+		flexDirection: 'row',
+		[theme.breakpoints.down('sm')]: {
+			paddingTop: 15
+		},
+		[theme.breakpoints.down('xs')]: {
+			flexDirection: 'column',
+			paddingTop: 30
+		},
+	},
+	toolbarPadding: {
+		[theme.breakpoints.down('xs')]: {
+			paddingRight: 0,
+			paddingLeft: 0,
+		},
+	},
+	secondToolbar: {
+		display: 'flex',
+		flexDirection: 'column',
+		justifyContent: 'center',
+		alignItems: 'strech',
+		marginTop: 15,
+	},
+	getInTouchComponent: {
+		display: 'flex',
+		flexDirection: 'row'
+	},
+	otherButton: {
 		color: theme.palette.primary.main,
 		backgroundColor: theme.palette.common.white,
-		borderRadius: 25,
+		borderRadius: 30,
 		paddingTop: 10,
 		paddingBottom: 10,
 		paddingRight: 20,
 		paddingLeft: 20,
 		fontSize: 15,
-		marginLeft: 20,
+		margin: 10,
 		fontWeight: 'bold',
-		boxShadow: theme.shadows[5],
+		boxShadow: 'none',
+		'&:hover': {
+			backgroundColor: theme.palette.common.white,
+			boxShadow: theme.shadows[5],
+		},
+		[theme.breakpoints.down('md')]: {
+			margin: 2,
+			paddingTop: 5,
+			paddingBottom: 5,
+			paddingRight: 10,
+			paddingLeft: 10,
+		},
+		[theme.breakpoints.down('sm')]: {
+			margin: 10,
+		},
+	},
+	getInTouchButton: {
+		color: theme.palette.primary.main,
+		backgroundColor: theme.palette.common.white,
+		borderRadius: 30,
+		height: 56,
+		paddingTop: 10,
+		paddingBottom: 10,
+		paddingRight: 20,
+		paddingLeft: 20,
+		fontSize: 15,
+		fontWeight: 'bold',
+		boxShadow: theme.shadows[3],
+		marginRight: 16,
 		'&:hover': {
 			backgroundColor: theme.palette.common.white,
 			boxShadow: theme.shadows[10],
 		},
+		[theme.breakpoints.down('xs')]: {
+			marginRight: 8,
+		},
+	},
+	facebookIcon: {
+		backgroundColor: theme.palette.common.white,
+		fontSize: 30,
+		boxShadow: theme.shadows[3],
+		marginRight: 16,
+		'&:hover': {
+			backgroundColor: theme.palette.common.white,
+			boxShadow: theme.shadows[10],
+		},
+		[theme.breakpoints.down('xs')]: {
+			marginRight: 8,
+		},
+	},
+	instagramIcon: {
+		backgroundColor: theme.palette.common.white,
+		fontSize: 30,
+		boxShadow: theme.shadows[3],
+		'&:hover': {
+			backgroundColor: theme.palette.common.white,
+			boxShadow: theme.shadows[10],
+		}
 	},
 	iconSocialMedia: {
-		color: theme.palette.grey[800],
-		marginLeft: 15,
-		marginRight: 15,
-		'&:hover': {
-			color: theme.palette.common.black
-		},
-		[theme.breakpoints.down('sm')]: {
-			marginLeft: 10,
-			marginRight: 10,
-		},
-	},
-	firstToolbar: {
-		display: 'flex',
-		justifyContent: 'center',
-		alignItems: 'strech',
-		marginTop: 15,
-		marginBottom: 15,
-		[theme.breakpoints.down('xs')]: {
-			flexDirection: 'column',
-			marginBottom: 20,
-		},
-	},
-	secondToolbar: {
-		display: 'flex',
-		justifyContent: 'space-between',
-		alignItems: 'strech',
-		marginTop: 15,
-		marginBottom: 15,
-		[theme.breakpoints.down('xs')]: {
-			flexDirection: 'column'
-		},
-	},
-	thirdToolbar: {
-		display: 'flex',
-		justifyContent: 'space-between',
-		alignItems: 'strech',
-		marginTop: 15,
-		marginBottom: 15,
-		marginLeft: 0,
-		[theme.breakpoints.down('sm')]: {
-			flexDirection: 'column'
-		},
-	},
-	menuText: {
-		color: theme.palette.grey[900],
-		fontSize: 20,
-		margin: 15
-	},
-	bottomText: {
-		color: theme.palette.grey[700],
-		fontSize: 20,
-		margin: 15
+		fontSize: 30,
+		color: theme.palette.primary.main
 	},
 	copyrightText: {
 		color: theme.palette.grey[700],
 		fontSize: 16,
-		margin: 10
+		marginTop: 20
 	},
-	infoText: {
-		fontSize: 16,
-		color: theme.palette.common.black
-	},
-	iconSocialMediaContainer: {
-		'&:hover': {
-			backgroundColor: theme.palette.common.white,
-		}
-	},
-	privacyTextContainer: {
-		[theme.breakpoints.down('sm')]: {
-			display: 'flex',
-			flexDirection: 'column',
-			alignItems: 'center'
-		},
-	}
 }))
 
 
@@ -121,46 +147,42 @@ const Footer = () => {
 	return (
 		<AppBar position="relative" color="primary" className={classes.appBar}>
 			<Divider light/>
-			<Toolbar className={classes.firstToolbar}>
-				<Typography className={classes.getInTouchText}>
-					Do you have a question or just need support?
-				</Typography>
-				<Button variant="contained" className={classes.getInTouch} >
-					Get in touch
-				</Button>
-			</Toolbar>
-			<Divider light/>
-			<Toolbar className={classes.secondToolbar}>
-				<Link href="#" onClick={() => console.log('Privacy Policy clicked')} className={classes.menuText}>
-					FAQ
-				</Link>
-				<Link href="#" onClick={() => console.log('Privacy Policy clicked')} className={classes.menuText}>
-					How it works
-				</Link>
-				<Link href="#" onClick={() => console.log('Privacy Policy clicked')} className={classes.menuText}>
-					About
-				</Link>
-				<Link href="#" onClick={() => console.log('Privacy Policy clicked')} className={classes.menuText}>
-				Contacts
-				</Link>
-			</Toolbar>
-			<Divider light/>
-			<Toolbar className={classes.thirdToolbar}>
-				<div className={classes.privacyTextContainer}>
-					<Link href="#" onClick={() => console.log('Privacy Policy clicked')} className={classes.bottomText}>
-						Privacy Policy
-					</Link>
-					<Link href="#" onClick={() => console.log('Terms and Conditions clicked')} className={classes.bottomText}>
-						Terms and Conditions
-					</Link>
+			<Toolbar className={classes.firstToolbar} classes={{ regular: classes.toolbarPadding}}>
+				<div className={classes.primaryInfoDiv}>
+					<Button variant="contained" className={classes.otherButton} onClick={() => console.log('clicked')}>
+						FAQ
+					</Button>
+					<Button variant="contained" className={classes.otherButton} onClick={() => console.log('clicked')}>
+						How It Works
+					</Button>
+					<Button variant="contained" className={classes.otherButton} onClick={() => console.log('clicked')}>
+						About
+					</Button>
+					<Button variant="contained" className={classes.otherButton} onClick={() => console.log('clicked')}>
+						Contact Us
+					</Button>
 				</div>
-				<div>
-					<IconButton className={classes.iconSocialMediaContainer}>
-						<FacebookIcon style={{ fontSize: 30 }} className={classes.iconSocialMedia} />
-					</IconButton>
-					<IconButton className={classes.iconSocialMediaContainer}>
-						<InstagramIcon style={{ fontSize: 30 }} className={classes.iconSocialMedia} />
-					</IconButton>
+				<div className={classes.secondaryInfoDiv}>
+					<Button variant="contained" className={classes.otherButton} onClick={() => console.log('clicked')}>
+						Privacy Policy
+					</Button>
+					<Button variant="contained" className={classes.otherButton} onClick={() => console.log('clicked')}>
+						Terms and Conditions
+					</Button>
+				</div>
+			</Toolbar>
+			<Divider light/>
+			<Toolbar className={classes.secondToolbar} classes={{ regular: classes.toolbarPadding}}>
+				<div className={classes.getInTouchComponent}>
+					<Button variant="contained" className={classes.getInTouchButton}>
+						Get in touch
+					</Button>
+					<Fab className={classes.facebookIcon}>
+						<FacebookIcon className={classes.iconSocialMedia} />
+					</Fab>
+					<Fab className={classes.instagramIcon}>
+						<InstagramIcon className={classes.iconSocialMedia} />
+					</Fab>
 				</div>
 				<Typography className={classes.copyrightText}>
 					{'JJ-Rent © '}

@@ -167,19 +167,19 @@ const Products = ({ name }) => {
 		case name = 'Smartphones':
 			return mainData.map(phone => (
 				<Grid item xs={12} sm={6} md={4} lg={4} key={phone.id}>
-					<DeviceCard name={phone.phoneName} price={priceSwitch(phone)} desc={phone.description} image={phone.imageIds.filter(image => image.imageName.includes('main_thumb_1'))} id={phone.id} category='smartphone'/>
+					<DeviceCard name={phone.phoneName} price={priceSwitch(phone)} desc={phone.description} image={phone.imageIds.filter(image => image.imageName.includes('main_thumb_1'))} id={phone.id} category='smartphone' minRentPeriod={minRentPeriod}/>
 				</Grid>
 			))
 		case name = 'Laptops':
 			return mainData.map(laptop => (
 				<Grid item xs={12} sm={6} md={4} lg={4} key={laptop.id}>
-					<DeviceCard name={laptop.laptopName} price={priceSwitch(laptop)} desc={laptop.description} image={laptop.imageIds.filter(image => image.imageName.includes('main_thumb_1'))} id={laptop.id} category='laptop'/>
+					<DeviceCard name={laptop.laptopName} price={priceSwitch(laptop)} desc={laptop.description} image={laptop.imageIds.filter(image => image.imageName.includes('main_thumb_1'))} id={laptop.id} category='laptop' minRentPeriod={minRentPeriod}/>
 				</Grid>
 			))
 		case name = 'Smartwatches':
 			return mainData.map(watch => (
 				<Grid item xs={12} sm={6} md={4} lg={4} key={watch.id}>
-					<DeviceCard name={watch.watchName} price={priceSwitch(watch)} desc={watch.description} image={watch.imageIds.filter(image => image.imageName.includes('main_thumb_1'))} id={watch.id} category='smartwatch'/>
+					<DeviceCard name={watch.watchName} price={priceSwitch(watch)} desc={watch.description} image={watch.imageIds.filter(image => image.imageName.includes('main_thumb_1'))} id={watch.id} category='smartwatch' minRentPeriod={minRentPeriod}/>
 				</Grid>
 			))	
 		default:

@@ -414,7 +414,6 @@ const AddLaptop = () => {
 				imageIds: imagesArray 
 			}
 
-			console.log('inputconst', inputconst)
 
 			await addLaptop({ variables: { input: inputconst } })
 			history.push('/admin/dashboard')
