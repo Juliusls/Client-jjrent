@@ -29,7 +29,7 @@ const useStyles = makeStyles({
 })
 
 const initialValues = {
-	laptopName: '',
+	name: '',
 	description: '',
 	brand: '',
 	onePrice: 0,
@@ -67,11 +67,11 @@ const NewProductForm = ({ values, errors, touched, handleChange, handleBlur, han
 						component={TextField}
 						onChange={handleChange}
 						onBlur={handleBlur}
-						value={values.laptopName}
-						error={touched.laptopName && Boolean(errors.laptopName)}
-						helperText={touched.laptopName && errors.laptopName}
-						id="laptopName"
-						name="laptopName"
+						value={values.name}
+						error={touched.name && Boolean(errors.name)}
+						helperText={touched.name && errors.name}
+						id="name"
+						name="name"
 						label="Laptop Name"
 						variant="outlined"
 						fullWidth
@@ -393,7 +393,7 @@ const AddLaptop = () => {
 			))
 			
 			const inputconst = { 
-				laptopName: values.laptopName, 
+				name: values.name, 
 				description: values.description,
 				brand: values.brand,
 				insideTheBox: values.insideTheBox,
@@ -448,4 +448,5 @@ const AddLaptop = () => {
 
 export default AddLaptop
 
+// TODO ADD CATEGORY
 // TODO yup validation

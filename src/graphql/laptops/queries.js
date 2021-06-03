@@ -5,7 +5,8 @@ export const FIND_LAPTOP = gql`
 	query findLaptop($id: String!) {
 		findLaptop(id: $id) {
 			id
-			laptopName
+			name
+			category
 			description
 			brand
 			insideTheBox
@@ -43,7 +44,8 @@ export const ALL_LAPTOPS = gql`
 	query {
 		allLaptops {
 			id
-			laptopName
+			name
+			category
 			description
 			brand
 			insideTheBox
@@ -81,7 +83,8 @@ export const ALL_LAPTOPS_MINI = gql`
 	query {
 		allLaptops {
 			id
-			laptopName
+			name
+			category
 			description
 			prices {
 				twelvePrice
@@ -99,7 +102,8 @@ export const ALL_LAPTOPS_MIDI = gql`
 	query {
 		allLaptops {
 			id
-			laptopName
+			name
+			category
 			description
 			brand
 			prices {

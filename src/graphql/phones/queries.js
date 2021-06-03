@@ -4,7 +4,8 @@ export const FIND_PHONE = gql`
   query findPhone($id: String!) {
     findPhone(id: $id) {
 		id
-		phoneName
+		name
+		category
 		description
 		brand
 		insideTheBox
@@ -42,7 +43,8 @@ export const ALL_PHONES = gql`
 	query {
 		allPhones  {
 			id
-			phoneName
+			name
+			category
 			description
 			brand
 			insideTheBox
@@ -80,7 +82,8 @@ export const ALL_PHONES_MINI = gql`
 	query {
 		allPhones  {
 			id
-			phoneName
+			name
+			category
 			description
 			prices {
 				twelvePrice
@@ -97,7 +100,8 @@ export const ALL_PHONES_MIDI = gql`
 	query {
 		allPhones  {
 			id
-			phoneName
+			name
+			category
 			description
 			brand
 			prices {

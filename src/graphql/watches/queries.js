@@ -4,7 +4,8 @@ export const FIND_WATCH = gql`
 query findWatch($id: String!) {
 	findWatch(id: $id) {
 		id
-		watchName
+		name
+		category
 		description
 		brand
 		insideTheBox
@@ -44,7 +45,8 @@ export const ALL_WATCHES = gql`
 	query {
 		allWatches {    
 			id
-			watchName
+			name
+			category
 			description
 			brand
 			insideTheBox
@@ -84,7 +86,8 @@ export const ALL_WATCHES_MINI = gql`
 	query {
 		allWatches {    
 			id
-			watchName
+			name
+			category
 			description
 			prices {
 				twelvePrice
@@ -101,7 +104,8 @@ export const ALL_WATCHES_MIDI = gql`
 	query {
 		allWatches {    
 			id
-			watchName
+			name
+			category
 			description
 			brand
 			prices {

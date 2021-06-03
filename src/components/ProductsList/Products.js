@@ -94,7 +94,7 @@ const useStyles = makeStyles(theme => ({
 let mainData = null
 let dataForMinMAx = null
 
-const Products = ({ name }) => {
+const Products = ({ category }) => {
 	const classes = useStyles()
 	const phoneData = useQuery(ALL_PHONES_MIDI)
 	const laptopData = useQuery(ALL_LAPTOPS_MIDI)
@@ -109,13 +109,13 @@ const Products = ({ name }) => {
 
 	if (phoneData.loading || laptopData.loading || watchData.loading) return <p>Loading ...</p>
 
-	if (name === 'Smartphones') {
+	if (category === 'Smartphones') {
 		mainData = phoneData.data.allPhones
 		dataForMinMAx = phoneData.data.allPhones
-	} else if (name === 'Laptops') {
+	} else if (category === 'Laptops') {
 		mainData = laptopData.data.allLaptops
 		dataForMinMAx = laptopData.data.allLaptops
-	} else if (name === 'Smartwatches') {
+	} else if (category === 'Smartwatches') {
 		mainData = watchData.data.allWatches
 		dataForMinMAx = watchData.data.allWatches
 	}
@@ -159,27 +159,36 @@ const Products = ({ name }) => {
 		mainData
 	}
 
+	// Initial min max prices
+	if (pricesArray.length === 0) {
+		setPricesArray([
+			Math.min(...dataForMinMAx.map(item => priceSwitch(item))), 
+			Math.max(...dataForMinMAx.map(item => priceSwitch(item)))
+		])
+	}
+
 	// filter for MONTLYPRICE
 	mainData = mainData.slice().filter(item => pricesArray[0] <= priceSwitch(item) && priceSwitch(item) <= pricesArray[1])
 
+
 	const dataValues = () => {
-		switch (name) {
-		case name = 'Smartphones':
+		switch (category) {
+		case category = 'Smartphones':
 			return mainData.map(phone => (
 				<Grid item xs={12} sm={6} md={4} lg={4} key={phone.id}>
-					<DeviceCard name={phone.phoneName} price={priceSwitch(phone)} desc={phone.description} image={phone.imageIds.filter(image => image.imageName.includes('main_thumb_1'))} id={phone.id} category='smartphone' minRentPeriod={minRentPeriod}/>
+					<DeviceCard name={phone.name} price={priceSwitch(phone)} desc={phone.description} image={phone.imageIds.filter(image => image.imageName.includes('main_thumb_1'))} id={phone.id} category='smartphone' minRentPeriod={minRentPeriod}/>
 				</Grid>
 			))
-		case name = 'Laptops':
+		case category = 'Laptops':
 			return mainData.map(laptop => (
 				<Grid item xs={12} sm={6} md={4} lg={4} key={laptop.id}>
-					<DeviceCard name={laptop.laptopName} price={priceSwitch(laptop)} desc={laptop.description} image={laptop.imageIds.filter(image => image.imageName.includes('main_thumb_1'))} id={laptop.id} category='laptop' minRentPeriod={minRentPeriod}/>
+					<DeviceCard name={laptop.name} price={priceSwitch(laptop)} desc={laptop.description} image={laptop.imageIds.filter(image => image.imageName.includes('main_thumb_1'))} id={laptop.id} category='laptop' minRentPeriod={minRentPeriod}/>
 				</Grid>
 			))
-		case name = 'Smartwatches':
+		case category = 'Smartwatches':
 			return mainData.map(watch => (
 				<Grid item xs={12} sm={6} md={4} lg={4} key={watch.id}>
-					<DeviceCard name={watch.watchName} price={priceSwitch(watch)} desc={watch.description} image={watch.imageIds.filter(image => image.imageName.includes('main_thumb_1'))} id={watch.id} category='smartwatch' minRentPeriod={minRentPeriod}/>
+					<DeviceCard name={watch.name} price={priceSwitch(watch)} desc={watch.description} image={watch.imageIds.filter(image => image.imageName.includes('main_thumb_1'))} id={watch.id} category='smartwatch' minRentPeriod={minRentPeriod}/>
 				</Grid>
 			))	
 		default:
@@ -194,7 +203,17 @@ const Products = ({ name }) => {
 			<div className={classes.flexboxContainer}>
 				<Hidden xsDown>
 					<div className={classes.firstGridContaner}>
-						<Filters setBrandsArray={setBrandsArray} brandsList={brandsList} sortBy={sortBy} setSortBy={setSortBy} minRentPeriod={minRentPeriod} setMinRentPeriod={setMinRentPeriod} setPricesArray={setPricesArray} minPrice={Math.min(...dataForMinMAx.map(item => priceSwitch(item)))} maxPrice={Math.max(...dataForMinMAx.map(item => priceSwitch(item)))}/>
+						<Filters 
+							setBrandsArray={setBrandsArray} 
+							brandsList={brandsList} 
+							sortBy={sortBy} 
+							setSortBy={setSortBy} 
+							minRentPeriod={minRentPeriod} 
+							setMinRentPeriod={setMinRentPeriod} 
+							setPricesArray={setPricesArray} 
+							minPrice={Math.min(...dataForMinMAx.map(item => priceSwitch(item)))} 
+							maxPrice={Math.max(...dataForMinMAx.map(item => priceSwitch(item)))}
+						/>
 					</div>
 					<Hidden lgUp>
 						<Divider classes={{ root: classes.dividerSecondary }}/>
@@ -206,7 +225,18 @@ const Products = ({ name }) => {
 				<Grid container spacing={2} className={classes.secondGridContaner}>
 					{dataValues()}
 				</Grid>
-				<TopFilter topMenuOpne={topMenuOpne} setTopMenuOpen={setTopMenuOpen} brandsList={brandsList} sortBy={sortBy} setSortBy={setSortBy} minRentPeriod={minRentPeriod} setMinRentPeriod={setMinRentPeriod} setPricesArray={setPricesArray} minPrice={Math.min(...dataForMinMAx.map(item => priceSwitch(item)))} maxPrice={Math.max(...dataForMinMAx.map(item => priceSwitch(item)))} />
+				<TopFilter
+					topMenuOpne={topMenuOpne} setTopMenuOpen={setTopMenuOpen} 
+					setBrandsArray={setBrandsArray} 
+					brandsList={brandsList}
+					sortBy={sortBy} 
+					setSortBy={setSortBy} 
+					minRentPeriod={minRentPeriod} 
+					setMinRentPeriod={setMinRentPeriod} 
+					setPricesArray={setPricesArray} 
+					minPrice={Math.min(...dataForMinMAx.map(item => priceSwitch(item)))} 
+					maxPrice={Math.max(...dataForMinMAx.map(item => priceSwitch(item)))}
+				/>
 			</div>
 		</div>
 	)

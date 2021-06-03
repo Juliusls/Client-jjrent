@@ -89,11 +89,11 @@ const ProductPage = () => {
 	const nameSwitch = () => {
 		switch (category) {
 		case 'smartphone':
-			return mainData.phoneName
+			return mainData.name
 		case 'laptop':
-			return mainData.laptopName
+			return mainData.name
 		case 'smartwatch':
-			return mainData.watchName
+			return mainData.name
 		default:
 			break
 		}

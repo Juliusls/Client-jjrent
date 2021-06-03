@@ -89,23 +89,23 @@ const App = () => {
 				<Layout>
 					<Route exact path='/'>
 						<Jumbotron />
-						<Recommended name='Recommended'/>
+						<Recommended category='Recommended'/>
 						<HowItWorksComponent data={howItWorksData}/>
-						<OneCategory name='Smartphones' data={phonesResult.data.allPhones}/>
-						<OneCategory name='Laptops' data={laptopsResult.data.allLaptops}/>
-						<OneCategory name='Smartwatches' data={watchesResult.data.allWatches}/>
+						<OneCategory category='Smartphones' data={phonesResult.data.allPhones}/>
+						<OneCategory category='Laptops' data={laptopsResult.data.allLaptops}/>
+						<OneCategory category='Smartwatches' data={watchesResult.data.allWatches}/>
 					</Route>
 					<Route exact path='/laptops'>
-						<Products name='Laptops'/>
+						<Products category='Laptops'/>
 					</Route>
 					<Route exact path='/smartphones'>
-						<Products name='Smartphones'/>
+						<Products category='Smartphones'/>
 					</Route>
 					<Route exact path='/smartwatches'>
-						<Products name='Smartwatches'/>
+						<Products category='Smartwatches'/>
 					</Route>
 					<Route exact path='/:category/:id'>
-						<ProductPage/>
+						<ProductPage />
 					</Route>
 					<Route exact path='/howitworks'>
 						<HowItWorks />

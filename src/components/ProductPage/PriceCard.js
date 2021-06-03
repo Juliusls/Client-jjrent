@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { makeStyles, Card, Typography, Box, IconButton, Button, Tooltip, withStyles, Fade, Hidden } from '@material-ui/core/'
+import { makeStyles, Card, Typography, IconButton, Button, Tooltip, Hidden, Fade, withStyles } from '@material-ui/core/'
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import LocalShippingOutlinedIcon from '@material-ui/icons/LocalShippingOutlined'
@@ -174,11 +174,9 @@ const useStyles = makeStyles(theme => ({
 	iconTextContainer: {
 		display: 'flex'
 	},
-	arrow: {
+	tooltip: {
+		opacity: 0.85,
 		color: theme.palette.common.black,
-	},
-	popper: {
-		opacity: 0.85
 	},
 	bottomButtonSubscribe: {
 		color: theme.palette.common.white,
@@ -275,7 +273,7 @@ const PriceCard = ({ name, prices, desc, variants }) => {
 					{desc}
 				</Typography>
 				<Typography className={classes.cardAroundPrice}>
-					<Box display='inline' className={classes.cardPrice}>€{priceSwitch()} </Box>
+					<span display='inline' className={classes.cardPrice}>€{priceSwitch()} </span>
 						per month for {perMonthTextSwitch()}, afterwards cancel anytime
 				</Typography>
 				<div className={classes.iconTextContainer}>
@@ -288,19 +286,19 @@ const PriceCard = ({ name, prices, desc, variants }) => {
 					{'Select your '}
 					<BigTooltip 
 						arrow
-						classes={{ arrow: classes.arrow, popper: classes.popper }}
+						classes={{ tooltip: classes.tooltip }}
 						TransitionComponent={Fade}
 						TransitionProps={{ timeout: 600 }}
 						placement="top"
 						title='At the end of your minimum rental period, you can keep on renting for the same price or cancel your subscription by sending the product back for free. Switching to a longer rental plan to lower your monthly payments is also possible at any time.'
 					>
-						<Box display='inline' className={classes.minimumText}>minimum rental period</Box>
+						<span display='inline' className={classes.minimumText}>minimum rental period</span>
 					</BigTooltip>
 				</Typography>
 				<MinimumRental setMinRentPeriod={setMinRentPeriod} />
 				<Typography className={classes.textColor}>
 						Selected color:
-					<Box display='inline' className={classes.oneColorText}> {selectedColor}</Box>
+					<span display='inline' className={classes.oneColorText}> {selectedColor}</span>
 				</Typography>
 				<ColorPicker variants={variants} selectedColor={selectedColor} setSelectedColor={setSelectedColor}/>
 				<Hidden smDown>

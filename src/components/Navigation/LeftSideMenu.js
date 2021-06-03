@@ -7,6 +7,7 @@ import { makeStyles, Drawer, List, ListItem, ListItemText, Divider, ListItemIcon
 import PhoneIphoneIcon from '@material-ui/icons/PhoneIphone'
 import LaptopMacIcon from '@material-ui/icons/LaptopMac'
 import WatchIcon from '@material-ui/icons/Watch'
+import HelpOutlineOutlinedIcon from '@material-ui/icons/HelpOutlineOutlined'
 
 const useStyles = makeStyles(theme => ({
 	list: {
@@ -18,7 +19,12 @@ const useStyles = makeStyles(theme => ({
 		color: theme.palette.primary.main,
 	},
 	iconStyle: {
-		// color: theme.palette.primary.light,
+		width: 35,
+		height: 35,
+		color: theme.palette.grey[800]
+	},
+	iconSize: {
+		fontSize: 30
 	}
 	
 }))
@@ -41,26 +47,29 @@ const LeftSideMenu = ({ leftSideMenuIsOpen, setLeftSideMenuIsOpen }) => {
 				onKeyDown={() => setLeftSideMenuIsOpen(false)}
 			>
 				<List>
-					<ListItem component={ Link } to='/smartPhones' button style={{ textDecoration: 'none' }}>
+					<ListItem component={ Link } to='/smartphones' button style={{ textDecoration: 'none' }}>
 						<ListItemIcon className={classes.iconStyle}>
-							<PhoneIphoneIcon fontSize="medium" />
+							<PhoneIphoneIcon className={classes.iconSize} />
 						</ListItemIcon>
-						<ListItemText primary="SmartPhones" classes={{ primary: classes.textList }}/>
+						<ListItemText primary="Smartphones" classes={{ primary: classes.textList }}/>
 					</ListItem>
 					<ListItem component={ Link } to='/laptops' button style={{ textDecoration: 'none' }}>
 						<ListItemIcon className={classes.iconStyle}>
-							<LaptopMacIcon fontSize="medium" />
+							<LaptopMacIcon className={classes.iconSize} />
 						</ListItemIcon>
 						<ListItemText primary="Laptops" classes={{ primary: classes.textList }}/>
 					</ListItem>
 					<ListItem component={ Link } to='/smartwatches' button style={{ textDecoration: 'none' }}>
 						<ListItemIcon className={classes.iconStyle}>
-							<WatchIcon fontSize="medium" />
+							<WatchIcon className={classes.iconSize} />
 						</ListItemIcon>
 						<ListItemText primary="Smartwatches" classes={{ primary: classes.textList }}/>
 					</ListItem>
 					<Divider light/>
 					<ListItem component={ Link } to='/howitworks' button style={{ textDecoration: 'none' }}>
+						<ListItemIcon className={classes.iconStyle}>
+							<HelpOutlineOutlinedIcon className={classes.iconSize} />
+						</ListItemIcon>
 						<ListItemText primary="How it works" classes={{ primary: classes.textList }}/>
 					</ListItem>
 				</List>

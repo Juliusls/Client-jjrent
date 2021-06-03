@@ -58,27 +58,29 @@ const useStyles = makeStyles(theme => ({
 	},
 }))
 
-const OneCategory = ({ name, data }) => {
+const OneCategory = ({ category, data }) => {
 	const classes = useStyles()
 
+	// console.log(data)
+
 	const dataValues = () => {
-		switch (name) {
-		case name = 'Smartphones':
+		switch (category) {
+		case category = 'Smartphones':
 			return data.map(phone => (
 				<Grid item xs={12} sm={6} md={3} lg={3} key={phone.id} style={{ height: '100%' }}>
-					<DeviceCard name={phone.phoneName} price={phone.prices.twelvePrice} desc={phone.description} image={phone.imageIds.filter(image => image.imageName.includes('main_thumb_1'))} id={phone.id} category='smartphone'/>
+					<DeviceCard name={phone.name} price={phone.prices.twelvePrice} desc={phone.description} image={phone.imageIds.filter(image => image.imageName.includes('main_thumb_1'))} id={phone.id} category='smartphone'/>
 				</Grid>
 			))
-		case name = 'Laptops':
+		case category = 'Laptops':
 			return data.map(laptop => (
 				<Grid item xs={12} sm={6} md={3} lg={3} key={laptop.id} style={{ height: '100%' }}>
-					<DeviceCard name={laptop.laptopName} price={laptop.prices.twelvePrice} desc={laptop.description} image={laptop.imageIds.filter(image => image.imageName.includes('main_thumb_1'))} id={laptop.id} category='laptop'/>
+					<DeviceCard name={laptop.name} price={laptop.prices.twelvePrice} desc={laptop.description} image={laptop.imageIds.filter(image => image.imageName.includes('main_thumb_1'))} id={laptop.id} category='laptop'/>
 				</Grid>
 			))
-		case name = 'Smartwatches':
+		case category = 'Smartwatches':
 			return data.map(watch => (
 				<Grid item xs={12} sm={6} md={3} lg={3} key={watch.id} style={{ height: '100%' }}>
-					<DeviceCard name={watch.watchName} price={watch.prices.twelvePrice} desc={watch.description} image={watch.imageIds.filter(image => image.imageName.includes('main_thumb_1'))} id={watch.id} category='smartwatch'/>
+					<DeviceCard name={watch.name} price={watch.prices.twelvePrice} desc={watch.description} image={watch.imageIds.filter(image => image.imageName.includes('main_thumb_1'))} id={watch.id} category='smartwatch'/>
 				</Grid>
 			))	
 		default:
@@ -88,11 +90,11 @@ const OneCategory = ({ name, data }) => {
 
 	return (
 		<div className={classes.root} >
-			<Typography variant='h4' className={classes.categoryName}>{name}</Typography>
+			<Typography variant='h4' className={classes.categoryName}>{category}</Typography>
 			<Grid container spacing={2} className={classes.containerGrid} >
 				{dataValues()}
 			</Grid>
-			<Button variant="contained" className={classes.viewAllButton} component={ Link } to={`/${name.toLowerCase()}`}>View all</Button>
+			<Button variant="contained" className={classes.viewAllButton} component={ Link } to={`/${category.toLowerCase()}`}>View all</Button>
 		</div>
 	)
 }

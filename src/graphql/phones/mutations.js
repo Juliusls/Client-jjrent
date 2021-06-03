@@ -4,7 +4,8 @@ export const ADD_PHONE = gql`
 	mutation addLaptop($input: LaptopInput!) {
 		addLaptop(input: $input) {
 			id
-			laptopName
+			name
+			category
 			description
 			brand
 			insideTheBox

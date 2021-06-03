@@ -60,7 +60,7 @@ const useStyles = makeStyles(theme => ({
 	buttonSearch: {
 		color: theme.palette.primary.main,
 		backgroundColor: 'white',
-		boxShadow: 'none',
+		boxShadow: theme.shadows[5],
 		position: 'fixed',
 		bottom: 10,
 		left: 10,
@@ -163,10 +163,10 @@ const NavBar = () => {
 							<Fab color="primary" aria-label="add" className={classes.buttonCart} onClick={() => setSearchFieldIsOpen(true)}>
 								<SearchOutlinedIcon className={classes.iconsSize}/>
 							</Fab>
+							<Fab color="primary" aria-label="add" className={classes.buttonCart} component={ Link } to='/howitworks'>
+								<HelpOutlineOutlinedIcon className={classes.iconsSize}/>
+							</Fab>
 						</Hidden>
-						<Fab color="primary" aria-label="add" className={classes.buttonCart} component={ Link } to='/howitworks'>
-							<HelpOutlineOutlinedIcon className={classes.iconsSize}/>
-						</Fab>
 						<Fab color="primary" aria-label="add" className={classes.buttonCart} onClick={handleCartClick}>
 							<ShoppingCartOutlinedIcon className={classes.iconsSize}/>
 						</Fab>

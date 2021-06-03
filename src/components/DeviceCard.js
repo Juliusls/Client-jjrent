@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { makeStyles, Card, CardActionArea, CardContent, Typography, Box, IconButton } from '@material-ui/core/'
+import { makeStyles, Card, CardActionArea, CardContent, Typography, IconButton } from '@material-ui/core/'
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import { Image } from 'cloudinary-react'
@@ -146,7 +146,6 @@ const useStyles = makeStyles(theme => ({
 
 const DeviceCard = ({ name, price, desc, image, id, category, minRentPeriod }) => {
 
-
 	const classes = useStyles()
 	const history = useHistory()
 
@@ -158,13 +157,15 @@ const DeviceCard = ({ name, price, desc, image, id, category, minRentPeriod }) =
 
 	const priceTextSwitch = () => {
 		if (minRentPeriod === 4) {
-			return <Typography className={classes.cardAroundPrice}>from <Box display='inline' className={classes.cardPrice}> €{price}</Box> per month</Typography>
+			return <Typography className={classes.cardAroundPrice}>from <span display='inline' className={classes.cardPrice}> €{price}</span> per month</Typography>
 		} else if (minRentPeriod === 3) {
-			return <Typography className={classes.cardAroundPrice}><Box display='inline' className={classes.cardPrice}> €{price}</Box> per month for 6 months</Typography>
+			return <Typography className={classes.cardAroundPrice}><span display='inline' className={classes.cardPrice}> €{price}</span> per month for 6 months</Typography>
 		} else if (minRentPeriod === 2) {
-			return <Typography className={classes.cardAroundPrice}><Box display='inline' className={classes.cardPrice}> €{price}</Box> per month for 3 months</Typography>
+			return <Typography className={classes.cardAroundPrice}><span display='inline' className={classes.cardPrice}> €{price}</span> per month for 3 months</Typography>
 		} else if (minRentPeriod === 1) {
-			return <Typography className={classes.cardAroundPrice}><Box display='inline' className={classes.cardPrice}> €{price}</Box> per month</Typography>
+			return <Typography className={classes.cardAroundPrice}><span display='inline' className={classes.cardPrice}> €{price}</span> per month</Typography>
+		} else {
+			return <Typography className={classes.cardAroundPrice}><span display='inline' className={classes.cardPrice}> €{price}</span> per month</Typography>
 		}
 	}
 

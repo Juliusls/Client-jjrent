@@ -5,16 +5,27 @@ import { Drawer } from '@material-ui/core/'
 import Filters from './Filters'
 
 
-const TopFilter = ({ topMenuOpne, setTopMenuOpen, brandNames, maxPrice, minPrice }) => {
+const TopFilter = ({ topMenuOpne, setTopMenuOpen, setBrandsArray, sortBy, setSortBy, minRentPeriod, setMinRentPeriod, brandsList, setPricesArray, minPrice, maxPrice }) => {
 	return (
 		<Drawer
-			// classes={{ paper: classes.paper }}
 			anchor="top"
 			variant="temporary"
 			open={topMenuOpne}
 			onClose={() => setTopMenuOpen(false)}
 		>
-			<Filters brandNames={brandNames} maxPrice={maxPrice} minPrice={minPrice} setTopMenuOpen={setTopMenuOpen} />
+			<Filters 
+				setTopMenuOpen={setTopMenuOpen}
+
+				setBrandsArray={setBrandsArray} 
+				brandsList={brandsList} 
+				sortBy={sortBy} 
+				setSortBy={setSortBy} 
+				minRentPeriod={minRentPeriod} 
+				setMinRentPeriod={setMinRentPeriod} 
+				setPricesArray={setPricesArray} 
+				maxPrice={maxPrice} 
+				minPrice={minPrice}
+			/>
 		</Drawer>
 	)
 }

@@ -29,7 +29,7 @@ const useStyles = makeStyles({
 })
 
 const initialValues = {
-	watchName: '',
+	name: '',
 	description: '',
 	brand: '',
 	insideTheBox: [],
@@ -69,11 +69,11 @@ const NewProductForm = ({ values, errors, touched, handleChange, handleBlur, han
 						component={TextField}
 						onChange={handleChange}
 						onBlur={handleBlur}
-						value={values.watchName}
-						error={touched.watchName && Boolean(errors.watchName)}
-						helperText={touched.watchName && errors.watchName}
-						id="watchName"
-						name="watchName"
+						value={values.name}
+						error={touched.name && Boolean(errors.name)}
+						helperText={touched.name && errors.name}
+						id="name"
+						name="name"
 						label="Watch Name"
 						variant="outlined"
 						type="text"
@@ -419,7 +419,7 @@ const AddProduct = () => {
 			))
 		
 			const inputconst = { 
-				watchName: values.watchName, 
+				name: values.name, 
 				description: values.description,
 				brand: values.brand,
 				insideTheBox: values.insideTheBox,
@@ -475,4 +475,5 @@ const AddProduct = () => {
 
 export default AddProduct
 
+// TODO ADD CATEGORY
 // TODO yup validation

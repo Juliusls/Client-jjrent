@@ -29,7 +29,7 @@ const useStyles = makeStyles({
 })
 
 const initialValues = {
-	phoneName: '',
+	name: '',
 	description: '',
 	brand: '',
 	onePrice: 0,
@@ -68,11 +68,11 @@ const NewProductForm = ({ values, errors, touched, handleChange, handleBlur, han
 						component={TextField}
 						onChange={handleChange}
 						onBlur={handleBlur}
-						value={values.phoneName}
-						error={touched.phoneName && Boolean(errors.phoneName)}
-						helperText={touched.phoneName && errors.phoneName}
-						id="phoneName"
-						name="phoneName"
+						value={values.name}
+						error={touched.name && Boolean(errors.name)}
+						helperText={touched.name && errors.name}
+						id="name"
+						name="name"
 						label="Phone Name"
 						variant="outlined"
 						fullWidth
@@ -410,7 +410,7 @@ const AddPhone = () => {
 			))
 			
 			const inputconst = { 
-				phoneName: values.phoneName, 
+				name: values.name, 
 				description: values.description,
 				brand: values.brand,
 				insideTheBox: values.insideTheBox,
@@ -467,4 +467,5 @@ const AddPhone = () => {
 
 export default AddPhone
 
+// TODO ADD CATEGORY
 // TODO yup validation

@@ -139,7 +139,7 @@ const useStyles = makeStyles(theme => ({
 	},
 }))
 
-const Filters = ({ setBrandsArray, setTopMenuOpen, sortBy, setSortBy, minRentPeriod, setMinRentPeriod, brandsList, setPricesArray, minPrice, maxPrice}) => {
+const Filters = ({ setBrandsArray, setTopMenuOpen, sortBy, setSortBy, minRentPeriod, setMinRentPeriod, brandsList, setPricesArray, minPrice, maxPrice }) => {
 	const [brandsChecked, setBandsChecked] = useState(brandsList.map(name => ({ name: name, checked: false })))
 	const [priceRange, setPriceRange] = useState([minPrice, maxPrice])
 

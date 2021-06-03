@@ -4,7 +4,8 @@ export const ADD_WATCH = gql`
     mutation addWatch($input: WatchInput!) {
         addWatch(input: $input) {
 			id
-			watchName
+			name
+			category
 			description
 			brand
 			insideTheBox

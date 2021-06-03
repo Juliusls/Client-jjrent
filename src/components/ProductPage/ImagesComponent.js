@@ -114,7 +114,7 @@ const ImagesComponent = ({ images }) => {
 		<div className={classes.containerDiv}>
 			<Grid container className={classes.gridList} cols={1}>
 				{thumbs.map(thumb => 
-					<Grid item button className={(thumb.imageName.includes(`thumb_${imageSelected}`)) ? classes.imgContainerHover : classes.imgContainer} classes={{ root: classes.imgClass }} key={thumb.imageName} onClick={() => handleImageSelect(thumb.imageName)}>
+					<Grid item button='true' className={(thumb.imageName.includes(`thumb_${imageSelected}`)) ? classes.imgContainerHover : classes.imgContainer} classes={{ root: classes.imgClass }} key={thumb.imageName} onClick={() => handleImageSelect(thumb.imageName)}>
 						<Image publicId={thumb.publicId} cloudName={config.REACT_APP_CLOUD_NAME} className={classes.image} />
 					</Grid>
 				)}

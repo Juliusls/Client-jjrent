@@ -95,16 +95,16 @@ const Recommended = ({ name }) => {
 			<Typography variant='h4' className={classes.categoryName}>{name}</Typography>
 			<Grid container spacing={2} className={classes.containerGrid} >
 				<Grid item xs={12} sm={6} md={3} lg={3} key={first.id} style={{ height: '100%' }}>
-					<DeviceCard name={first.laptopName} price={first.prices.twelvePrice} desc={first.description} image={first.imageIds.filter(image => image.imageName.includes('main_thumb_1'))} id={first.id} category='laptop'/>
+					<DeviceCard name={first.name} price={first.prices.twelvePrice} desc={first.description} image={first.imageIds.filter(image => image.imageName.includes('main_thumb_1'))} id={first.id} category='laptop'/>
 				</Grid>
 				<Grid item xs={12} sm={6} md={3} lg={3} key={second.id} style={{ height: '100%' }}>
-					<DeviceCard name={second.phoneName} price={second.prices.twelvePrice} desc={second.description} image={second.imageIds.filter(image => image.imageName.includes('main_thumb_1'))} id={second.id} category='smartphone'/>
+					<DeviceCard name={second.name} price={second.prices.twelvePrice} desc={second.description} image={second.imageIds.filter(image => image.imageName.includes('main_thumb_1'))} id={second.id} category='smartphone'/>
 				</Grid>
 				<Grid item xs={12} sm={6} md={3} lg={3} key={third.id} style={{ height: '100%' }}>
-					<DeviceCard name={third.phoneName} price={third.prices.twelvePrice} desc={third.description} image={third.imageIds.filter(image => image.imageName.includes('main_thumb_1'))} id={third.id} category='smartphone'/>
+					<DeviceCard name={third.name} price={third.prices.twelvePrice} desc={third.description} image={third.imageIds.filter(image => image.imageName.includes('main_thumb_1'))} id={third.id} category='smartphone'/>
 				</Grid>
 				<Grid item xs={12} sm={6} md={3} lg={3} key={fourth.id} style={{ height: '100%' }}>
-					<DeviceCard name={fourth.watchName} price={fourth.prices.twelvePrice} desc={fourth.description} image={fourth.imageIds.filter(image => image.imageName.includes('main_thumb_1'))} id={fourth.id} category='smartwatch'/>
+					<DeviceCard name={fourth.name} price={fourth.prices.twelvePrice} desc={fourth.description} image={fourth.imageIds.filter(image => image.imageName.includes('main_thumb_1'))} id={fourth.id} category='smartwatch'/>
 				</Grid>
 			</Grid>
 		</div>
