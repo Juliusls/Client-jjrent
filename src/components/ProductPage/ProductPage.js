@@ -15,6 +15,7 @@ import WatchSpecifications from './Specifications/WatchSpecifications'
 import InsideTheBox from './InsideTheBox'
 import QandA from './FAQ'
 import Benefits from './Benefits'
+import NotFound from '../NotFound'
 
 import { FIND_PHONE } from '../../graphql/phones/queries'
 import { FIND_LAPTOP } from '../../graphql/laptops/queries'
@@ -71,6 +72,10 @@ const ProductPage = () => {
 			return null
 		}
 		mainData = watch.data.findWatch
+	}
+
+	if (mainData == undefined) {
+		return <NotFound />
 	}
 
 	const specSwitch = () => {

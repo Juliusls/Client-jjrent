@@ -13,7 +13,8 @@ import Footer from './components/Footer'
 import HowItWorksComponent from './components/HowItWorks/HowItWorksComponent'
 import ProductPage from './components/ProductPage/ProductPage'
 import HowItWorks from './components/HowItWorks/HowItWorks'
-import Dashboard from './components/ADMIN/Dashboard'
+// import Dashboard from './components/ADMIN/Dashboard'
+import NotFound from './components/NotFound'
 
 import { howItWorksData } from './data'
 
@@ -51,26 +52,29 @@ const useStyles = makeStyles(theme => ({
 }))
 
   
-const Layout = ({ children }) => {
-	const classes = useStyles()
+// const Layout = ({ children }) => {
+// 	const classes = useStyles()
 
-	return (
-		<section>
-			<Container className={classes.root}>
-				<NavBar />
-				<div className={classes.offset} />
-				{children}
-				<Footer/>
-			</Container>
-		</section>
-	)
+// 	return (
+// 		<section>
+// 			<Container className={classes.root}>
+// 				<NavBar />
+// 				<div className={classes.offset} />
+// 				{children}
+// 				<Footer />
+// 			</Container>
+// 		</section>
+// 	)
   
-}
+// }
 
 const App = () => {
 	const phonesResult = useQuery(ALL_PHONES_MINI)
 	const laptopsResult = useQuery(ALL_LAPTOPS_MINI)
 	const watchesResult = useQuery(ALL_WATCHES_MINI)
+
+	const classes = useStyles()
+
 
 	if (phonesResult.loading || laptopsResult.loading || watchesResult.loading)  {
 		return (
@@ -83,10 +87,11 @@ const App = () => {
 	return (
 		<Router onUpdate={() => window.scrollTo(0, 0)} >
 			<ScrollToTop />
-
-			<Switch>
-				<Route path='/admin/dashboard' component={Dashboard}/>
-				<Layout>
+			<Container className={classes.root}>
+				<NavBar />
+				<div className={classes.offset} />
+				<Switch>
+					{/* <Route exact path='/admin/dashboard' component={Dashboard}/> */}
 					<Route exact path='/'>
 						<Jumbotron />
 						<Recommended category='Recommended'/>
@@ -110,8 +115,13 @@ const App = () => {
 					<Route exact path='/howitworks'>
 						<HowItWorks />
 					</Route>
-				</Layout>
-			</Switch>
+					<Route >
+						<NotFound />
+					</Route>
+					<Route component={NotFound} />
+				</Switch>
+				<Footer />
+			</Container>
 		</Router>
 	)
 }

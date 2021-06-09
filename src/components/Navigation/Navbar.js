@@ -156,7 +156,7 @@ const NavBar = () => {
 						</Fab>
 					</Hidden>
 					
-					<Typography className={classes.title} component={ Link } to='/'>JJ-rent</Typography>
+					<Typography className={classes.title} component={ Link } to='/'>MANFLI</Typography>
 
 					<div>
 						<Hidden xsDown>
