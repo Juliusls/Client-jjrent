@@ -19,4 +19,7 @@ price card margin on the bottom of the page
 
 // TODO yup in all sections
 // TODO not found route
-// <Route path='*' component={ NotFound } />
+// TODO fix admin route
+
+
+// TODO add IP rating to phone specs

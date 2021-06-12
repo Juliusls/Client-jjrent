@@ -55,7 +55,7 @@ const useStyles = makeStyles(theme => ({
 		marginTop: 16,
 		borderRadius: 15,
 		maxHeight: '50vh',
-		overflow: 'hidden',
+		overflow: 'auto',
 		boxShadow: theme.shadows[5],
 		[theme.breakpoints.down('md')]: {
 			maxHeight: '40vh',

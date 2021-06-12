@@ -114,12 +114,12 @@ const ProductPage = () => {
 					{specSwitch()}
 					<QandA />
 				</div>
-				<PriceCard name={nameSwitch()} prices={mainData.prices} desc={mainData.description} variants={mainData.variants} />
+				<PriceCard id={id} name={nameSwitch()} prices={mainData.prices} desc={mainData.description} variants={mainData.variants} thumbId={mainData.imageIds.filter(image => image.imageName.includes('thumb_1'))[0].publicId}/>
 			</Hidden>
 			<Hidden mdUp>
 				<div className={classes.pageFlow}>
 					<ImagesCarousel images={mainData.imageIds} />
-					<PriceCard name={nameSwitch()} prices={mainData.prices} desc={mainData.description} variants={mainData.variants} />
+					<PriceCard id={id} name={nameSwitch()} prices={mainData.prices} desc={mainData.description} variants={mainData.variants} thumbId={mainData.imageIds.filter(image => image.imageName.includes('thumb_1'))[0].publicId}/>
 					<Benefits />
 					<InsideTheBox insideTheBox={mainData.insideTheBox} />
 					{specSwitch()}

@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useQuery } from '@apollo/client'
 import './styles.css'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { makeStyles, Backdrop, CircularProgress } from '@material-ui/core'
+
+import { CartContext, SetCartContext } from './CartContext'
+
 
 import NavBar from './components/Navigation/NavBar'
 import Products from './components/ProductsList/Products'
@@ -73,6 +76,8 @@ const App = () => {
 	const laptopsResult = useQuery(ALL_LAPTOPS_MINI)
 	const watchesResult = useQuery(ALL_WATCHES_MINI)
 
+	const [context, setContext] = useState([])
+
 	const classes = useStyles()
 
 
@@ -85,44 +90,48 @@ const App = () => {
 	}
 
 	return (
-		<Router onUpdate={() => window.scrollTo(0, 0)} >
-			<ScrollToTop />
-			<Container className={classes.root}>
-				<NavBar />
-				<div className={classes.offset} />
-				<Switch>
-					{/* <Route exact path='/admin/dashboard' component={Dashboard}/> */}
-					<Route exact path='/'>
-						<Jumbotron />
-						<Recommended category='Recommended'/>
-						<HowItWorksComponent data={howItWorksData}/>
-						<OneCategory category='Smartphones' data={phonesResult.data.allPhones}/>
-						<OneCategory category='Laptops' data={laptopsResult.data.allLaptops}/>
-						<OneCategory category='Smartwatches' data={watchesResult.data.allWatches}/>
-					</Route>
-					<Route exact path='/laptops'>
-						<Products category='Laptops'/>
-					</Route>
-					<Route exact path='/smartphones'>
-						<Products category='Smartphones'/>
-					</Route>
-					<Route exact path='/smartwatches'>
-						<Products category='Smartwatches'/>
-					</Route>
-					<Route exact path='/:category/:id'>
-						<ProductPage />
-					</Route>
-					<Route exact path='/howitworks'>
-						<HowItWorks />
-					</Route>
-					<Route >
-						<NotFound />
-					</Route>
-					<Route component={NotFound} />
-				</Switch>
-				<Footer />
-			</Container>
-		</Router>
+		<CartContext.Provider value={[context]}>
+			<SetCartContext.Provider value={[setContext]}>
+				<Router onUpdate={() => window.scrollTo(0, 0)} >
+					<ScrollToTop />
+					<Container className={classes.root}>
+						<NavBar />
+						<div className={classes.offset} />
+						<Switch>
+							{/* <Route exact path='/admin/dashboard' component={Dashboard}/> */}
+							<Route exact path='/'>
+								<Jumbotron />
+								<Recommended category='Recommended'/>
+								<HowItWorksComponent data={howItWorksData}/>
+								<OneCategory category='Smartphones' data={phonesResult.data.allPhones}/>
+								<OneCategory category='Laptops' data={laptopsResult.data.allLaptops}/>
+								<OneCategory category='Smartwatches' data={watchesResult.data.allWatches}/>
+							</Route>
+							<Route exact path='/laptops'>
+								<Products category='Laptops'/>
+							</Route>
+							<Route exact path='/smartphones'>
+								<Products category='Smartphones'/>
+							</Route>
+							<Route exact path='/smartwatches'>
+								<Products category='Smartwatches'/>
+							</Route>
+							<Route exact path='/:category/:id'>
+								<ProductPage />
+							</Route>
+							<Route exact path='/howitworks'>
+								<HowItWorks />
+							</Route>
+							<Route >
+								<NotFound />
+							</Route>
+							<Route component={NotFound} />
+						</Switch>
+						<Footer />
+					</Container>
+				</Router>
+			</SetCartContext.Provider>
+		</CartContext.Provider>
 	)
 }
 

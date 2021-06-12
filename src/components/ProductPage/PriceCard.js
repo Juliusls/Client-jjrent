@@ -1,12 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 
 import { makeStyles, Card, Typography, IconButton, Button, Tooltip, Hidden, Fade, withStyles } from '@material-ui/core/'
+// import Alert from '@material-ui/lab/Alert'
+
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import LocalShippingOutlinedIcon from '@material-ui/icons/LocalShippingOutlined'
 
 import MinimumRental from './MinumumRental'
 import ColorPicker from './ColorPicker'
+
+import { SetCartContext } from '../../CartContext'
 
 const useStyles = makeStyles(theme => ({
 	card: {
@@ -222,13 +226,14 @@ const BigTooltip = withStyles((theme) => ({
 	},
 }))(Tooltip)
 
-const PriceCard = ({ name, prices, desc, variants }) => {
+const PriceCard = ({ id, name, prices, desc, variants, thumbId }) => {
 	const classes = useStyles()
 	const [favorited, setFavorited] = useState(false)
 	const colors = variants.map(variant => variant.color)
 	const [selectedColor, setSelectedColor] = useState(colors[0])
 	const [minRentPeriod, setMinRentPeriod] = useState(4)
 
+	const [setContext] = useContext(SetCartContext)
 
 	// filter for MINRENTPERIOD
 	const priceSwitch = () => {
@@ -255,6 +260,34 @@ const PriceCard = ({ name, prices, desc, variants }) => {
 		}
 	}
 
+	const handleSubscirbe = () => {
+		let prev_items = JSON.parse(localStorage.getItem('cart')) || []
+		console.log('prev_items', prev_items)
+		
+		// look for item in cart array
+		let existingItem = prev_items.find(cartItem => cartItem.id == id)
+
+		// alert if item is already in the car
+		if (existingItem) {
+			alert('Item is already in the cart')
+		// if it is not in the cart add it
+		} else {
+			let cartItem = {
+				id: id,
+				name: name,
+				colorName: selectedColor,
+				colorCode: variants.filter(variant => variant.color === selectedColor)[0].colorCode,
+				publicId: thumbId,
+				price: priceSwitch(),
+				period: perMonthTextSwitch()
+			}
+			let new_items = [...prev_items, cartItem]
+			setContext(new_items)
+			localStorage.setItem('cart', JSON.stringify(new_items))
+			console.log('new_items', new_items)
+		}
+	}
+
 	return (
 		<Card className={classes.card} >
 			<div className={classes.cardContent} >
@@ -273,7 +306,7 @@ const PriceCard = ({ name, prices, desc, variants }) => {
 					{desc}
 				</Typography>
 				<Typography className={classes.cardAroundPrice}>
-					<span display='inline' className={classes.cardPrice}>€{priceSwitch()} </span>
+					<span display='inline' className={classes.cardPrice}>€{priceSwitch()}</span>
 						per month for {perMonthTextSwitch()}, afterwards cancel anytime
 				</Typography>
 				<div className={classes.iconTextContainer}>
@@ -302,10 +335,10 @@ const PriceCard = ({ name, prices, desc, variants }) => {
 				</Typography>
 				<ColorPicker variants={variants} selectedColor={selectedColor} setSelectedColor={setSelectedColor}/>
 				<Hidden smDown>
-					<Button variant="contained" className={classes.buttonSubscribe}>Subscribe</Button>
+					<Button variant="contained" className={classes.buttonSubscribe} onClick={() => handleSubscirbe()}>Subscribe</Button>
 				</Hidden>
 				<Hidden mdUp>
-					<Button variant="contained" className={classes.bottomButtonSubscribe}>Subscribe</Button>					
+					<Button variant="contained" className={classes.bottomButtonSubscribe} onClick={() => handleSubscirbe()}>Subscribe</Button>					
 				</Hidden>
 			</div>
 		</Card>

@@ -1,7 +1,7 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 
-import { makeStyles, Toolbar, AppBar, Fab, Typography, Button, Hidden } from '@material-ui/core'
+import { makeStyles, Toolbar, AppBar, Fab, Typography, Button, Hidden, Badge } from '@material-ui/core'
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined'
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined'
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined'
@@ -13,6 +13,9 @@ import AccountMenu from './AccountMenu'
 import CartMenu from './CartMenu'
 import LeftSideMenu from './LeftSideMenu'
 import SearchField from './SearchField'
+
+import { CartContext } from '../../CartContext'
+
 
 const useStyles = makeStyles(theme => ({
 	appbar: {	
@@ -55,7 +58,11 @@ const useStyles = makeStyles(theme => ({
 		'&:hover': {
 			backgroundColor: theme.palette.common.white,
 			boxShadow: 'none',
-		}
+		},
+		[theme.breakpoints.down('xs')]: {
+			width: 40,
+			height: 40,
+		},
 	},
 	buttonSearch: {
 		color: theme.palette.primary.main,
@@ -100,6 +107,11 @@ const useStyles = makeStyles(theme => ({
 		[theme.breakpoints.down('xs')]: {
 			fontSize: 30,
 		},
+	},
+	badge: {
+		backgroundColor: '#F46036',
+		color: 'white',
+		fontWeight: 'bold'
 	}
 }))
 
@@ -110,6 +122,9 @@ const NavBar = () => {
 	const [accountMenuIsOpen, setAccountMenuIsOpen] = useState(false)
 	const [cartMenuIsOpen, setCartMenuIsOpen] = useState(false)
 	const [searchFieldIsOpen, setSearchFieldIsOpen] = useState(false)
+	const [cartItems, setCartItems] = useState([])
+
+	const [context] = useContext(CartContext)
 
 	const searchInputRef = useRef()
 
@@ -133,6 +148,12 @@ const NavBar = () => {
 	const handleCartClose = () => {
 		setCartMenuIsOpen(null)
 	}
+
+	let cart
+	useEffect(() => {
+		cart = JSON.parse(localStorage.getItem('cart')) || []
+		setCartItems(cart)
+	}, [context]) 
 
 	return (
 		<div className={classes.root}>
@@ -168,7 +189,9 @@ const NavBar = () => {
 							</Fab>
 						</Hidden>
 						<Fab color="primary" aria-label="add" className={classes.buttonCart} onClick={handleCartClick}>
-							<ShoppingCartOutlinedIcon className={classes.iconsSize}/>
+							<Badge badgeContent={cartItems.length} max={9} classes={{ badge: classes.badge }}>
+								<ShoppingCartOutlinedIcon className={classes.iconsSize}/>
+							</Badge>
 						</Fab>
 						<Fab color="primary" aria-label="add" className={classes.buttonCart} onClick={handleAccountClick}>
 							<AccountCircleOutlinedIcon className={classes.iconsSize}/>

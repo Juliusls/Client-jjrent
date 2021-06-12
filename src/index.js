@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 
+
 import { ThemeProvider } from '@material-ui/styles'
 import theme from './theme'
 
@@ -15,6 +16,7 @@ const client = new ApolloClient({
 		uri: 'http://localhost:4000',
 	})
 })
+
 
 ReactDOM.render(
 	<ApolloProvider client={client}>
